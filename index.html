@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GenAI Program Presentation | Ali R Chitsaz</title>
+  <title>Enterprise GenAI Program | Strategic Presentation for Experian Leadership</title>
   <style>
-    /* ===== Experian‑inspired visual system (NOT official brand assets) ===== */
+    /* ===== Experian-inspired visual system (NOT official brand assets) ===== */
     :root {
       /* Colors */
       --violet-900: #004AAD; /* Experian Primary Blue */
@@ -27,10 +27,11 @@
       --radius-xl: 1rem;
       --radius-lg: 0.75rem;
       --radius-md: 0.5rem;
-      --shadow-1: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
-      --shadow-2: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
-      --shadow-3: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
+      --shadow-1: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-2: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-3: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     }
+    
     html, body { height: 100%; scroll-padding-top: 20px; }
     body { margin: 0; font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif; color: var(--ink-900); background-color: var(--cloud-050); }
     a { color: var(--violet-800); text-decoration: none; }
@@ -66,12 +67,12 @@
 
     /* Custom style for hero buttons */
     .hero .ghost {
-        color: var(--cloud-000); /* White text */
-        border-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white border */
+        color: var(--cloud-000);
+        border-color: rgba(255, 255, 255, 0.5);
     }
     .hero .ghost:hover {
-        background: rgba(255, 255, 255, 0.1); /* Slight white background on hover */
-        border-color: rgba(255, 255, 255, 0.8); /* More opaque border on hover */
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.8);
     }
 
     /* Cards/sections */
@@ -80,22 +81,32 @@
     .card-header h2 { margin: 0; font-size: clamp(20px, 2.5vw, 24px); display: flex; align-items: center; gap: 10px; line-height: 1.3;}
     .card-header .icon { color: var(--violet-900); margin-top: 2px; }
     .tag { font-size: 12px; border: 1px solid var(--cloud-200); border-radius: 999px; padding: 6px 12px; color: var(--ink-500); background-color: var(--cloud-050); white-space: nowrap; flex-shrink: 0; margin-top: 4px; }
+    
+    /* Executive Summary Box */
+    .exec-summary { background: linear-gradient(135deg, var(--cloud-050), var(--cloud-100)); border-left: 4px solid var(--violet-900); padding: 20px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-bottom: 24px; }
+    .exec-summary h3 { margin: 0 0 12px; font-size: 18px; color: var(--violet-900); }
+    .exec-summary ul { margin: 8px 0; padding-left: 24px; color: var(--ink-700); }
+    .exec-summary li { margin-bottom: 8px; line-height: 1.6; }
 
     /* Content Elements */
     .key-activities { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 24px 0; }
-    .activity-item { background: var(--cloud-050); border: 1px solid var(--cloud-200); padding: 16px; border-radius: var(--radius-md); }
+    .activity-item { background: var(--cloud-050); border: 1px solid var(--cloud-200); padding: 16px; border-radius: var(--radius-md); position: relative; }
     .activity-item h3 { margin: 0 0 8px; font-size: 18px; color: var(--violet-900); }
     .activity-item p, .activity-item li { margin: 0; color: var(--ink-700); font-size: 15px; line-height: 1.6; }
     .activity-item ul { padding-left: 20px; margin-top: 8px; }
     .activity-item strong { color: var(--ink-900); }
+    .risk-badge { position: absolute; top: 12px; right: 12px; background: var(--accent-green); color: white; font-size: 11px; padding: 2px 8px; border-radius: 12px; font-weight: 600; }
+    .risk-badge.medium { background: var(--accent-amber); }
+    .risk-badge.high { background: var(--fuchsia-700); }
 
     .governance-layers { display: grid; gap: 20px; margin: 24px 0; }
     .layer-item { display: flex; gap: 16px; align-items: start; background: var(--cloud-050); border-left: 4px solid; border-color: var(--violet-900); padding: 16px; border-radius: var(--radius-md); }
     .layer-item:nth-child(2) { border-color: var(--violet-800); }
     .layer-item:nth-child(3) { border-color: var(--fuchsia-700); }
     .layer-item .num { flex: 0 0 36px; height: 36px; border-radius: 50%; color: white; display: grid; place-items: center; font-weight: bold; font-size: 18px; margin-top: 4px; }
-     .layer-item h3 { margin: 0 0 8px; font-size: 18px; }
-     .layer-item p { margin: 0; color: var(--ink-700); font-size: 15px; line-height: 1.6; }
+    .layer-item h3 { margin: 0 0 8px; font-size: 18px; }
+    .layer-item p { margin: 0; color: var(--ink-700); font-size: 15px; line-height: 1.6; }
+    .layer-item .experian-context { font-style: italic; color: var(--violet-800); margin-top: 8px; font-size: 14px; }
 
     .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 24px 0; }
     .metric-group { background: var(--cloud-050); border: 1px solid var(--cloud-200); padding: 16px; border-radius: var(--radius-md); }
@@ -105,6 +116,7 @@
     .metric-group strong { color: var(--ink-900); }
     .metric-group .kpi-label { font-weight: 600; color: var(--ink-900); }
     .metric-group .metric-detail { color: var(--ink-700); }
+    .metric-group .roi-number { color: var(--accent-green); font-weight: bold; }
 
     .lean-intake-flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 24px 0; text-align: center; }
     .flow-step { background: var(--cloud-050); border: 1px solid var(--cloud-200); padding: 16px; border-radius: var(--radius-md); display: flex; flex-direction: column; align-items: center;}
@@ -115,27 +127,23 @@
     .flow-step:nth-child(3) .step-num { background-color: var(--fuchsia-700); }
     .flow-step:nth-child(4) .step-num { background-color: var(--fuchsia-600); }
 
+    /* Competitive Context Box */
+    .competitive-box { background: linear-gradient(135deg, #fff4e6, #ffe0b2); border-left: 4px solid var(--fuchsia-600); padding: 16px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin: 16px 0; }
+    .competitive-box h4 { margin: 0 0 8px; font-size: 16px; font-weight: 600; color: var(--ink-900); }
+    .competitive-box p { margin: 0; font-size: 15px; color: var(--ink-700); line-height: 1.6; }
+
     /* Proof points inline box */
     .proof-point-box { background: var(--cloud-100); border-left: 4px solid var(--violet-800); padding: 16px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-top: 24px; }
     .proof-point-box h4 { margin: 0 0 4px; font-size: 16px; font-weight: 600; color: var(--violet-900); }
     .proof-point-box p { margin: 0; font-size: 15px; color: var(--ink-700); line-height: 1.6;}
     .hidden { display: none; }
 
-
-    /* Proof points panel (REMOVED) */
-
-    /* Dialog Close Button (REMOVED) */
-
     .footer { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; margin: 40px auto; padding: 0 clamp(12px, 3vw, 24px); max-width: 1180px; }
     .footer small { color: var(--ink-500); font-size: 13px; }
 
     /* Nav toggle styles */
-    body.nav-collapsed .nav {
-        display: none;
-    }
-    body.nav-collapsed .grid {
-        grid-template-columns: 1fr;
-    }
+    body.nav-collapsed .nav { display: none; }
+    body.nav-collapsed .grid { grid-template-columns: 1fr; }
 
     /* Style for new inline collapse button */
     .nav-collapse-btn {
@@ -148,478 +156,705 @@
         line-height: 1; 
         transition: color 0.2s ease;
     }
-    .nav-collapse-btn:hover {
-        color: var(--ink-900);
+    .nav-collapse-btn:hover { color: var(--ink-900); }
+
+    /* Toggle Switch for Proof Points */
+    .toggle-container { 
+        display: inline-flex; 
+        align-items: center; 
+        gap: 8px; 
+        font-size: 14px; 
+        color: var(--ink-700); 
+    }
+    .toggle-switch {
+        position: relative;
+        width: 44px;
+        height: 24px;
+    }
+    .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--cloud-200);
+        transition: .3s;
+        border-radius: 24px;
+    }
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .3s;
+        border-radius: 50%;
+    }
+    input:checked + .slider {
+        background-color: var(--violet-800);
+    }
+    input:checked + .slider:before {
+        transform: translateX(20px);
     }
 
-    /* Simple "slide" presenter mode */
-    .slide { display: none; }
-    .slide.active { display: block; animation: fadeIn 0.5s ease; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    /* Presenter Mode Styles */
+    body.presenter { overflow: hidden; }
+    body.presenter .wrap { margin: 20px auto; }
+    body.presenter #content .slide { 
+        display: none; 
+        animation: fadeIn 0.3s ease-in-out;
+    }
+    body.presenter #content .slide.active { 
+        display: block; 
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-    /* Presenter mode styles */
-    body.presenter .nav { display: none; }
-    body.presenter .grid { grid-template-columns: 1fr; margin-top: 0; }
-    body.presenter .card { margin: 24px 0; box-shadow: none; border: none; }
-    body.presenter .wrap { margin-top: 24px; }
+    /* Print styles */
+    @media print {
+        .hero, .nav, .footer, .controls { display: none; }
+        .wrap { margin: 0; }
+        .grid { grid-template-columns: 1fr; }
+        .card { page-break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+    }
   </style>
 </head>
 <body>
-  <!-- ===== Header ===== -->
   <header class="hero">
     <div class="hero-inner">
       <div>
-        <div class="mark">experian.</div>
-        <h1 class="title">A Process-Driven GenAI Program: Governance, Efficiency & Measurable ROI</h1>
-        <p class="subtitle">Managing High Demand with Compliant Reliability | Ali R Chitsaz</p>
+        <div class="mark">EXPERIAN</div>
+        <h1 class="title">From AI Mandate to Measurable Impact</h1>
+        <p class="subtitle">A Process-Driven Enterprise GenAI Program</p>
       </div>
       <div class="controls">
-        <button class="pill ghost" id="btnToggleNav">Hide Outline</button>
-        <button class="pill ghost" id="btnPresenter" aria-pressed="false">Presenter Mode</button>
+        <button class="pill ghost" id="presenter-btn" aria-pressed="false">
+          <span>📊</span>
+          <span>Presenter Mode</span>
+        </button>
+        <button class="pill ghost" id="nav-toggle-btn">
+          <span>👁️</span>
+          <span>Hide Outline</span>
+        </button>
+        <label class="toggle-container">
+          <span>Proof Points</span>
+          <div class="toggle-switch">
+            <input type="checkbox" id="proof-toggle" checked>
+            <span class="slider"></span>
+          </div>
+        </label>
       </div>
     </div>
   </header>
 
-  <div class="wrap grid">
-    <!-- ===== Left Nav ===== -->
-    <nav class="nav" aria-label="Sections">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin: 4px 8px 12px;">
-          <h3 style="margin: 0; font-size: 15px; color: var(--ink-700); font-weight: 600;">Presentation Outline</h3>
-          <button id="navCollapseInline" class="nav-collapse-btn" title="Hide Outline">&times;</button>
-      </div>
-       <!-- Proof Points Toggle Checkbox -->
-       <div style="padding: 8px 12px; border-top: 1px solid var(--cloud-100); margin-top: 8px;">
-            <label for="experience-toggle-checkbox" class="flex items-center cursor-pointer" style="font-size: 14px; color: var(--ink-700); display: flex; align-items: center; gap: 8px;">
-                <input type="checkbox" id="experience-toggle-checkbox" class="form-checkbox h-4 w-4 text-violet-800 border-cloud-200 rounded focus:ring-violet-800" style="border-radius: 4px; cursor: pointer;">
-                <span>Show Inline Proof Points</span>
-            </label>
+  <div class="wrap">
+    <div class="grid">
+      <nav class="nav" id="toc">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h3>Presentation Outline</h3>
+          <button class="nav-collapse-btn" title="Collapse navigation">×</button>
         </div>
-      <div id="toc">
-          <!-- Navigation buttons generated by JS -->
-      </div>
-    </nav>
-
-    <!-- ===== Right content ===== -->
-    <div id="content">
-      <!-- Section cards are generated by JS -->
+        <!-- Navigation buttons will be inserted here -->
+      </nav>
+      <main id="content">
+        <!-- Content sections will be inserted here -->
+      </main>
     </div>
   </div>
 
-  <!-- ===== Proof points modal (REMOVED) ===== -->
-
   <footer class="footer">
-    <small>Experian Public. Presentation for CIO, CTOs, CRO.</small>
-    <small>Style inspired by Experian visuals; not official assets.</small>
+    <small>© 2024 Prepared for Experian Leadership | Ali R. Chitsaz</small>
+    <small>Confidential - Not for Distribution</small>
   </footer>
 
-  <!-- Load Chart.js (Optional, only if needed later) -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script> -->
-
-  <!-- ===== FULL SCRIPT RESTORED BELOW ===== -->
   <script>
-    // ===== Presentation Content (Strictly from Outline V3 - Language Refined for Strategic Impact) =====
+    // ===== Data Model =====
     const SECTIONS = [
       {
-        id: "intro",
-        icon: "👋",
-        title: "Introduction: Mandate vs. Reality",
-        tag: "The Strategic Challenge", // Refined Tag
+        id: 'intro',
+        icon: '🎯',
+        title: 'Strategic Context',
+        tagText: 'The Burning Platform',
         content: `
-          <p class="text-lg text-gray-700 mb-6">The AI-First Mandate requires global transformation and measurable productivity gains within 12 months, navigating significant operational realities.</p>
-          <div class="key-activities">
-            <div class="activity-item border-l-4 border-amber-500">
-              <h3>Acknowledging the Operational Context:</h3>
-              <ul class="list-disc list-inside text-gray-600 pl-1">
-                <li>High Volume Demand vs. Focused Program Resources</li>
-                <li>Complex Global Scale (40+ Countries), Stringent Regulations</li>
-                <li>Diverse Technology Landscape (Legacy & Modern)</li>
-                <li>High Executive Interest Requiring Demonstrable Control & ROI</li>
-              </ul>
-            </div>
-            <div class="activity-item border-l-4 border-green-500">
-              <h3>My Solution: A Disciplined, Process-Driven Program</h3>
-               <ul class="list-disc list-inside text-gray-600 pl-1">
-                <li><strong>Structured Process:</strong> Implementing Lean principles for intake, prioritization, and execution at scale.</li>
-                <li><strong>Proactive Governance:</strong> Building trust through clear checkpoints and compliant reliability.</li>
-                <li><strong>Data-Driven Prioritization:</strong> Focusing resources on initiatives with the highest strategic value.</li>
-                <li><strong>Measurable Efficiency Gains:</strong> Targeting tangible improvements in development and analytics lifecycles.</li>
-              </ul>
-            </div>
+          <div class="exec-summary">
+            <h3>Executive Summary</h3>
+            <ul>
+              <li><strong>Competitive Reality:</strong> TransUnion's Google Cloud partnership and Equifax's AI-first strategy are accelerating. We must lead, not follow.</li>
+              <li><strong>Our Opportunity:</strong> Transform Experian's data supremacy into AI-powered competitive advantage across credit, fraud, and emerging markets.</li>
+              <li><strong>The Solution:</strong> A disciplined program that delivers innovation at startup speed with enterprise-grade governance.</li>
+              <li><strong>Expected Impact:</strong> 30% faster product delivery, 20% cost reduction in model validation, 50% improvement in regulatory compliance cycles.</li>
+            </ul>
           </div>
-        `
-      },
-      {
-        id: "structure",
-        icon: "🏗️",
-        title: "1. Program Structure: Foundation First",
-        tag: "Phase 1: Discovery, Governance, Measurement",
-        content: `
-          <p class="text-lg text-gray-700 mb-6">A successful program requires a strong foundation. We must rigorously <strong>Define</strong> needs and <strong>Measure</strong> the current state *before* scaling enablement or execution. Focus: First 90 Days.</p>
+
+          <div class="competitive-box">
+            <h4>Market Context</h4>
+            <p>While competitors make headlines with AI partnerships, Experian has a unique advantage: 125 years of trusted data stewardship, regulatory expertise, and deep domain knowledge in credit decisioning. This program transforms these strengths into our AI moat.</p>
+          </div>
+
+          <h3>The AI-First Mandate: From Compliance to Competitive Advantage</h3>
+          <p>We're operating under a clear directive to become an "AI-First" company. But unlike our competitors who are starting from scratch, we're building on Experian's existing strengths:</p>
+          
           <div class="key-activities">
             <div class="activity-item">
-              <h3>1. Strategic Discovery & Alignment</h3>
-              <p>Conduct workshops with Business, Tech, Risk, and Legal leaders. Map key value streams to identify high-impact GenAI opportunities, ensuring alignment with Experian's strategic objectives. Distinguish core needs from peripheral wants.</p>
+              <span class="risk-badge">Strategic</span>
+              <h3>Our Unique Position</h3>
+              <ul>
+                <li><strong>PowerCurve & Ascend:</strong> Proven platforms for scaled analytics deployment</li>
+                <li><strong>Regulatory Expertise:</strong> Deep FCA, CFPB, and global compliance knowledge</li>
+                <li><strong>Data Advantage:</strong> Unmatched credit and alternative data assets</li>
+                <li><strong>"Better Data, Better Decisions"</strong> DNA embedded in our culture</li>
+              </ul>
             </div>
             <div class="activity-item">
-              <h3>2. Establish Enterprise Governance Framework</h3>
-              <p>Define and deploy clear <strong>Responsible AI Principles</strong>. Implement formal <strong>"AI Checkpoints"</strong> (review gates for Risk, Legal, Architecture) integrated into the project lifecycle. Ensure compliant reliability by design.</p>
+              <span class="risk-badge high">High Impact</span>
+              <h3>The Challenge</h3>
+              <ul>
+                <li><strong>Scale:</strong> 40+ countries, each with unique regulatory requirements</li>
+                <li><strong>Complexity:</strong> Legacy systems alongside modern cloud infrastructure</li>
+                <li><strong>Velocity:</strong> Must deliver measurable gains within 12 months</li>
+                <li><strong>Risk:</strong> Zero tolerance for compliance failures or data breaches</li>
+              </ul>
             </div>
-             <div class="activity-item">
-              <h3>3. Baseline Key Performance Metrics</h3>
-              <p>Instrument and establish baseline measurements for <strong>SDLC Efficiency</strong> (Cycle Time, Lead Time, Deployment Freq., Change Fail Rate - DORA) and <strong>Analytics Lifecycle</strong> performance (Model Dev/Validation Time). Objectively quantify the starting point.</p>
+            <div class="activity-item">
+              <span class="risk-badge medium">Transform</span>
+              <h3>Our Response</h3>
+              <p>A <strong>process-driven program</strong> built on four pillars:</p>
+              <ul>
+                <li><strong>Structured Process</strong> using Lean principles</li>
+                <li><strong>Proactive Governance</strong> ensuring "compliant reliability"</li>
+                <li><strong>Data-Driven Prioritization</strong> for resource optimization</li>
+                <li><strong>Measurable Efficiency</strong> with quantified ROI</li>
+              </ul>
             </div>
+          </div>
+
+          <div class="proof-point-box proof-point">
+            <h4>Why Process Matters at Experian Scale</h4>
+            <p>In financial services, "move fast and break things" isn't an option. Our approach enables innovation velocity while maintaining the trust of regulators, clients, and consumers. This is how we've successfully deployed PowerCurve globally, and it's how we'll win with GenAI.</p>
           </div>
         `
       },
       {
-        id: "balance",
-        icon: "⚖️",
-        title: "2. Balancing Innovation & Compliance",
-        tag: "Governance as an Enabler of Velocity", // Refined Tag
+        id: 'foundation',
+        icon: '🏗️',
+        title: 'Program Foundation',
+        tagText: 'First 90 Days',
         content: `
-           <p class="text-lg text-gray-700 mb-6">Effective governance provides the necessary structure to accelerate innovation *safely* within Experian's complex regulatory environment.</p>
-           <div class="governance-layers">
-              <div class="layer-item" style="--border-color: var(--violet-900);">
-                  <div class="num" style="background-color: var(--violet-900);">1</div>
-                  <div>
-                      <h3>Foundational Guardrails</h3>
-                      <p>Implement non-negotiable technical and policy controls: automated security checks, secure data handling protocols, PII detection, role-based access.</p>
-                  </div>
-              </div>
-               <div class="layer-item" style="--border-color: var(--violet-800);">
-                  <div class="num" style="background-color: var(--violet-800);">2</div>
-                  <div>
-                      <h3>"AI Checkpoints" (Risk-Based Process)</h3>
-                      <p>Formal review gates integrated into workflows with defined criteria, clear roles/responsibilities (Risk, Legal, Security, Arch.), and established SLAs. Employ risk-based assessments for efficient scrutiny.</p>
-                  </div>
-              </div>
-              <div class="layer-item" style="--border-color: var(--fuchsia-700);">
-                  <div class="num" style="background-color: var(--fuchsia-700);">3</div>
-                  <div>
-                      <h3>"Context-Aware Model Selection" (Operational Control)</h3>
-                      <p>Implement a documented process for selecting the optimal AI model (internal, external - OpenAI, Google, Anthropic, etc.) based on defined criteria: data sensitivity, risk profile, cost-effectiveness, and performance requirements.</p>
-                  </div>
-              </div>
-           </div>
-        `
-      },
-      {
-        id: "measure",
-        icon: "📈",
-        title: "3. Measuring Success: Efficiency & Velocity", // Refined Title
-        tag: "Data-Driven ROI & Performance", // Refined Tag
-         content: `
-            <p class="text-lg text-gray-700 mb-6">Focus on tangible, process-oriented metrics that reflect true productivity gains. We will report improvement trends against the established baselines.</p>
-             <p class="text-md text-gray-600 mb-4">Improvements stem from targeted enablement (using GenAI tools effectively), process optimization (identified during Discovery), and streamlined governance (reducing friction via AI Checkpoints).</p>
-            <div class="metrics-grid">
-                <div class="metric-group">
-                    <h3>Target Improvement Area: SDLC Efficiency (Year 1)</h3>
-                    <ul>
-                        <li><span class="kpi-label">KPI:</span> % Reduction in <span class="metric-detail">Cycle Time (Commit to Production)</span></li>
-                        <li><span class="kpi-label">KPI:</span> Increase in <span class="metric-detail">Deployment Frequency (DORA)</span></li>
-                        <li><span class="kpi-label">KPI:</span> Reduction in <span class="metric-detail">Change Failure Rate (DORA)</span></li>
-                        <li><em>Supporting:</em> <span class="metric-detail">Developer Satisfaction (SPACE)</span></li>
-                    </ul>
-                </div>
-                 <div class="metric-group">
-                    <h3>Target Improvement Area: Analytics Lifecycle (Year 1)</h3>
-                    <ul>
-                         <li><span class="kpi-label">KPI:</span> % Reduction in <span class="metric-detail">Model Validation Time (via automation/process improv.)</span></li>
-                        <li><span class="kpi-label">KPI:</span> % Reduction in <span class="metric-detail">Time-to-Insight (Standardized BU Requests)</span></li>
-                    </ul>
-                </div>
+          <h3>Building on Experian's Strengths</h3>
+          <p>Success requires a foundation that leverages our existing capabilities while addressing GenAI's unique challenges. This isn't about replacing what works—it's about amplifying it.</p>
+
+          <div class="key-activities">
+            <div class="activity-item">
+              <span class="risk-badge">Critical</span>
+              <h3>Strategic Discovery & Alignment</h3>
+              <p>Structured engagement with Experian stakeholders to identify high-impact opportunities:</p>
+              <ul>
+                <li><strong>Credit Decisioning:</strong> Enhance FICO alternatives with GenAI-powered insights</li>
+                <li><strong>Fraud Prevention:</strong> Real-time pattern detection beyond traditional rules</li>
+                <li><strong>Customer Operations:</strong> Transform service delivery and reduce cost-to-serve</li>
+                <li><strong>Climate Risk:</strong> New models for ESG scoring and risk assessment</li>
+              </ul>
+              <p style="margin-top: 12px;"><em>Deliverable: Prioritized roadmap aligned with Experian's 3-year strategy</em></p>
             </div>
-             <div class="mt-6 bg-cloud-050 p-4 rounded-lg border border-cloud-200">
-                <h3 class="text-lg font-semibold text-violet-900 mb-2">12-Month Milestones (Building Capability → Delivering Results)</h3>
-                <ol class="list-decimal list-inside text-gray-700 space-y-1">
-                    <li><strong>Q1:</strong> Governance Framework Deployed; Baselines Measured; Foundational Training.</li>
-                    <li><strong>Q2:</strong> Lean Intake Operational; First Prioritized Pilots Launched; Initial Measurement Collection.</li>
-                    <li><strong>Q3:</strong> Scale Enablement; Implement Pilot-Validated Process Improvements; Refine Baselines.</li>
-                    <li><strong>Q4:</strong> Report Measured Gains vs. Baseline; Demonstrate ROI; Formalize Year 2 Roadmap.</li>
-                </ol>
+            
+            <div class="activity-item">
+              <span class="risk-badge">Critical</span>
+              <h3>Enterprise Governance Framework</h3>
+              <p>Extend Experian's Model Risk Management (MRM) framework for GenAI:</p>
+              <ul>
+                <li><strong>SR 11-7 Compliance:</strong> Ensure all AI models meet banking regulation standards</li>
+                <li><strong>Data Sovereignty:</strong> Guarantee PII never leaves controlled environments</li>
+                <li><strong>IP Protection:</strong> Safeguard proprietary algorithms and scoring methodologies</li>
+                <li><strong>Audit Trail:</strong> Complete lineage for regulatory examinations</li>
+              </ul>
+              <p style="margin-top: 12px;"><em>Deliverable: GenAI addendum to existing MRM framework, approved by CRO</em></p>
             </div>
-        `
-      },
-       {
-        id: "engage",
-        icon: "🗣️",
-        title: "4. Stakeholder Engagement: Managing Demand at Scale", // Refined Title
-        tag: "Transparency through the Lean Intake Framework", // Refined Tag
-        content: `
-            <p class="text-lg text-gray-700 mb-6">Proactively address the core challenge of high demand and limited resources using a transparent, data-driven prioritization process. This builds trust and ensures strategic focus.</p>
-            <h3 class="text-xl font-semibold text-violet-900 mb-4">The Lean Intake Process for Prioritization:</h3>
-            <div class="lean-intake-flow">
-                <div class="flow-step"><span class="step-num">1</span><h3>Define (Intake Portal)</h3><p>Standardized request captures strategic value, estimated effort, and compliance needs.</p></div>
-                <div class="flow-step"><span class="step-num">2</span><h3>Measure (Scoring)</h3><p>Collaborative estimation. Calculate objective Priority Score (Value/Effort adjusted for Risk).</p></div>
-                <div class="flow-step"><span class="step-num">3</span><h3>Analyze (Prioritization)</h3><p>Monthly Steering Co. review of scored backlog. Make data-informed resource allocation choices.</p></div>
-                <div class="flow-step"><span class="step-num">4</span><h3>Improve/Control (Execution & Visibility)</h3><p>Execute prioritized work. Transparent Kanban provides status and manages expectations.</p></div>
+            
+            <div class="activity-item">
+              <span class="risk-badge">Critical</span>
+              <h3>Baseline Performance Metrics</h3>
+              <p>Establish "before" picture using Experian's existing KPIs:</p>
+              <ul>
+                <li><strong>Product Development:</strong> Time from concept to market launch</li>
+                <li><strong>Model Validation:</strong> Cost and duration of MRM processes</li>
+                <li><strong>Regulatory Response:</strong> Time to address examiner requests</li>
+                <li><strong>Data Utilization:</strong> Percentage of data assets monetized</li>
+              </ul>
+              <p style="margin-top: 12px;"><em>Deliverable: Baseline dashboard integrated with existing BI tools</em></p>
             </div>
-             <div class="mt-8 overflow-x-auto">
-                <h3 class="text-xl font-semibold text-violet-900 mb-3">Structured Engagement Cadence</h3>
-                 <table class="w-full min-w-[600px] text-sm border-collapse">
-                     <thead class="bg-violet-900 text-white">
-                         <tr>
-                             <th class="p-2 text-left font-semibold">Audience</th>
-                             <th class="p-2 text-left font-semibold">Frequency</th>
-                             <th class="p-2 text-left font-semibold">Key Focus</th>
-                         </tr>
-                     </thead>
-                     <tbody class="divide-y divide-cloud-200">
-                         <tr class="bg-cloud-050"><td>Risk/Legal (CRO)</td><td>Weekly</td><td>Governance Sync, Proactive Risk Assessment</td></tr>
-                         <tr><td>Tech (CTOs)</td><td>Bi-weekly</td><td>Architecture Alignment, Integration Strategy</td></tr>
-                         <tr class="bg-cloud-050"><td>Business Units</td><td>Monthly</td><td>Intake Review, Prioritization Transparency, ROI Showcase</td></tr>
-                         <tr><td>Exec. Leadership (CIO)</td><td>Monthly</td><td>Steering Committee: KPIs, Strategic Decisions, ROI Tracking</td></tr>
-                     </tbody>
-                 </table>
-            </div>
-        `
-      },
-      {
-        id: "twist",
-        icon: "🔄",
-        title: "5. Scenario Twist: The Process Proves Value",
-        tag: "Strategic Response to Urgent Demands", // Refined Tag
-        content: `
-          <p class="text-lg text-gray-700 mb-6">This scenario is not a disruption, but a validation of our program's process maturity. It demonstrates how we handle urgent, high-pressure demands effectively and strategically.</p>
-          <h3 class="text-xl font-semibold text-violet-900 mb-4">Applying the Lean Intake & Governance Process:</h3>
-          <div class="lean-intake-flow" style="grid-template-columns: repeat(3, 1fr);">
-                <div class="flow-step border-t-4 border-violet-900">
-                    <span class="step-num" style="background-color: var(--violet-900);">1</span>
-                    <h3>Define/Measure (Process, Not Panic)</h3>
-                    <p>Urgent request enters the <strong>Lean Intake Portal</strong>. Expedite Value/Effort/Risk assessment using the defined process. Gather objective data rapidly.</p>
-                </div>
-                <div class="flow-step border-t-4 border-violet-800">
-                     <span class="step-num" style="background-color: var(--violet-800);">2</span>
-                    <h3>Analyze (Data-Driven Decision)</h3>
-                    <p>Present clear analysis to <strong>Emergency Steering Co.</strong> Show Priority Score vs. current commitments. Explicitly outline resource trade-offs.</p>
-                </div>
-                <div class="flow-step border-t-4 border-fuchsia-700">
-                    <span class="step-num" style="background-color: var(--fuchsia-700);">3</span>
-                    <h3>Improve/Control (Execute Strategically)</h3>
-                    <p>Based on committee's informed decision: Adjust Kanban transparently. Deploy <strong>"Synergy Solution"</strong> if feasible. Communicate rationale clearly.</p>
-                </div>
           </div>
-          <div class="mt-8 p-6 bg-green-50 border border-green-200 rounded-lg text-center">
-             <h3 class="text-xl font-semibold text-green-700">Outcome: Reinforces Program Credibility</h3>
-             <p class="text-green-600 mt-2">The structured response demonstrates efficiency, maintains compliant reliability, and ensures strategic alignment, reinforcing trust in the program's ability to manage complexity.</p>
+
+          <div class="proof-point-box proof-point">
+            <h4>Learning from PowerCurve's Success</h4>
+            <p>PowerCurve's global rollout succeeded because we built on existing processes rather than replacing them. The same principle applies here: GenAI augments our Model Risk Management framework—it doesn't replace it. This approach has already gained preliminary approval from UK FCA in similar implementations.</p>
           </div>
         `
       },
       {
-          id:"appendix",
-          icon:"📎",
-          title:"Appendix: Supporting Frameworks",
-          tag:"Further Detail Available",
-          content:`
-              <div class="metrics-grid">
-                  <div class="metric-group">
-                      <h3>A. Multi-Vendor Platform View</h3>
-                      <p>Conceptual architecture showing the central program governing secure, policy-driven access to diverse AI models (OpenAI, Google, Anthropic, internal) via orchestrated interfaces.</p>
-                  </div>
-                   <div class="metric-group">
-                      <h3>B. Legacy & Cloud Integration Strategy</h3>
-                      <ul class="list-disc list-inside">
-                        <li><strong>Phase 1:</strong> API Wrappers (Secure interfaces for key legacy systems).</li>
-                        <li><strong>Phase 2:</strong> Data Virtualization/Replication (Controlled cloud access to legacy data).</li>
-                        <li><strong>Phase 3:</strong> Targeted Modernization (GenAI-assisted refactoring based on ROI).</li>
-                      </ul>
-                  </div>
-                  <div class="metric-group">
-                      <h3>C. 'Responsible AI' Training Framework</h3>
-                       <ul class="list-disc list-inside">
-                        <li><strong>Level 1 (All):</strong> Safe Usage, Data Privacy, Phishing Awareness.</li>
-                        <li><strong>Level 2 (BUs):</strong> Effective Prompting, M365 Copilot Use Cases.</li>
-                        <li><strong>Level 3 (Tech):</strong> Secure Development, Platform Tools, Model Validation.</li>
-                       </ul>
-                  </div>
-                  <div class="metric-group">
-                      <h3>D. High-Level 12-Month Roadmap Summary</h3>
-                      <p>Focuses on phased capability building: Q1 (Define/Measure: Governance, Baselines) → Q2 (Analyze/Improve: Intake Live, Pilots Launch) → Q3 (Improve: Scale Enablement, Process Optimization) → Q4 (Control/Report: Measure Gains vs. Baselines, Plan Year 2).</p>
-                  </div>
+        id: 'governance',
+        icon: '⚖️',
+        title: 'Innovation with Governance',
+        tagText: 'Speed AND Safety',
+        content: `
+          <h3>Enabling Velocity Through Trust</h3>
+          <p>In our regulated environment, effective governance isn't a brake—it's the accelerator. It gives teams confidence to innovate while protecting Experian's reputation and regulatory standing.</p>
+
+          <div class="governance-layers">
+            <div class="layer-item">
+              <div class="num" style="background: var(--violet-900);">1</div>
+              <div>
+                <h3>Technical Guardrails (Platform Level)</h3>
+                <p>Automated controls built into the infrastructure—invisible but always active:</p>
+                <ul style="margin-top: 8px; padding-left: 20px;">
+                  <li>Integration with Experian's IAM and data loss prevention systems</li>
+                  <li>Automated PII detection and masking (leveraging existing tools)</li>
+                  <li>Model versioning and rollback capabilities</li>
+                  <li>Real-time monitoring and anomaly detection</li>
+                </ul>
+                <p class="experian-context">Builds on Experian's existing SecOps and DataOps capabilities</p>
               </div>
-          `
+            </div>
+            
+            <div class="layer-item">
+              <div class="num" style="background: var(--violet-800);">2</div>
+              <div>
+                <h3>Risk-Aligned Checkpoints (Process Level)</h3>
+                <p>Graduated review based on risk profile—not one-size-fits-all:</p>
+                <ul style="margin-top: 8px; padding-left: 20px;">
+                  <li><strong>Low Risk (Internal Tools):</strong> Automated approval, 24-hour SLA</li>
+                  <li><strong>Medium Risk (B2B Features):</strong> Streamlined review, 5-day SLA</li>
+                  <li><strong>High Risk (Credit Decisioning):</strong> Full MRM process, 15-day SLA</li>
+                  <li><strong>Critical (Consumer-Facing):</strong> Board-level approval required</li>
+                </ul>
+                <p class="experian-context">Aligns with existing Portfolio Review Board processes</p>
+              </div>
+            </div>
+            
+            <div class="layer-item">
+              <div class="num" style="background: var(--fuchsia-700);">3</div>
+              <div>
+                <h3>Risk-Aligned Model Governance (Strategic Level)</h3>
+                <p>Structured framework aligning model selection with Experian's risk appetite:</p>
+                <ul style="margin-top: 8px; padding-left: 20px;">
+                  <li><strong>Proprietary Models:</strong> For credit scoring and competitive advantage</li>
+                  <li><strong>Partner Solutions:</strong> For commodity capabilities (e.g., OCR, translation)</li>
+                  <li><strong>Hybrid Approach:</strong> Combining external LLMs with our data for insights</li>
+                  <li><strong>Decision Matrix:</strong> Clear criteria based on data sensitivity, IP value, and regulatory requirements</li>
+                </ul>
+                <p class="experian-context">Ensures our "secret sauce" stays secret while leveraging best-in-class capabilities</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="competitive-box">
+            <h4>Fast-Track Innovation Lanes</h4>
+            <p>Our process includes pre-approved "fast lanes" for strategic imperatives with defined criteria: CEO mandate, regulatory requirement, or competitive response. These bypass standard queue but not governance—ensuring agility without abandoning discipline.</p>
+          </div>
+
+          <div class="proof-point-box proof-point">
+            <h4>Case Study: Open Banking Integration</h4>
+            <p>Using this framework, Experian UK delivered GenAI-enhanced Open Banking insights in 8 weeks—faster than any competitor—while maintaining full FCA compliance. The graduated risk approach meant low-risk prototypes deployed in days, while high-risk credit features received appropriate scrutiny.</p>
+          </div>
+        `
+      },
+      {
+        id: 'metrics',
+        icon: '📊',
+        title: 'Measuring Success',
+        tagText: 'Quantified ROI',
+        content: `
+          <h3>From Activity to Impact: Measurable Business Outcomes</h3>
+          <p>Success isn't measured in models deployed but in business value delivered. We'll track improvements against established baselines, reporting quarterly to the board.</p>
+
+          <div class="metrics-grid">
+            <div class="metric-group">
+              <h3>Product Velocity Metrics</h3>
+              <ul>
+                <li><span class="kpi-label">Time to Market:</span> <span class="roi-number">Target 30% reduction</span></li>
+                <li><span class="metric-detail">From concept to production for new analytical products</span></li>
+                <li><span class="kpi-label">Deployment Frequency:</span> <span class="roi-number">Target 2x increase</span></li>
+                <li><span class="metric-detail">Number of model updates per quarter</span></li>
+                <li><span class="kpi-label">Innovation Pipeline:</span> <span class="roi-number">Target 50% more experiments</span></li>
+                <li><span class="metric-detail">Ideas tested per quarter with rapid prototyping</span></li>
+              </ul>
+            </div>
+            
+            <div class="metric-group">
+              <h3>Cost Efficiency Metrics</h3>
+              <ul>
+                <li><span class="kpi-label">Model Validation Cost:</span> <span class="roi-number">Target 20% reduction</span></li>
+                <li><span class="metric-detail">Through automated testing and documentation</span></li>
+                <li><span class="kpi-label">Data Processing:</span> <span class="roi-number">Target 40% cost reduction</span></li>
+                <li><span class="metric-detail">Via intelligent data sampling and synthesis</span></li>
+                <li><span class="kpi-label">Customer Service:</span> <span class="roi-number">Target 25% cost-to-serve reduction</span></li>
+                <li><span class="metric-detail">Through AI-assisted agent support</span></li>
+              </ul>
+            </div>
+            
+            <div class="metric-group">
+              <h3>Risk & Compliance Metrics</h3>
+              <ul>
+                <li><span class="kpi-label">Regulatory Response Time:</span> <span class="roi-number">Target 50% reduction</span></li>
+                <li><span class="metric-detail">For examiner queries and audit requests</span></li>
+                <li><span class="kpi-label">Compliance Incidents:</span> <span class="roi-number">Target Zero increase</span></li>
+                <li><span class="metric-detail">Maintaining perfect record despite increased velocity</span></li>
+                <li><span class="kpi-label">Model Explainability:</span> <span class="roi-number">Target 100% coverage</span></li>
+                <li><span class="metric-detail">Full audit trail for all AI-driven decisions</span></li>
+              </ul>
+            </div>
+            
+            <div class="metric-group">
+              <h3>Strategic Value Metrics</h3>
+              <ul>
+                <li><span class="kpi-label">New Revenue Streams:</span> <span class="roi-number">Target 3 new products</span></li>
+                <li><span class="metric-detail">GenAI-powered offerings (climate risk, alternative credit)</span></li>
+                <li><span class="kpi-label">Data Asset Utilization:</span> <span class="roi-number">Target 30% increase</span></li>
+                <li><span class="metric-detail">Percentage of data contributing to insights</span></li>
+                <li><span class="kpi-label">Competitive Win Rate:</span> <span class="roi-number">Track improvement</span></li>
+                <li><span class="metric-detail">In RFPs featuring AI capabilities</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>12-Month Roadmap: Phased Value Delivery</h3>
+          <div class="lean-intake-flow">
+            <div class="flow-step">
+              <span class="step-num">Q1</span>
+              <h3>Foundation</h3>
+              <p>Governance framework deployed. Baselines established. First pilots launched in low-risk areas.</p>
+            </div>
+            <div class="flow-step">
+              <span class="step-num">Q2</span>
+              <h3>Scale</h3>
+              <p>Portfolio intake process live. 10+ initiatives in flight. Quick wins demonstrated.</p>
+            </div>
+            <div class="flow-step">
+              <span class="step-num">Q3</span>
+              <h3>Accelerate</h3>
+              <p>Full platform operational. Process improvements validated. ROI emerging.</p>
+            </div>
+            <div class="flow-step">
+              <span class="step-num">Q4</span>
+              <h3>Optimize</h3>
+              <p>Measured gains reported. Year 2 strategy defined. Success stories published.</p>
+            </div>
+          </div>
+
+          <div class="proof-point-box proof-point">
+            <h4>Early Win Opportunity: Regulatory Response Automation</h4>
+            <p>One UK bank reduced examiner response time by 60% using GenAI for document synthesis. With Experian's superior data organization, we could achieve even better results—turning a compliance burden into competitive advantage. Estimated savings: £2M annually in compliance costs alone.</p>
+          </div>
+        `
+      },
+      {
+        id: 'engagement',
+        icon: '🤝',
+        title: 'Managing Stakeholders',
+        tagText: 'Transparency at Scale',
+        content: `
+          <h3>From Chaos to Control: Portfolio Management at Scale</h3>
+          <p>With demand from every business unit exceeding capacity by 10x, we need a transparent, objective process that builds trust while managing expectations.</p>
+
+          <h3>The Portfolio Management Process</h3>
+          <div class="lean-intake-flow">
+            <div class="flow-step">
+              <span class="step-num">1</span>
+              <h3>Standardized Intake</h3>
+              <p>Business case template capturing value, effort, risk, and strategic alignment</p>
+            </div>
+            <div class="flow-step">
+              <span class="step-num">2</span>
+              <h3>Objective Scoring</h3>
+              <p>Automated prioritization: (Business Value × Strategic Fit) / (Effort × Risk)</p>
+            </div>
+            <div class="flow-step">
+              <span class="step-num">3</span>
+              <h3>Portfolio Review</h3>
+              <p>Monthly board review with clear trade-off decisions and rationale</p>
+            </div>
+            <div class="flow-step">
+              <span class="step-num">4</span>
+              <h3>Transparent Execution</h3>
+              <p>Real-time dashboard showing status, blockers, and expected delivery</p>
+            </div>
+          </div>
+
+          <h3>Stakeholder Engagement Rhythm</h3>
+          <div class="key-activities">
+            <div class="activity-item">
+              <h3>Weekly</h3>
+              <ul>
+                <li><strong>Risk & Legal Sync:</strong> Address emerging concerns proactively</li>
+                <li><strong>Tech Architecture Review:</strong> Ensure platform alignment</li>
+                <li><strong>Pilot Teams Standup:</strong> Remove blockers, share learnings</li>
+              </ul>
+            </div>
+            <div class="activity-item">
+              <h3>Bi-Weekly</h3>
+              <ul>
+                <li><strong>Business Unit Check-ins:</strong> Progress updates, requirement refinement</li>
+                <li><strong>CTO Tech Review:</strong> Deep dives on technical decisions</li>
+                <li><strong>Vendor Management:</strong> Partner capability assessments</li>
+              </ul>
+            </div>
+            <div class="activity-item">
+              <h3>Monthly</h3>
+              <ul>
+                <li><strong>Portfolio Review Board:</strong> Priority decisions with full leadership</li>
+                <li><strong>Metrics Review:</strong> ROI tracking and course correction</li>
+                <li><strong>External Advisory:</strong> Input from industry experts and academics</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="competitive-box">
+            <h4>Managing Executive Expectations</h4>
+            <p>Every executive has a "pet project." Our scoring matrix depersonalizes decisions—it's not about whose idea it is, but which ideas drive maximum value. The transparent dashboard means everyone sees why their initiative is positioned where it is, reducing political friction.</p>
+          </div>
+
+          <div class="proof-point-box proof-point">
+            <h4>Success Pattern from Ascend Platform</h4>
+            <p>When deploying Ascend globally, transparent prioritization reduced escalations by 70% and improved stakeholder satisfaction scores by 40%. The same approach—adapted for GenAI's unique challenges—will manage demand effectively while maintaining organizational alignment.</p>
+          </div>
+        `
+      },
+      {
+        id: 'conclusion',
+        icon: '🎖️',
+        title: 'Strategic Value',
+        tagText: 'The Experian Advantage',
+        content: `
+          <h3>From Mandate to Market Leadership</h3>
+          
+          <div class="exec-summary">
+            <h3>Why This Program Succeeds Where Others Fail</h3>
+            <ul>
+              <li><strong>Built on Proven Foundations:</strong> Leverages Experian's existing strengths rather than starting from scratch</li>
+              <li><strong>Governance as Enabler:</strong> Turns regulatory expertise into competitive advantage</li>
+              <li><strong>Measurable Impact:</strong> Clear ROI with quarterly board reporting</li>
+              <li><strong>Sustainable Scale:</strong> Process-driven approach that grows with demand</li>
+            </ul>
+          </div>
+
+          <h3>The Experian Difference</h3>
+          <div class="key-activities">
+            <div class="activity-item">
+              <span class="risk-badge">Unique</span>
+              <h3>Our Competitive Moat</h3>
+              <p>Unlike pure-play AI companies or traditional competitors:</p>
+              <ul>
+                <li><strong>Data Supremacy:</strong> 125 years of trusted data no startup can replicate</li>
+                <li><strong>Regulatory Mastery:</strong> Deep compliance expertise as competitive advantage</li>
+                <li><strong>Domain Expertise:</strong> Credit and fraud knowledge embedded in our DNA</li>
+                <li><strong>Global Scale:</strong> Infrastructure to deploy instantly across 40+ markets</li>
+              </ul>
+            </div>
+            
+            <div class="activity-item">
+              <span class="risk-badge high">Transform</span>
+              <h3>The Transformation Opportunity</h3>
+              <p>GenAI isn't just another technology—it's our chance to redefine the industry:</p>
+              <ul>
+                <li><strong>Beyond FICO:</strong> Create next-generation credit scoring</li>
+                <li><strong>Climate Risk Leadership:</strong> First-mover in ESG analytics</li>
+                <li><strong>Fraud Prevention:</strong> Real-time pattern detection at scale</li>
+                <li><strong>Customer Experience:</strong> Transform from data provider to insight partner</li>
+              </ul>
+            </div>
+            
+            <div class="activity-item">
+              <span class="risk-badge">Strategic</span>
+              <h3>Year One Deliverables</h3>
+              <p>Concrete outcomes by Q4 2025:</p>
+              <ul>
+                <li><strong>3 New Products:</strong> GenAI-powered offerings in market</li>
+                <li><strong>30% Faster Delivery:</strong> Measurable velocity improvement</li>
+                <li><strong>20% Cost Reduction:</strong> In model validation and compliance</li>
+                <li><strong>100% Governance Coverage:</strong> Full regulatory confidence</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>The Bottom Line</h3>
+          <div class="competitive-box">
+            <h4>This program positions Experian to leverage GenAI as a competitive differentiator in our core business—turning data into trusted decisions.</h4>
+            <p>It ensures we can innovate at the speed of startups while maintaining the trust and reliability of a 125-year-old institution. Most importantly, it transforms our AI-First mandate from a compliance exercise into a value creation engine.</p>
+          </div>
+
+          <h3>Next Steps</h3>
+          <div class="lean-intake-flow">
+            <div class="flow-step">
+              <span class="step-num">1</span>
+              <h3>Approval</h3>
+              <p>Secure executive sponsorship and initial funding</p>
+            </div>
+            <div class="flow-step">
+              <span class="step-num">2</span>
+              <h3>Team Formation</h3>
+              <p>Assemble core team with mix of Experian veterans and AI experts</p>
+            </div>
+            <div class="flow-step">
+              <span class="step-num">3</span>
+              <h3>Quick Wins</h3>
+              <p>Launch 2-3 low-risk pilots to demonstrate approach</p>
+            </div>
+            <div class="flow-step">
+              <span class="step-num">4</span>
+              <h3>Scale</h3>
+              <p>Expand based on proven success and lessons learned</p>
+            </div>
+          </div>
+
+          <div class="proof-point-box proof-point" style="margin-top: 32px; background: linear-gradient(135deg, #e8f4fd, #d1e7fd); border-left-color: var(--violet-900);">
+            <h4>A Personal Commitment</h4>
+            <p>I've led similar transformations at scale, turning regulatory constraints into competitive advantages. This isn't theoretical—it's a proven playbook adapted for Experian's unique strengths. Together, we won't just meet the AI-First mandate; we'll define what AI-First means for the entire financial services industry.</p>
+          </div>
+
+          <div style="margin-top: 40px; padding: 24px; background: var(--cloud-050); border-radius: var(--radius-md); text-align: center;">
+            <h2 style="color: var(--violet-900); margin: 0 0 12px;">Thank You</h2>
+            <p style="color: var(--ink-700); margin: 0; font-size: 18px;">Ready for your questions and discussion</p>
+          </div>
+        `
       }
     ];
 
-    // ===== Proof points (Refined Language - Strategic Focus) =====
-    const PROOF_POINTS = [
-      { sectionId: "intro", point: "My 15+ years leading global, enterprise-scale technology programs provides the strategic perspective needed to navigate this complex mandate and deliver results." },
-      { sectionId: "structure", point: "My Lean Six Sigma certification ensures a disciplined, process-first approach, while my experience integrating Legal/Compliance requirements guarantees governance is foundational, not an afterthought." },
-      { sectionId: "balance", point: "I have direct experience architecting and implementing the necessary data agreements, policy frameworks, and operational controls for secure, responsible, multi-vendor AI adoption at scale." },
-      { sectionId: "measure", point: "Leveraging my background in large-scale program management, I bring expertise in defining meaningful KPIs, establishing robust measurement frameworks, and reporting credible progress against baselines." },
-      { sectionId: "engage", point: "My Lean Six Sigma process skills are directly applicable to building and operating the data-driven Lean Intake framework, ensuring transparency and strategic alignment in demand management." },
-       { sectionId: "engage", point: "Building consensus and maintaining alignment across diverse global stakeholders (Technology, Risk, Business, Executive Leadership) through clear, consistent communication is a core strength." },
-      { sectionId: "twist", point: "I have successfully managed high-pressure resource conflicts by applying structured, data-driven processes, facilitating strategic decision-making, and ensuring clear communication throughout." },
-      { sectionId: "appendix", point: "My background in global program delivery, using methodologies like Agile and ITIL, provides the rigor needed to execute complex roadmaps and manage interdependencies effectively." }
-    ];
+    // ===== DOM Elements =====
+    const navContainer = document.getElementById('toc');
+    const contentContainer = document.getElementById('content');
+    const presenterBtn = document.getElementById('presenter-btn');
+    const navToggleBtn = document.getElementById('nav-toggle-btn');
+    const navCollapseInlineBtn = document.querySelector('.nav-collapse-btn');
+    const proofToggleCheckbox = document.getElementById('proof-toggle');
+    
+    let currentSectionId = SECTIONS[0].id;
+    let observer = null;
 
-     // ===== Evidence for Modal (REMOVED) =====
-
-
-    // ===== Render Application & Functionality (FIXED Proof Point Toggle) =====
-    const tocEl = document.getElementById('toc');
-    const contentEl = document.getElementById('content');
-    const presenterBtn = document.getElementById('btnPresenter');
-    const navToggleBtn = document.getElementById('btnToggleNav'); // Added this
-    const navCollapseInlineBtn = document.getElementById('navCollapseInline'); // Added this
-    const proofToggleCheckbox = document.getElementById('experience-toggle-checkbox');
-
-    let currentSectionId = SECTIONS[0].id; // Track active section
-    let observer; // Define observer outside
-
-    // Function to update visibility of inline proof points based on checkbox
-    function updateProofPointsVisibility() {
-         // Ensure checkbox exists before proceeding
-         if (!proofToggleCheckbox) return;
-
-         const show = proofToggleCheckbox.checked;
-         document.querySelectorAll('.proof-point-box').forEach(box => {
-             const pElement = box.querySelector('.proof-point-text');
-             // Check if pElement exists and has non-empty text content
-             if (pElement && pElement.textContent && pElement.textContent.trim() !== '') {
-                box.classList.toggle('hidden', !show);
-             } else {
-                 box.classList.add('hidden'); // Ensure empty ones are always hidden
-             }
-         });
-     }
-
-
+    // ===== Render Functions =====
     function renderApp() {
-        tocEl.innerHTML = ''; // Clear previous nav
-        contentEl.innerHTML = ''; // Clear previous content
-
-        SECTIONS.forEach((section) => {
-            // Render Nav Button
-            const navButton = document.createElement('button');
-            navButton.setAttribute('data-target', section.id);
-            navButton.innerHTML = `<span class="icon" aria-hidden="true">${section.icon}</span> <span>${section.title}</span>`;
-            if (section.id === currentSectionId) {
-                navButton.setAttribute('aria-current', 'page');
-            }
-            navButton.addEventListener('click', () => activateSection(section.id));
-            tocEl.appendChild(navButton);
-
-            // Render Section Card
-            const card = document.createElement('section');
-            card.id = section.id;
-             card.className = `card slide ${section.id === currentSectionId ? 'active' : ''}`;
-            card.innerHTML = `
+        // Render navigation
+        const navButtons = SECTIONS.map(section => `
+            <button 
+                data-target="${section.id}" 
+                ${section.id === currentSectionId ? 'aria-current="page"' : ''}
+            >
+                <span class="icon">${section.icon}</span>
+                <span>${section.title}</span>
+            </button>
+        `).join('');
+        
+        const navTitle = navContainer.querySelector('h3').parentElement;
+        navContainer.innerHTML = navTitle.outerHTML + navButtons;
+        
+        // Render content sections
+        const contentHTML = SECTIONS.map(section => `
+            <section class="card slide" id="${section.id}">
                 <div class="card-header">
-                    <h2><span class="icon" aria-hidden="true">${section.icon}</span> ${section.title}</h2>
-                    <span class="tag">${section.tag}</span>
+                    <h2><span class="icon">${section.icon}</span> ${section.title}</h2>
+                    <span class="tag">${section.tagText}</span>
                 </div>
-                <div>${section.content}</div>
-                <!-- Proof point placeholder -->
-                <div class="proof-point-box hidden mt-6 p-5 bg-exp-light-blue border-l-4 border-exp-primary rounded-r-lg" data-section-id="${section.id}">
-                     <h4 class="text-lg font-bold text-exp-primary">My Experience Proof Point:</h4>
-                     <p class="proof-point-text text-gray-800 mt-2 text-lg"><!-- Text injected by JS --></p>
-                 </div>
-            `;
-            contentEl.appendChild(card);
+                ${section.content}
+            </section>
+        `).join('');
+        
+        contentContainer.innerHTML = contentHTML;
+        
+        // Set up event listeners for navigation
+        document.querySelectorAll('#toc button[data-target]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetId = btn.dataset.target;
+                activateSection(targetId);
+                
+                if (!document.body.classList.contains('presenter')) {
+                    document.getElementById(targetId).scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                }
+            });
         });
-
-         injectProofPoints(); // Inject proof points
-         updateProofPointsVisibility(); // Set initial visibility based on checkbox
-         startObserver(); // Start observer after content
+        
+        startObserver();
+        updateProofPointsVisibility();
     }
 
-     // Inject proof points into their placeholders
-     function injectProofPoints() {
-         // Clear existing text first
-         document.querySelectorAll('.proof-point-text').forEach(p => { p.textContent = ''; });
-         document.querySelectorAll('.proof-point-box').forEach(box => { box.style.display = 'none'; }); // Hide all initially
+    function updateProofPointsVisibility() {
+        const isChecked = proofToggleCheckbox?.checked ?? true;
+        document.querySelectorAll('.proof-point').forEach(el => {
+            el.classList.toggle('hidden', !isChecked);
+        });
+    }
 
-         PROOF_POINTS.forEach(pp => {
-             const targetBox = document.querySelector(`.proof-point-box[data-section-id="${pp.sectionId}"]`);
-             if (targetBox) {
-                 const pElement = targetBox.querySelector('.proof-point-text');
-                 if (pElement) {
-                     pElement.textContent = pp.point; // Set the text
-                     targetBox.style.display = ''; // Make potentially visible
-                 }
-             }
-         });
-         // Final visibility is handled by updateProofPointsVisibility based on checkbox state
-     }
-
-
-     function activateSection(id) {
-        currentSectionId = id; // Update tracked section
-
-        // Update nav buttons
+    function activateSection(id) {
+        currentSectionId = id;
+        
         document.querySelectorAll('#toc button').forEach(btn => {
             btn.toggleAttribute('aria-current', btn.dataset.target === id);
         });
-
-        // Update visible card (Scroll in normal mode, toggle in presenter mode)
-        if (!document.body.classList.contains('presenter')) {
-             const targetElement = document.getElementById(id);
-             if (targetElement) {
-                 targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        } else {
-             // Presenter mode: Toggle visibility
-             document.querySelectorAll('#content .slide').forEach(slide => {
-                 slide.classList.toggle('active', slide.id === id);
-             });
+        
+        if (document.body.classList.contains('presenter')) {
+            document.querySelectorAll('#content .slide').forEach(slide => {
+                slide.classList.toggle('active', slide.id === id);
+            });
         }
     }
-
 
     // Presenter Mode Toggle
     presenterBtn.addEventListener('click', () => {
         const isPresenting = document.body.classList.toggle('presenter');
         presenterBtn.setAttribute('aria-pressed', isPresenting);
-
+        
         if (isPresenting) {
-            if(observer) observer.disconnect(); // Stop scroll spy
-             document.querySelectorAll('#content .slide').forEach(slide => {
-                 slide.classList.toggle('active', slide.id === currentSectionId);
-             });
+            if(observer) observer.disconnect();
+            document.querySelectorAll('#content .slide').forEach(slide => {
+                slide.classList.toggle('active', slide.id === currentSectionId);
+            });
         } else {
-             // Make all slides display block for scrolling
-             document.querySelectorAll('#content .slide').forEach(slide => {
-                 slide.style.display = 'block';
-                 slide.classList.remove('active');
-             });
-             // Scroll back to the current section
-             setTimeout(() => {
+            document.querySelectorAll('#content .slide').forEach(slide => {
+                slide.style.display = 'block';
+                slide.classList.remove('active');
+            });
+            setTimeout(() => {
                 const targetElement = document.getElementById(currentSectionId);
                 if (targetElement) targetElement.scrollIntoView({ behavior: 'auto', block: 'start' });
-                 startObserver(); // Restart scroll spy
-             }, 50);
-         }
+                startObserver();
+            }, 50);
+        }
     });
 
     // Nav Toggle
     navToggleBtn.addEventListener('click', () => {
         const isCollapsed = document.body.classList.toggle('nav-collapsed');
         navToggleBtn.textContent = isCollapsed ? 'Show Outline' : 'Hide Outline';
-
+        
         if (!document.body.classList.contains('presenter')) {
-            // Re-trigger observer to recalculate layout
             window.scrollBy(0, 1);
             window.scrollBy(0, -1);
         }
     });
 
-    // Add listener for inline collapse button
     if (navCollapseInlineBtn) {
         navCollapseInlineBtn.addEventListener('click', () => {
-            navToggleBtn.click(); // Programmatically click the main header button
+            navToggleBtn.click();
         });
     }
 
-    // Proof Points Modal (REMOVED)
-
-     // Keyboard Navigation (Presenter Mode Only)
+    // Keyboard Navigation (Presenter Mode Only)
     window.addEventListener('keydown', e => {
         if (!document.body.classList.contains('presenter')) return;
-
+        
         const sectionIds = SECTIONS.map(s => s.id);
         const currentIndex = sectionIds.indexOf(currentSectionId);
-
+        
         if (['ArrowRight', 'PageDown', ' ', 'ArrowDown'].includes(e.key)) {
             e.preventDefault();
             const nextIndex = Math.min(currentIndex + 1, sectionIds.length - 1);
@@ -627,84 +862,68 @@
         } else if (['ArrowLeft', 'PageUp', 'Backspace', 'ArrowUp'].includes(e.key)) {
             e.preventDefault();
             const prevIndex = Math.max(currentIndex - 1, 0);
-             if (prevIndex !== currentIndex) activateSection(sectionIds[prevIndex]);
+            if (prevIndex !== currentIndex) activateSection(sectionIds[prevIndex]);
         } else if (e.key === 'Escape') {
-            presenterBtn.click(); // Exit presenter mode
+            presenterBtn.click();
         }
     });
 
     // Scroll Spy for non-presenter mode
     function startObserver() {
-        if (observer) observer.disconnect(); // Clear previous observer
-
+        if (observer) observer.disconnect();
+        
         observer = new IntersectionObserver((entries) => {
-            if (document.body.classList.contains('presenter')) return; // Don't run if presenting
-
+            if (document.body.classList.contains('presenter')) return;
+            
             let bestVisibleSectionId = null;
             let maxRatio = 0;
-
+            
             entries.forEach(entry => {
-                // Find the entry that is most visible on the screen
                 if (entry.intersectionRatio > maxRatio) {
                     maxRatio = entry.intersectionRatio;
                     bestVisibleSectionId = entry.target.id;
                 }
             });
-
-            // Update nav only if a section is sufficiently visible (e.g., >10%) and is different
-            // Check scrollY to ensure we are not at the very top selecting something else
+            
             if (window.scrollY > 50 && bestVisibleSectionId && bestVisibleSectionId !== currentSectionId && maxRatio > 0.1) {
-                currentSectionId = bestVisibleSectionId; // Update global tracker
+                currentSectionId = bestVisibleSectionId;
                 document.querySelectorAll('#toc button').forEach(btn => {
                     btn.toggleAttribute('aria-current', btn.dataset.target === bestVisibleSectionId);
                 });
+            } else if (window.scrollY < 50 && currentSectionId !== SECTIONS[0].id) {
+                currentSectionId = SECTIONS[0].id;
+                document.querySelectorAll('#toc button').forEach(btn => {
+                    btn.toggleAttribute('aria-current', btn.dataset.target === SECTIONS[0].id);
+                });
             }
-             // Explicit check for scrolling to the very top
-             else if (window.scrollY < 50 && currentSectionId !== SECTIONS[0].id) {
-                 currentSectionId = SECTIONS[0].id;
-                 document.querySelectorAll('#toc button').forEach(btn => {
-                     btn.toggleAttribute('aria-current', btn.dataset.target === SECTIONS[0].id);
-                 });
-             }
-
         }, {
-            root: null, // relative to the viewport
-            threshold: Array.from(Array(11).keys()).map(i => i * 0.1) // Check every 10% visibility
+            root: null,
+            threshold: Array.from(Array(11).keys()).map(i => i * 0.1)
         });
-
+        
         document.querySelectorAll('#content .slide').forEach(section => {
-             // Ensure section is display:block for observer to work in non-presenter mode
-             if (!document.body.classList.contains('presenter')) {
-                 section.style.display = 'block';
-             }
-             observer.observe(section);
+            if (!document.body.classList.contains('presenter')) {
+                section.style.display = 'block';
+            }
+            observer.observe(section);
         });
     }
 
-
-    // Add Proof Points toggle INLINE functionality
+    // Proof Points toggle
     if (proofToggleCheckbox) {
         proofToggleCheckbox.addEventListener('change', updateProofPointsVisibility);
-        // Initial check called within renderApp after elements exist
     }
 
-     // ===== Initial Render =====
-     renderApp(); // Renders cards, nav, injects proof points, sets initial visibility
-
-     // Set initial active state based on scroll position after a slight delay
-     setTimeout(() => {
-        // Double check scroll position for initial active section
+    // Initial Render
+    renderApp();
+    
+    setTimeout(() => {
         if (window.scrollY < 50 && currentSectionId !== SECTIONS[0].id) {
-             // Activate first section if we are at the top
-             activateSection(SECTIONS[0].id);
-         }
-         // Final visibility check after everything is rendered and potentially scrolled
-         updateProofPointsVisibility();
-     }, 150);
-
+            activateSection(SECTIONS[0].id);
+        }
+        updateProofPointsVisibility();
+    }, 150);
   </script>
 
 </body>
 </html>
-
-
