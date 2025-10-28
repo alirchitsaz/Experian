@@ -161,16 +161,7 @@
         color: var(--ink-900);
     }
 
-    /* Simple "slide" presenter mode */
-    .slide { display: none; }
-    .slide.active { display: block; animation: fadeIn 0.5s ease; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* Presenter mode styles */
-    body.presenter .nav { display: none; }
-    body.presenter .grid { grid-template-columns: 1fr; margin-top: 0; }
-    body.presenter .card { margin: 24px 0; box-shadow: none; border: none; }
-    body.presenter .wrap { margin-top: 24px; }
+    /* Presenter mode styles (REMOVED) */
   </style>
 </head>
 <body>
@@ -179,13 +170,12 @@
     <div class="hero-inner">
       <div>
         <div class="mark">experian.</div>
-        <!-- UPDATED TITLE TO REFLECT DUAL MANDATES -->
         <h1 class="title">A Process-Driven GenAI Program: Adoption, Governance & Measurable ROI</h1> 
         <p class="subtitle">Managing High Demand with Compliant Reliability | Ali R Chitsaz</p>
       </div>
       <div class="controls">
+        <!-- Presenter Mode Button Removed -->
         <button class="pill ghost" id="btnToggleNav">Hide Outline</button>
-        <button class="pill ghost" id="btnPresenter" aria-pressed="false">Presenter Mode</button>
       </div>
     </div>
   </header>
@@ -215,16 +205,14 @@
     </div>
   </div>
 
-  <!-- ===== Proof points modal (REMOVED) ===== -->
-
   <footer class="footer">
     <small>Experian Public. Presentation for CIO, CTOs, CRO.</small>
     <small>Style inspired by Experian visuals; not official assets.</small>
   </footer>
 
-  <!-- ===== FULL SCRIPT RESTORED BELOW ===== -->
+  <!-- ===== FULL SCRIPT (STREAMLINED) ===== -->
   <script>
-    // ===== Presentation Content (UPDATED TO ALIGN WITH SCRIPT) =====
+    // ===== Presentation Content (ALIGNED WITH SCRIPT) =====
     const SECTIONS = [
       {
         id: "intro",
@@ -462,7 +450,6 @@
     ];
 
     // ===== Proof points (Refined Language - Strategic Focus) =====
-    // NOTE: These are general enough to remain valid for the new content
     const PROOF_POINTS = [
       { sectionId: "intro", point: "My 15+ years leading global, enterprise-scale technology programs provides the strategic perspective needed to navigate this complex mandate and deliver results." },
       { sectionId: "structure", point: "My background in large-scale change management and Lean certification ensures a dual focus on both the cultural adoption (CoE, Champions) and the process framework (Governance, Intake)." },
@@ -475,12 +462,12 @@
     ];
 
 
-    // ===== Render Application & Functionality (FIXED Proof Point Toggle) =====
+    // ===== Render Application & Functionality (Streamlined) =====
     const tocEl = document.getElementById('toc');
     const contentEl = document.getElementById('content');
-    const presenterBtn = document.getElementById('btnPresenter');
-    const navToggleBtn = document.getElementById('btnToggleNav'); // Added this
-    const navCollapseInlineBtn = document.getElementById('navCollapseInline'); // Added this
+    // presenterBtn Removed
+    const navToggleBtn = document.getElementById('btnToggleNav');
+    const navCollapseInlineBtn = document.getElementById('navCollapseInline');
     const proofToggleCheckbox = document.getElementById('experience-toggle-checkbox');
 
     let currentSectionId = SECTIONS[0].id; // Track active section
@@ -488,13 +475,10 @@
 
     // Function to update visibility of inline proof points based on checkbox
     function updateProofPointsVisibility() {
-         // Ensure checkbox exists before proceeding
          if (!proofToggleCheckbox) return;
-
          const show = proofToggleCheckbox.checked;
          document.querySelectorAll('.proof-point-box').forEach(box => {
              const pElement = box.querySelector('.proof-point-text');
-             // Check if pElement exists and has non-empty text content
              if (pElement && pElement.textContent && pElement.textContent.trim() !== '') {
                 box.classList.toggle('hidden', !show);
              } else {
@@ -522,7 +506,7 @@
             // Render Section Card
             const card = document.createElement('section');
             card.id = section.id;
-             card.className = `card slide ${section.id === currentSectionId ? 'active' : ''}`;
+             card.className = 'card'; // Simplified: Removed 'slide' and 'active' classes
             card.innerHTML = `
                 <div class="card-header">
                     <h2><span class="icon" aria-hidden="true">${section.icon}</span> ${section.title}</h2>
@@ -545,21 +529,19 @@
 
      // Inject proof points into their placeholders
      function injectProofPoints() {
-         // Clear existing text first
          document.querySelectorAll('.proof-point-text').forEach(p => { p.textContent = ''; });
-         document.querySelectorAll('.proof-point-box').forEach(box => { box.style.display = 'none'; }); // Hide all initially
+         document.querySelectorAll('.proof-point-box').forEach(box => { box.style.display = 'none'; });
 
          PROOF_POINTS.forEach(pp => {
              const targetBox = document.querySelector(`.proof-point-box[data-section-id="${pp.sectionId}"]`);
              if (targetBox) {
                  const pElement = targetBox.querySelector('.proof-point-text');
                  if (pElement) {
-                     pElement.textContent = pp.point; // Set the text
-                     targetBox.style.display = ''; // Make potentially visible
+                     pElement.textContent = pp.point;
+                     targetBox.style.display = '';
                  }
              }
          });
-         // Final visibility is handled by updateProofPointsVisibility based on checkbox state
      }
 
 
@@ -571,56 +553,24 @@
             btn.toggleAttribute('aria-current', btn.dataset.target === id);
         });
 
-        // Update visible card (Scroll in normal mode, toggle in presenter mode)
-        if (!document.body.classList.contains('presenter')) {
-             const targetElement = document.getElementById(id);
-             if (targetElement) {
-                 targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        } else {
-             // Presenter mode: Toggle visibility
-             document.querySelectorAll('#content .slide').forEach(slide => {
-                 slide.classList.toggle('active', slide.id === id);
-             });
+        // Simplified scrolling logic
+         const targetElement = document.getElementById(id);
+         if (targetElement) {
+             targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }
 
 
-    // Presenter Mode Toggle
-    presenterBtn.addEventListener('click', () => {
-        const isPresenting = document.body.classList.toggle('presenter');
-        presenterBtn.setAttribute('aria-pressed', isPresenting);
-
-        if (isPresenting) {
-            if(observer) observer.disconnect(); // Stop scroll spy
-             document.querySelectorAll('#content .slide').forEach(slide => {
-                 slide.classList.toggle('active', slide.id === currentSectionId);
-             });
-        } else {
-             // Make all slides display block for scrolling
-             document.querySelectorAll('#content .slide').forEach(slide => {
-                 slide.style.display = 'block';
-                 slide.classList.remove('active');
-             });
-             // Scroll back to the current section
-             setTimeout(() => {
-                const targetElement = document.getElementById(currentSectionId);
-                if (targetElement) targetElement.scrollIntoView({ behavior: 'auto', block: 'start' });
-                 startObserver(); // Restart scroll spy
-             }, 50);
-         }
-    });
+    // Presenter Mode Toggle (REMOVED)
 
     // Nav Toggle
     navToggleBtn.addEventListener('click', () => {
         const isCollapsed = document.body.classList.toggle('nav-collapsed');
         navToggleBtn.textContent = isCollapsed ? 'Show Outline' : 'Hide Outline';
 
-        if (!document.body.classList.contains('presenter')) {
-            // Re-trigger observer to recalculate layout
-            window.scrollBy(0, 1);
-            window.scrollBy(0, -1);
-        }
+        // Re-trigger observer to recalculate layout
+        window.scrollBy(0, 1);
+        window.scrollBy(0, -1);
     });
 
     // Add listener for inline collapse button
@@ -630,55 +580,29 @@
         });
     }
 
-    // Proof Points Modal (REMOVED)
+    // Keyboard Navigation (REMOVED)
 
-     // Keyboard Navigation (Presenter Mode Only)
-    window.addEventListener('keydown', e => {
-        if (!document.body.classList.contains('presenter')) return;
-
-        const sectionIds = SECTIONS.map(s => s.id);
-        const currentIndex = sectionIds.indexOf(currentSectionId);
-
-        if (['ArrowRight', 'PageDown', ' ', 'ArrowDown'].includes(e.key)) {
-            e.preventDefault();
-            const nextIndex = Math.min(currentIndex + 1, sectionIds.length - 1);
-            if (nextIndex !== currentIndex) activateSection(sectionIds[nextIndex]);
-        } else if (['ArrowLeft', 'PageUp', 'Backspace', 'ArrowUp'].includes(e.key)) {
-            e.preventDefault();
-            const prevIndex = Math.max(currentIndex - 1, 0);
-             if (prevIndex !== currentIndex) activateSection(sectionIds[prevIndex]);
-        } else if (e.key === 'Escape') {
-            presenterBtn.click(); // Exit presenter mode
-        }
-    });
-
-    // Scroll Spy for non-presenter mode
+    // Scroll Spy
     function startObserver() {
         if (observer) observer.disconnect(); // Clear previous observer
 
         observer = new IntersectionObserver((entries) => {
-            if (document.body.classList.contains('presenter')) return; // Don't run if presenting
-
             let bestVisibleSectionId = null;
             let maxRatio = 0;
 
             entries.forEach(entry => {
-                // Find the entry that is most visible on the screen
                 if (entry.intersectionRatio > maxRatio) {
                     maxRatio = entry.intersectionRatio;
                     bestVisibleSectionId = entry.target.id;
                 }
             });
 
-            // Update nav only if a section is sufficiently visible (e.g., >10%) and is different
-            // Check scrollY to ensure we are not at the very top selecting something else
             if (window.scrollY > 50 && bestVisibleSectionId && bestVisibleSectionId !== currentSectionId && maxRatio > 0.1) {
-                currentSectionId = bestVisibleSectionId; // Update global tracker
+                currentSectionId = bestVisibleSectionId;
                 document.querySelectorAll('#toc button').forEach(btn => {
                     btn.toggleAttribute('aria-current', btn.dataset.target === bestVisibleSectionId);
                 });
             }
-             // Explicit check for scrolling to the very top
              else if (window.scrollY < 50 && currentSectionId !== SECTIONS[0].id) {
                  currentSectionId = SECTIONS[0].id;
                  document.querySelectorAll('#toc button').forEach(btn => {
@@ -687,15 +611,12 @@
              }
 
         }, {
-            root: null, // relative to the viewport
-            threshold: Array.from(Array(11).keys()).map(i => i * 0.1) // Check every 10% visibility
+            root: null,
+            threshold: Array.from(Array(11).keys()).map(i => i * 0.1)
         });
 
-        document.querySelectorAll('#content .slide').forEach(section => {
-             // Ensure section is display:block for observer to work in non-presenter mode
-             if (!document.body.classList.contains('presenter')) {
-                 section.style.display = 'block';
-             }
+        // Updated selector to find '.card' instead of '.slide'
+        document.querySelectorAll('#content .card').forEach(section => {
              observer.observe(section);
         });
     }
@@ -704,20 +625,15 @@
     // Add Proof Points toggle INLINE functionality
     if (proofToggleCheckbox) {
         proofToggleCheckbox.addEventListener('change', updateProofPointsVisibility);
-        // Initial check called within renderApp after elements exist
     }
 
      // ===== Initial Render =====
-     renderApp(); // Renders cards, nav, injects proof points, sets initial visibility
+     renderApp();
 
-     // Set initial active state based on scroll position after a slight delay
      setTimeout(() => {
-        // Double check scroll position for initial active section
         if (window.scrollY < 50 && currentSectionId !== SECTIONS[0].id) {
-             // Activate first section if we are at the top
              activateSection(SECTIONS[0].id);
          }
-         // Final visibility check after everything is rendered and potentially scrolled
          updateProofPointsVisibility();
      }, 150);
 
