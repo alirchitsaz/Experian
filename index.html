@@ -64,6 +64,16 @@
     .ghost { background: transparent; color: var(--violet-800); border: 1px solid var(--cloud-200); box-shadow: none; }
     .ghost:hover { background: var(--cloud-100); }
 
+    /* Custom style for hero buttons */
+    .hero .ghost {
+        color: var(--cloud-000); /* White text */
+        border-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white border */
+    }
+    .hero .ghost:hover {
+        background: rgba(255, 255, 255, 0.1); /* Slight white background on hover */
+        border-color: rgba(255, 255, 255, 0.8); /* More opaque border on hover */
+    }
+
     /* Cards/sections */
     .card { background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-1); padding: 24px 28px; margin-bottom: 32px; border: 1px solid var(--cloud-200); }
     .card-header { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--cloud-100); padding-bottom: 12px; }
@@ -113,7 +123,7 @@
 
 
     /* Proof points panel */
-    dialog#proof { border: none; border-radius: var(--radius-lg); padding: 0; box-shadow: var(--shadow-3); width: min(880px, 92vw); max-width: 90%; }
+    dialog#proof { position: relative; border: none; border-radius: var(--radius-lg); padding: 0; box-shadow: var(--shadow-3); width: min(880px, 92vw); max-width: 90%; }
     dialog#proof::backdrop { background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
     .sheet { display: grid; grid-template-columns: 1.2fr 1fr; }
     @media (max-width: 700px) { .sheet { grid-template-columns: 1fr; } .sheet__right { border-left: none; border-top: 1px solid var(--cloud-200); border-radius: 0 0 var(--radius-lg) var(--radius-lg); } }
@@ -129,6 +139,26 @@
     .evidence-item { background: white; border: 1px solid var(--cloud-200); padding: 12px; border-radius: var(--radius-md); }
     .evidence-item .kpi-title { display: block; font-size: 14px; color: var(--ink-500); margin-bottom: 4px; font-weight: 600; }
     .evidence-item .outcome-text { font-size: 15px; color: var(--ink-900); font-weight: 500; line-height: 1.6;}
+
+    /* New Dialog Close Button */
+    .dialog-close {
+        position: absolute;
+        top: 10px;
+        right: 16px;
+        background: transparent;
+        border: none;
+        font-size: 2.5rem;
+        font-weight: 300;
+        color: var(--ink-500);
+        cursor: pointer;
+        line-height: 1;
+        padding: 0;
+        z-index: 10;
+        transition: color 0.2s ease;
+    }
+    .dialog-close:hover {
+        color: var(--ink-900);
+    }
 
     .footer { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; margin: 40px auto; padding: 0 clamp(12px, 3vw, 24px); max-width: 1180px; }
     .footer small { color: var(--ink-500); font-size: 13px; }
@@ -185,6 +215,8 @@
 
   <!-- ===== Proof points modal ===== -->
   <dialog id="proof">
+    <!-- ADDED THIS BUTTON -->
+    <button class="dialog-close" id="dialogCloseBtn" aria-label="Close dialog">&times;</button>
     <div class="sheet">
       <div class="sheet__left">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
@@ -213,6 +245,7 @@
   <!-- Load Chart.js (Optional, only if needed later) -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script> -->
 
+  <!-- ===== FULL SCRIPT RESTORED BELOW ===== -->
   <script>
     // ===== Presentation Content (Strictly from Outline V3 - Language Refined for Strategic Impact) =====
     const SECTIONS = [
@@ -467,7 +500,7 @@
     const proofListEl = document.getElementById('proofList');
     const evidenceListEl = document.getElementById('evidence');
     const presenterBtn = document.getElementById('btnPresenter');
-    const proofToggleCheckbox = document.getElementById('experience-toggle-checkbox'); // Define checkbox here
+    const proofToggleCheckbox = document.getElementById('experience-toggle-checkbox'); // This line was missing before
 
     let currentSectionId = SECTIONS[0].id; // Track active section
     let observer; // Define observer outside
@@ -614,6 +647,7 @@
         proofDialog.showModal();
     });
     document.getElementById('closeProof').addEventListener('click', () => proofDialog.close());
+    document.getElementById('dialogCloseBtn').addEventListener('click', () => proofDialog.close()); // Added this line for the 'X'
 
      // Keyboard Navigation (Presenter Mode Only)
     window.addEventListener('keydown', e => {
@@ -712,4 +746,5 @@
 
 </body>
 </html>
+
 
