@@ -122,46 +122,35 @@
     .hidden { display: none; }
 
 
-    /* Proof points panel */
-    dialog#proof { position: relative; border: none; border-radius: var(--radius-lg); padding: 0; box-shadow: var(--shadow-3); width: min(880px, 92vw); max-width: 90%; }
-    dialog#proof::backdrop { background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
-    .sheet { display: grid; grid-template-columns: 1.2fr 1fr; }
-    @media (max-width: 700px) { .sheet { grid-template-columns: 1fr; } .sheet__right { border-left: none; border-top: 1px solid var(--cloud-200); border-radius: 0 0 var(--radius-lg) var(--radius-lg); } }
-    .sheet__left { padding: 24px 28px; }
-    .sheet__right { padding: 24px 28px; background: var(--cloud-050); border-left: 1px solid var(--cloud-200); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
-    .sheet h3 { margin: 0 0 12px; font-size: 18px; color: var(--violet-900); }
-    .proof-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
-    .proof-item { display: flex; gap: 12px; align-items: start; }
-    .proof-dot { flex: 0 0 8px; height: 8px; border-radius: 50%; margin-top: 7px; background: var(--fuchsia-700); }
-    .proof-item .section-title { display: block; font-weight: 600; color: var(--ink-900); font-size: 15px; margin-bottom: 2px; }
-    .proof-item .point-text { font-size: 14px; color: var(--ink-700); line-height: 1.6; }
-    .evidence-list { display: grid; gap: 12px; }
-    .evidence-item { background: white; border: 1px solid var(--cloud-200); padding: 12px; border-radius: var(--radius-md); }
-    .evidence-item .kpi-title { display: block; font-size: 14px; color: var(--ink-500); margin-bottom: 4px; font-weight: 600; }
-    .evidence-item .outcome-text { font-size: 15px; color: var(--ink-900); font-weight: 500; line-height: 1.6;}
+    /* Proof points panel (REMOVED) */
 
-    /* New Dialog Close Button */
-    .dialog-close {
-        position: absolute;
-        top: 10px;
-        right: 16px;
-        background: transparent;
-        border: none;
-        font-size: 2.5rem;
-        font-weight: 300;
-        color: var(--ink-500);
-        cursor: pointer;
-        line-height: 1;
-        padding: 0;
-        z-index: 10;
-        transition: color 0.2s ease;
-    }
-    .dialog-close:hover {
-        color: var(--ink-900);
-    }
+    /* Dialog Close Button (REMOVED) */
 
     .footer { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; margin: 40px auto; padding: 0 clamp(12px, 3vw, 24px); max-width: 1180px; }
     .footer small { color: var(--ink-500); font-size: 13px; }
+
+    /* Nav toggle styles */
+    body.nav-collapsed .nav {
+        display: none;
+    }
+    body.nav-collapsed .grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Style for new inline collapse button */
+    .nav-collapse-btn {
+        background: none; 
+        border: none; 
+        font-size: 24px; 
+        color: var(--ink-500); 
+        cursor: pointer; 
+        padding: 0 4px; 
+        line-height: 1; 
+        transition: color 0.2s ease;
+    }
+    .nav-collapse-btn:hover {
+        color: var(--ink-900);
+    }
 
     /* Simple "slide" presenter mode */
     .slide { display: none; }
@@ -185,7 +174,7 @@
         <p class="subtitle">Managing High Demand with Compliant Reliability | Ali R Chitsaz</p>
       </div>
       <div class="controls">
-        <button class="pill ghost" id="btnProof">Show My Proof Points</button>
+        <button class="pill ghost" id="btnToggleNav">Hide Outline</button>
         <button class="pill ghost" id="btnPresenter" aria-pressed="false">Presenter Mode</button>
       </div>
     </div>
@@ -194,7 +183,10 @@
   <div class="wrap grid">
     <!-- ===== Left Nav ===== -->
     <nav class="nav" aria-label="Sections">
-      <h3>Presentation Outline</h3>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin: 4px 8px 12px;">
+          <h3 style="margin: 0; font-size: 15px; color: var(--ink-700); font-weight: 600;">Presentation Outline</h3>
+          <button id="navCollapseInline" class="nav-collapse-btn" title="Hide Outline">&times;</button>
+      </div>
        <!-- Proof Points Toggle Checkbox -->
        <div style="padding: 8px 12px; border-top: 1px solid var(--cloud-100); margin-top: 8px;">
             <label for="experience-toggle-checkbox" class="flex items-center cursor-pointer" style="font-size: 14px; color: var(--ink-700); display: flex; align-items: center; gap: 8px;">
@@ -213,29 +205,7 @@
     </div>
   </div>
 
-  <!-- ===== Proof points modal ===== -->
-  <dialog id="proof">
-    <!-- ADDED THIS BUTTON -->
-    <button class="dialog-close" id="dialogCloseBtn" aria-label="Close dialog">&times;</button>
-    <div class="sheet">
-      <div class="sheet__left">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-          <h3>My Experience Proof Points</h3>
-          <span class="tag">Ali R. Chitsaz</span>
-        </div>
-        <ul id="proofList" class="proof-list">
-            <!-- Proof points loaded by JS -->
-        </ul>
-        <button class="pill ghost" id="closeProof" style="margin-top: 20px;">Close</button>
-      </div>
-      <aside class="sheet__right">
-        <h3>Résumé Highlights → Strategic Impact</h3>
-        <div id="evidence" class="evidence-list">
-            <!-- Evidence loaded by JS -->
-        </div>
-      </aside>
-    </div>
-  </dialog>
+  <!-- ===== Proof points modal (REMOVED) ===== -->
 
   <footer class="footer">
     <small>Experian Public. Presentation for CIO, CTOs, CRO.</small>
@@ -483,24 +453,16 @@
       { sectionId: "appendix", point: "My background in global program delivery, using methodologies like Agile and ITIL, provides the rigor needed to execute complex roadmaps and manage interdependencies effectively." }
     ];
 
-     // ===== Evidence for Modal (Refined Language - Strategic Focus) =====
-     const EVIDENCE = [
-        { kpi: "Process Discipline & Governance", outcome: "Lean Six Sigma Green Belt; Architected and implemented compliance frameworks for enterprise AI (OpenAI, Google, Anthropic)." },
-        { kpi: "Measurement & Program Leadership", outcome: "Proven experience defining program KPIs and tracking value delivery (including SDLC metrics); Achieved high stakeholder satisfaction (>95% CSAT) in complex program roles." },
-        { kpi: "Multi-Vendor Technology Strategy", outcome: "Led enablement and solution deployment across diverse ecosystems (Google Cloud, Azure/OpenAI, Anthropic)." },
-        { kpi: "Global Scale & Change Leadership", outcome: "Managed complex global platform migrations ensuring business continuity; Drove significant user adoption for transformative technologies." },
-        { kpi: "Executive Communication & Alignment", outcome: "Skilled in facilitating strategic discussions and building consensus across technical and business leadership globally." }
-     ];
+     // ===== Evidence for Modal (REMOVED) =====
 
 
     // ===== Render Application & Functionality (FIXED Proof Point Toggle) =====
     const tocEl = document.getElementById('toc');
     const contentEl = document.getElementById('content');
-    const proofDialog = document.getElementById('proof');
-    const proofListEl = document.getElementById('proofList');
-    const evidenceListEl = document.getElementById('evidence');
     const presenterBtn = document.getElementById('btnPresenter');
-    const proofToggleCheckbox = document.getElementById('experience-toggle-checkbox'); // This line was missing before
+    const navToggleBtn = document.getElementById('btnToggleNav'); // Added this
+    const navCollapseInlineBtn = document.getElementById('navCollapseInline'); // Added this
+    const proofToggleCheckbox = document.getElementById('experience-toggle-checkbox');
 
     let currentSectionId = SECTIONS[0].id; // Track active section
     let observer; // Define observer outside
@@ -630,24 +592,26 @@
          }
     });
 
-    // Proof Points Modal
-    document.getElementById('btnProof').addEventListener('click', () => {
-        proofListEl.innerHTML = PROOF_POINTS.map(p => `
-            <li class="proof-item">
-                <span class="proof-dot" aria-hidden="true"></span>
-                <div><span class="section-title">${SECTIONS.find(s => s.id === p.sectionId)?.title.split(': ')[1] || 'General'}:</span> <span class="point-text">${p.point}</span></div>
-            </li>
-        `).join('');
-        evidenceListEl.innerHTML = EVIDENCE.map(e => `
-            <div class="evidence-item">
-                <span class="kpi-title">${e.kpi}</span>
-                <span class="outcome-text">${e.outcome}</span>
-            </div>
-        `).join('');
-        proofDialog.showModal();
+    // Nav Toggle
+    navToggleBtn.addEventListener('click', () => {
+        const isCollapsed = document.body.classList.toggle('nav-collapsed');
+        navToggleBtn.textContent = isCollapsed ? 'Show Outline' : 'Hide Outline';
+
+        if (!document.body.classList.contains('presenter')) {
+            // Re-trigger observer to recalculate layout
+            window.scrollBy(0, 1);
+            window.scrollBy(0, -1);
+        }
     });
-    document.getElementById('closeProof').addEventListener('click', () => proofDialog.close());
-    document.getElementById('dialogCloseBtn').addEventListener('click', () => proofDialog.close()); // Added this line for the 'X'
+
+    // Add listener for inline collapse button
+    if (navCollapseInlineBtn) {
+        navCollapseInlineBtn.addEventListener('click', () => {
+            navToggleBtn.click(); // Programmatically click the main header button
+        });
+    }
+
+    // Proof Points Modal (REMOVED)
 
      // Keyboard Navigation (Presenter Mode Only)
     window.addEventListener('keydown', e => {
@@ -665,11 +629,7 @@
             const prevIndex = Math.max(currentIndex - 1, 0);
              if (prevIndex !== currentIndex) activateSection(sectionIds[prevIndex]);
         } else if (e.key === 'Escape') {
-             if (proofDialog.open) {
-                 proofDialog.close();
-             } else {
-                presenterBtn.click(); // Exit presenter mode if modal not open
-             }
+            presenterBtn.click(); // Exit presenter mode
         }
     });
 
