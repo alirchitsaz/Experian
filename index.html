@@ -3,237 +3,412 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interview Guide: Head of Global Workplace GenAI</title>
+    <title>Experian Workplace GenAI Strategy | Ali Chitsaz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* Experian Brand Palette */
         :root {
-            --primary: #005A9C; /* Experian Blue */
-            --secondary: #E8F0F8;
-            --accent: #FF6A13;
-            --text-dark: #333333;
-            --text-light: #666666;
-            --bg-main: #F4F7F6;
+            --exp-dark-blue: #1D4F91;
+            --exp-light-blue: #426DA9;
+            --exp-magenta: #E80070;
+            --exp-purple: #77127B;
+            --bg-light: #F7F8FB;
+            --text-main: #333333;
+            --text-muted: #666666;
             --white: #FFFFFF;
         }
+
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-dark);
-            line-height: 1.6;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            box-sizing: border-box;
+        }
+        nav .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--exp-dark-blue);
+        }
+        nav .logo-text span { color: var(--exp-magenta); }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
             margin: 0;
             padding: 0;
         }
-        header {
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 2rem;
-            text-align: center;
-            border-bottom: 4px solid var(--accent);
-        }
-        header h1 { margin: 0; font-size: 2.5rem; }
-        header p { margin: 10px 0 0 0; font-size: 1.2rem; opacity: 0.9; }
-        
-        .container {
-            display: flex;
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
-            gap: 20px;
-        }
-        
-        /* Sidebar Navigation */
-        nav {
-            flex: 1;
-            background: var(--white);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 20px;
-            height: fit-content;
-        }
-        nav ul { list-style: none; padding: 0; margin: 0; }
-        nav li { margin-bottom: 10px; }
         nav a {
             text-decoration: none;
-            color: var(--primary);
-            font-weight: 600;
-            display: block;
-            padding: 10px;
-            border-radius: 4px;
-            transition: background 0.3s;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: color 0.3s;
         }
-        nav a:hover { background: var(--secondary); }
-        
-        /* Main Content */
-        main { flex: 3; }
-        
+        nav a:hover { color: var(--exp-magenta); }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--exp-dark-blue) 0%, var(--exp-purple) 100%);
+            color: var(--white);
+            padding: 160px 50px 100px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin: 0 0 20px 0;
+            letter-spacing: -1px;
+        }
+        .hero p {
+            font-size: 1.4rem;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        .hero .highlight {
+            color: #FFBACB; /* Experian Magenta 30 */
+            font-weight: 500;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--exp-dark-blue);
+            margin: 0 0 10px 0;
+        }
+        .section-header .divider {
+            height: 4px;
+            width: 60px;
+            background-color: var(--exp-magenta);
+            margin: 0 auto;
+        }
+
+        /* Grid Layouts */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        /* Cards */
         .card {
             background: var(--white);
-            border-radius: 8px;
-            padding: 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            border-left: 5px solid var(--primary);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 5px solid var(--exp-light-blue);
         }
-        .card h2 {
-            color: var(--primary);
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        .card h3 {
+            color: var(--exp-dark-blue);
+            font-size: 1.5rem;
             margin-top: 0;
-            border-bottom: 2px solid var(--secondary);
-            padding-bottom: 10px;
         }
-        .card h3 { color: var(--text-dark); margin-top: 20px; }
+        .card.magenta-top { border-top-color: var(--exp-magenta); }
         
-        /* STAR Framework formatting */
-        .star-box {
-            background: var(--secondary);
-            padding: 20px;
-            border-radius: 6px;
-            margin-top: 15px;
-        }
-        .star-letter {
-            font-weight: bold;
-            color: var(--accent);
-            margin-right: 10px;
-        }
-        .star-row { margin-bottom: 10px; }
-        
-        .highlight { font-weight: bold; color: var(--primary); }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        th, td {
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-        }
-        th { background-color: var(--secondary); color: var(--primary); }
-        
-        .alert {
-            background-color: #fff3cd;
-            color: #856404;
-            padding: 15px;
-            border-left: 5px solid #ffeeba;
+        /* Interactive Tabs for STAR Stories */
+        .tabs { margin-top: 40px; }
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            border-bottom: 2px solid #E2E4E7;
             margin-bottom: 20px;
-            border-radius: 4px;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s;
+        }
+        .tab-btn.active {
+            color: var(--exp-magenta);
+        }
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--exp-magenta);
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .tab-content.active { display: block; }
+        
+        /* STAR Framework Formatting */
+        .star-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        .star-item {
+            background: var(--bg-light);
+            padding: 20px;
+            border-left: 4px solid var(--exp-light-blue);
+            border-radius: 0 8px 8px 0;
+        }
+        .star-item strong { color: var(--exp-dark-blue); font-size: 1.1rem; }
+
+        /* Timeline for Roadmap */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--exp-light-blue);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        .t-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .t-left { left: 0; }
+        .t-right { left: 50%; }
+        .t-container::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--white);
+            border: 4px solid var(--exp-magenta);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .t-right::after { left: -14px; }
+        .t-content {
+            padding: 20px 30px;
+            background-color: var(--white);
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Utility */
+        .highlight-box {
+            background-color: #FDF6FA;
+            border: 1px solid #F8DDEB;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Experian Interview Strategy Guide</h1>
-    <p>Head of Global Workplace GenAI | Driving Safe, Scalable Enterprise Intelligence</p>
-</header>
+<nav>
+    <div class="logo-text">Experian <span>GenAI</span></div>
+    <ul>
+        <li><a href="#philosophy">The Philosophy</a></li>
+        <li><a href="#roadmap">Rollout Strategy</a></li>
+        <li><a href="#experience">Proven Execution</a></li>
+    </ul>
+</nav>
 
-<div class="container">
-    <nav>
-        <ul>
-            <li><a href="#value-prop">1. Core Value Proposition</a></li>
-            <li><a href="#panel">2. The Panel Strategy</a></li>
-            <li><a href="#jd-mapping">3. JD Skill Mapping</a></li>
-            <li><a href="#star-stories">4. STAR Story Bank</a></li>
-            <li><a href="#questions">5. Strategic Questions</a></li>
-        </ul>
-    </nav>
+<section class="hero">
+    <h1>Scaling Intelligent Automation Safely</h1>
+    <p>A strategic blueprint for operating, governing, and driving value realization for Experian’s global workplace GenAI platforms.</p>
+    <p class="highlight">Presented by Ali Chitsaz</p>
+</section>
 
-    <main>
-        <div id="value-prop" class="card">
-            <h2>1. Core Value Proposition (The Elevator Pitch)</h2>
-            <p><strong>The Hook:</strong> "I sit at the intersection of complex technology and human behavior."</p>
-            <p><strong>The Pitch:</strong> Experian needs a leader who can take ChatGPT Enterprise and scale it globally without creating security nightmares or fragmented toolsets. My expertise lies in architecting governed, scalable platforms within Global ITSM and Digital Workplace environments, while serving as a key voice on AI Center of Excellence boards. I don't just deploy tech; I find the 'carrot' that drives user adoption, building custom workflows and agents that create immediate competitive advantages while strictly adhering to compliance, legal, and risk frameworks.</p>
+<div class="container" id="philosophy">
+    <div class="section-header">
+        <h2>The Intersection of Tech & Humans</h2>
+        <div class="divider"></div>
+        <p style="margin-top: 20px; font-size: 1.2rem; color: var(--text-muted);">A successful ChatGPT Enterprise rollout isn't just an IT deployment. It’s a behavioral shift.</p>
+    </div>
+
+    <div class="grid-3">
+        <div class="card">
+            <h3>1. Finding the "Carrot"</h3>
+            <p>Tools fail when they feel like mandates. My expertise is identifying multi-persona use cases and building custom GPTs/Agents that solve real daily friction. I don't push technology; I deliver the carrot that organically drives adoption and productivity.</p>
         </div>
-
-        <div id="panel" class="card">
-            <h2>2. The Panel Strategy</h2>
-            <table>
-                <tr>
-                    <th>Interviewer</th>
-                    <th>Focus Area</th>
-                    <th>Your Play</th>
-                </tr>
-                <tr>
-                    <td><strong>Kathy Tira</strong><br><small>SVP, Digital Workplace</small></td>
-                    <td>Business transformation, ITSM, end-user employee experience, enterprise scale.</td>
-                    <td>Speak her language. Highlight your extensive background directing Global ITSM and Digital Workplace initiatives. Emphasize seamless coordination with Identity, Security, and Service Management.</td>
-                </tr>
-                <tr>
-                    <td><strong>Scott Kattrein</strong><br><small>Mgr. Tech Recruiting</small></td>
-                    <td>Scaling engineering, finding "disruptors", technical acumen.</td>
-                    <td>Highlight the entrepreneurial mindset. Discuss hands-on experience architecting workflow automations and building out custom GPTs to solve specific business bottlenecks.</td>
-                </tr>
-                <tr>
-                    <td><strong>Von Jones</strong><br><small>Unknown / Internal</small></td>
-                    <td>Likely cross-functional alignment or specialized technical architecture.</td>
-                    <td>Focus on adaptability, cross-regional rollout strategies, and how you partner with diverse business units to define multi-persona use cases.</td>
-                </tr>
-            </table>
+        <div class="card magenta-top">
+            <h3>2. Scale Without Vulnerability</h3>
+            <p>Drawing on deep experience directing Global ITSM and Digital Workplace initiatives, I understand how to integrate new tools with existing Identity, Security, and Service Management architectures. I build systems that scale globally without breaking.</p>
         </div>
-
-        <div id="jd-mapping" class="card">
-            <h2>3. Mapping Your Skills to the JD</h2>
-            <ul>
-                <li><span class="highlight">JD Requirement:</span> Coordinate with Digital Workplace, Identity, Security, and Service Management.<br>
-                <strong>Your Advantage:</strong> Directing Global ITSM and Digital Workplace operations provides the exact blueprint for integrating a GenAI platform into existing service management and identity architectures.</li>
-                
-                <li><span class="highlight">JD Requirement:</span> Partner with Legal, Privacy, Risk, and InfoSec for responsible use.<br>
-                <strong>Your Advantage:</strong> Serving on an AI Center of Excellence board requires defining these exact governance standards and preventing "Shadow AI."</li>
-                
-                <li><span class="highlight">JD Requirement:</span> Hands-on experience delivering customer GPTs, Agents, or enterprise AI.<br>
-                <strong>Your Advantage:</strong> Co-founding and driving a workflow automation consultancy heavily involves building, testing, and deploying custom agents that solve real-world operational problems.</li>
-                
-                <li><span class="highlight">JD Requirement:</span> Define success metrics, track adoption, and value realization.<br>
-                <strong>Your Advantage:</strong> Merging tech with humans. You understand that a tool is useless without the "carrot." You specialize in change management and proving ROI to senior leadership.</li>
-            </ul>
+        <div class="card">
+            <h3>3. Defending the Governance</h3>
+            <p>Serving on AI Center of Excellence boards has taught me how to partner effectively with Legal, Privacy, and Risk. I establish the guardrails first, ensuring responsible data controls and audit readiness without suffocating business innovation.</p>
         </div>
-
-        <div id="star-stories" class="card">
-            <h2>4. STAR Story Bank (Fill in your specifics)</h2>
-            
-            <div class="alert">
-                <strong>Pro Tip:</strong> When answering, keep the "Situation" and "Task" brief (20%). Spend 60% of your time on the "Action" (what YOU did), and 20% on the quantifiable "Result".
-            </div>
-
-            <h3>Story 1: The Governance & CoE Play (Safe Operations)</h3>
-            <p><em>Use when asked about: Risk, Legal, Compliance, avoiding fragmented AI.</em></p>
-            <div class="star-box">
-                <div class="star-row"><span class="star-letter">S</span> <strong>Situation:</strong> The business was rapidly exploring GenAI, creating a risk of fragmented tools, "Shadow AI," and potential data vulnerabilities.</div>
-                <div class="star-row"><span class="star-letter">T</span> <strong>Task:</strong> Needed to establish a unified governance framework without suffocating innovation.</div>
-                <div class="star-row"><span class="star-letter">A</span> <strong>Action:</strong> Through involvement with the AI Center of Excellence, partnered with InfoSec, Legal, and Privacy. Defined access standards, regulated data controls, and created a structured intake/evaluation process for new AI capabilities.</div>
-                <div class="star-row"><span class="star-letter">R</span> <strong>Result:</strong> [Insert Metric] Achieved controlled scaling, mitigated compliance risks, and provided a single point of accountability for leadership.</div>
-            </div>
-
-            <h3>Story 2: The ITSM / Digital Workplace Rollout (Scale)</h3>
-            <p><em>Use when asked about: Global platforms, Service Management integration, operational support.</em></p>
-            <div class="star-box">
-                <div class="star-row"><span class="star-letter">S</span> <strong>Situation:</strong> Needed to deploy a major digital workplace platform across a global, multi-regional organization.</div>
-                <div class="star-row"><span class="star-letter">T</span> <strong>Task:</strong> Ensure seamless integration with existing Identity and Service Management structures while maintaining stable operations post-rollout.</div>
-                <div class="star-row"><span class="star-letter">A</span> <strong>Action:</strong> Leveraged Global ITSM frameworks. Coordinated the vendor/SI handoff, defined the long-term operating model, and managed the release cycle in a phased approach.</div>
-                <div class="star-row"><span class="star-letter">R</span> <strong>Result:</strong> [Insert Metric] Smooth enterprise-wide adoption with zero disruption to existing business lines.</div>
-            </div>
-
-            <h3>Story 3: Building Custom GPTs & "Finding the Carrot" (Adoption)</h3>
-            <p><em>Use when asked about: Hands-on agent building, multi-persona use cases, driving adoption.</em></p>
-            <div class="star-box">
-                <div class="star-row"><span class="star-letter">S</span> <strong>Situation:</strong> Teams had access to AI tools but adoption was low, or workflows were highly manual and inefficient.</div>
-                <div class="star-row"><span class="star-letter">T</span> <strong>Task:</strong> Deliver a targeted AI solution that users would actually want to adopt.</div>
-                <div class="star-row"><span class="star-letter">A</span> <strong>Action:</strong> Applied hands-on workflow automation expertise to build custom GPTs/Agents tailored to specific personas. Focused heavily on the human element—identifying the "carrot" that made their daily jobs easier rather than just pushing a mandate.</div>
-                <div class="star-row"><span class="star-letter">R</span> <strong>Result:</strong> [Insert Metric] High user adoption, measured productivity outcomes, and clear value realization reported to the C-suite.</div>
-            </div>
-        </div>
-
-        <div id="questions" class="card">
-            <h2>5. Strategic Questions for the Panel</h2>
-            <ul>
-                <li><strong>For Kathy:</strong> "Given the goal of avoiding fragmented accountability, how is Experian currently balancing the aggressive push from individual business units wanting custom AI solutions against the need for central Digital Workplace governance?"</li>
-                <li><strong>For the Panel:</strong> "The JD mentions 'preventing fragmented accountability as workplace GenAI capabilities grow.' Beyond ChatGPT Enterprise, what specific tools or LLMs are currently causing the most friction or shadow-IT concerns within the organization?"</li>
-                <li><strong>For the Panel:</strong> "When you look at the rollout of this platform 12 months from now, what metric will tell you that the 'human adoption' piece of this strategy was a success?"</li>
-            </ul>
-        </div>
-    </main>
+    </div>
 </div>
+
+<div style="background-color: var(--white); padding: 80px 0;" id="roadmap">
+    <div class="container">
+        <div class="section-header">
+            <h2>The 90-Day Execution Roadmap</h2>
+            <div class="divider"></div>
+            <p style="margin-top: 20px;">Addressing the core requirements of the Head of Global Workplace GenAI role.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="t-container t-left">
+                <div class="t-content">
+                    <h3 style="color: var(--exp-magenta); margin-top: 0;">Days 1-30: Governance & Alignment</h3>
+                    <p><strong>Focus:</strong> Establish single-point ownership and stop fragmented accountability.</p>
+                    <ul>
+                        <li>Partner with Experian InfoSec, Legal, and Privacy to lock in data controls for ChatGPT Enterprise.</li>
+                        <li>Map out the vendor/SI handoff and establish the long-term ITSM operating model.</li>
+                        <li>Audit existing "Shadow AI" toolsets across the organization.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="t-container t-right">
+                <div class="t-content">
+                    <h3 style="color: var(--exp-dark-blue); margin-top: 0;">Days 31-60: The Controlled Rollout</h3>
+                    <p><strong>Focus:</strong> Phased adoption and multi-persona use cases.</p>
+                    <ul>
+                        <li>Coordinate with Digital Workplace & Identity teams for seamless SSO and access provisioning.</li>
+                        <li>Develop targeted Custom GPTs for high-impact departments (e.g., HR, Sales, IT Support) to demonstrate immediate value.</li>
+                        <li>Define success metrics (daily active users, task time reduction).</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="t-container t-left">
+                <div class="t-content">
+                    <h3 style="color: var(--exp-purple); margin-top: 0;">Days 61-90: Value Realization & Scale</h3>
+                    <p><strong>Focus:</strong> Reporting and establishing the release cycle.</p>
+                    <ul>
+                        <li>Report platform performance and tangible ROI to senior leadership (SVP of Digital Workplace).</li>
+                        <li>Establish the intake and evaluation process for *new* OpenAI capabilities as they are released.</li>
+                        <li>Expand rollout to international regions under unified governance standards.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="experience">
+    <div class="section-header">
+        <h2>Proven Execution (STAR Methodology)</h2>
+        <div class="divider"></div>
+        <p style="margin-top: 20px;">How my background maps directly to Experian's strategic needs.</p>
+    </div>
+
+    <div class="tabs">
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="openTab(event, 'star1')">Governance & CoE</button>
+            <button class="tab-btn" onclick="openTab(event, 'star2')">Global ITSM Integration</button>
+            <button class="tab-btn" onclick="openTab(event, 'star3')">Custom Agents & Adoption</button>
+        </div>
+
+        <div id="star1" class="tab-content active">
+            <div class="star-layout">
+                <div class="star-item"><strong>Situation:</strong> The business was rapidly exploring GenAI, creating a risk of fragmented tools, "Shadow AI," and potential data vulnerabilities.</div>
+                <div class="star-item"><strong>Task:</strong> Establish a unified governance framework and secure operating model without acting as a bottleneck to innovation.</div>
+                <div class="star-item"><strong>Action:</strong> Through leadership on an AI Center of Excellence board, I partnered cross-functionally with Legal, Privacy, and Risk. I helped define strict access standards, regulated data controls, and created a structured intake/evaluation process for reviewing and safely rolling out new AI capabilities.</div>
+                <div class="star-item"><strong>Result:</strong> Mitigated compliance risks, established a single point of accountability for AI tooling, and created a safe "sandbox" for the enterprise to innovate securely.</div>
+            </div>
+        </div>
+
+        <div id="star2" class="tab-content">
+            <div class="star-layout">
+                <div class="star-item"><strong>Situation:</strong> Required to deploy major digital workplace platforms across a global, multi-regional organization while avoiding disruption.</div>
+                <div class="star-item"><strong>Task:</strong> Ensure seamless integration with existing Identity and Service Management structures and take ownership of the post-implementation operating model.</div>
+                <div class="star-item"><strong>Action:</strong> Leveraged deep expertise in Global ITSM. Coordinated the vendor and SI handoff processes, embedded the new technology into the standard service catalog, and managed the release cycle in a highly controlled, phased approach across global offices.</div>
+                <div class="star-item"><strong>Result:</strong> Achieved stable enterprise-wide adoption, seamless coordination with underlying identity teams, and robust ongoing operational support.</div>
+            </div>
+        </div>
+
+        <div id="star3" class="tab-content">
+            <div class="star-layout">
+                <div class="star-item"><strong>Situation:</strong> Teams had access to basic automation and AI, but adoption was low because the tools lacked specific context for their daily workflows.</div>
+                <div class="star-item"><strong>Task:</strong> Deliver targeted AI solutions (like Custom GPTs or Agents) that users would genuinely want to use—finding the "carrot."</div>
+                <div class="star-item"><strong>Action:</strong> Applied hands-on workflow automation expertise (drawn from experience architecting specialized AI solutions) to build custom, persona-based agents. Focused heavily on change management and user experience, mapping the AI capabilities directly to painful, manual bottlenecks.</div>
+                <div class="star-item"><strong>Result:</strong> Drove high organic adoption rates, tracked clear productivity outcomes, and successfully reported measurable value realization back to senior leadership.</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="highlight-box">
+        <h4 style="margin-top: 0; color: var(--exp-magenta);">Conversation Starters for the Panel</h4>
+        <ul style="margin-bottom: 0;">
+            <li><strong>For Kathy:</strong> "Given the goal of avoiding fragmented accountability, how is Experian currently balancing the push from individual business units wanting custom AI solutions against the need for central Digital Workplace governance?"</li>
+            <li><strong>For Scott:</strong> "As we look at scaling this capability, what specific technical roadblocks are you seeing internally when trying to integrate LLMs with existing enterprise data?"</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+            tabcontent[i].classList.remove("active");
+        }
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.className += " active";
+    }
+</script>
 
 </body>
 </html>
