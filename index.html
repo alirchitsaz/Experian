@@ -1,644 +1,239 @@
 <!DOCTYPE html>
-<html lang="en" style="scroll-behavior: smooth;">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GenAI Program Presentation | Ali R Chitsaz</title>
-  <style>
-    /* ===== Experian‑inspired visual system (NOT official brand assets) ===== */
-    :root {
-      /* Colors */
-      --violet-900: #004AAD; /* Experian Primary Blue */
-      --violet-800: #0073E6; /* Experian Secondary Blue */
-      --fuchsia-700: #E11383; /* Experian Accent Pink/Magenta */
-      --fuchsia-600: #FF8C00; /* Experian Warning Orange (used sparingly) */
-      --ink-900: #1a202c;    /* Near-black for text */
-      --ink-700: #4a5568;    /* Medium gray for text */
-      --ink-500: #718096;    /* Lighter gray for subtle text */
-      --cloud-000: #ffffff;
-      --cloud-050: #f7fafc;    /* Lightest gray bg */
-      --cloud-100: #edf2f7;    /* Light gray bg/border */
-      --cloud-200: #e2e8f0;    /* Gray border */
-      --accent-green: #38a169; /* Green for positive indicators */
-      --accent-amber: #dd6b20; /* Amber/Orange for warnings */
-      --focus: #4299e1;       /* Focus ring blue */
-
-      /* Layout & Shadows */
-      --radius-xl: 1rem;
-      --radius-lg: 0.75rem;
-      --radius-md: 0.5rem;
-      --shadow-1: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
-      --shadow-2: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
-      --shadow-3: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
-    }
-    html, body { height: 100%; scroll-padding-top: 20px; }
-    body { margin: 0; font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif; color: var(--ink-900); background-color: var(--cloud-050); }
-    a { color: var(--violet-800); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    /* Header */
-    .hero { position: relative; overflow: hidden; color: white; background: linear-gradient(100deg, var(--violet-900), var(--violet-800) 65%, var(--fuchsia-700) 110%); }
-    .hero-inner { position: relative; padding: 28px clamp(16px, 5vw, 56px) 36px; display: flex; align-items: center; justify-content: space-between; gap: 28px; max-width: 1280px; margin: 0 auto; flex-wrap: wrap; }
-    .mark { font-size: 1.5rem; font-weight: 700; }
-    .title { font-weight: 700; font-size: clamp(20px, 3vw, 28px); letter-spacing: .2px; margin: 0 0 2px; }
-    .subtitle { opacity: .92; margin: 0; font-size: clamp(14px, 1.6vw, 18px); }
-    .controls { display: flex; gap: 10px; flex-wrap: wrap; margin-left: auto; }
-
-    /* Page layout */
-    .wrap { max-width: 1180px; margin: 40px auto; padding: 0 clamp(12px, 3vw, 24px); }
-    .grid { display: grid; grid-template-columns: 280px 1fr; gap: 32px; align-items: start; }
-    @media (max-width: 980px) { .grid { grid-template-columns: 1fr; } .nav { position: static; margin-bottom: 24px;} }
-
-    /* Nav card */
-    .nav { position: sticky; top: 20px; background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-1); padding: 16px; border: 1px solid var(--cloud-200);}
-    .nav h3 { margin: 4px 8px 12px; font-size: 15px; color: var(--ink-700); font-weight: 600; }
-    .nav button { all: unset; box-sizing: border-box; display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 12px; border-radius: var(--radius-md); color: var(--ink-900); cursor: pointer; font-size: 15px; transition: background-color 0.2s ease; text-align: left; }
-    .nav button:hover { background: var(--cloud-100); }
-    .nav button[aria-current="page"] { background: var(--fuchsia-700); color: white; font-weight: 600; }
-    .nav button .icon { font-size: 1.25rem; width: 20px; text-align: center; flex-shrink: 0; }
-
-    /* Buttons */
-    .pill { display: inline-flex; align-items: center; gap: 8px; background: var(--fuchsia-700); color: white; border: none; border-radius: 999px; padding: 10px 16px; font-weight: 600; box-shadow: var(--shadow-1); cursor: pointer; transition: background-color 0.2s ease; }
-    .pill:hover { background: #c81e80; }
-    .pill:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-    .ghost { background: transparent; color: var(--violet-800); border: 1px solid var(--cloud-200); box-shadow: none; }
-    .ghost:hover { background: var(--cloud-100); }
-
-    /* Custom style for hero buttons */
-    .hero .ghost {
-        color: var(--cloud-000); /* White text */
-        border-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white border */
-    }
-    .hero .ghost:hover {
-        background: rgba(255, 255, 255, 0.1); /* Slight white background on hover */
-        border-color: rgba(255, 255, 255, 0.8); /* More opaque border on hover */
-    }
-
-    /* Cards/sections */
-    .card { background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-1); padding: 24px 28px; margin-bottom: 32px; border: 1px solid var(--cloud-200); }
-    .card-header { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--cloud-100); padding-bottom: 12px; }
-    .card-header h2 { margin: 0; font-size: clamp(20px, 2.5vw, 24px); display: flex; align-items: center; gap: 10px; line-height: 1.3;}
-    .card-header .icon { color: var(--violet-900); margin-top: 2px; }
-    .tag { font-size: 12px; border: 1px solid var(--cloud-200); border-radius: 999px; padding: 6px 12px; color: var(--ink-500); background-color: var(--cloud-050); white-space: nowrap; flex-shrink: 0; margin-top: 4px; }
-
-    /* Content Elements */
-    .key-activities { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 24px 0; }
-    .activity-item { background: var(--cloud-050); border: 1px solid var(--cloud-200); padding: 16px; border-radius: var(--radius-md); }
-    .activity-item h3 { margin: 0 0 8px; font-size: 18px; color: var(--violet-900); }
-    .activity-item p, .activity-item li { margin: 0; color: var(--ink-700); font-size: 15px; line-height: 1.6; }
-    .activity-item ul { padding-left: 20px; margin-top: 8px; }
-    .activity-item strong { color: var(--ink-900); }
-
-    .governance-layers { display: grid; gap: 20px; margin: 24px 0; }
-    .layer-item { display: flex; gap: 16px; align-items: start; background: var(--cloud-050); border-left: 4px solid; border-color: var(--violet-900); padding: 16px; border-radius: var(--radius-md); }
-    .layer-item:nth-child(2) { border-color: var(--violet-800); }
-    .layer-item:nth-child(3) { border-color: var(--fuchsia-700); }
-    .layer-item .num { flex: 0 0 36px; height: 36px; border-radius: 50%; color: white; display: grid; place-items: center; font-weight: bold; font-size: 18px; margin-top: 4px; }
-     .layer-item h3 { margin: 0 0 8px; font-size: 18px; }
-     .layer-item p { margin: 0; color: var(--ink-700); font-size: 15px; line-height: 1.6; }
-
-    .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin: 24px 0; }
-    .metric-group { background: var(--cloud-050); border: 1px solid var(--cloud-200); padding: 16px; border-radius: var(--radius-md); }
-    .metric-group h3 { margin: 0 0 12px; font-size: 18px; color: var(--violet-900); }
-    .metric-group ul { margin: 0; padding-left: 20px; list-style: disc; color: var(--ink-700); font-size: 15px; }
-    .metric-group li { margin-bottom: 6px; }
-    .metric-group strong { color: var(--ink-900); }
-    .metric-group .kpi-label { font-weight: 600; color: var(--ink-900); }
-    .metric-group .metric-detail { color: var(--ink-700); }
-
-    .lean-intake-flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 24px 0; text-align: center; }
-    .flow-step { background: var(--cloud-050); border: 1px solid var(--cloud-200); padding: 16px; border-radius: var(--radius-md); display: flex; flex-direction: column; align-items: center;}
-    .flow-step .step-num { display: inline-block; background-color: var(--violet-900); color: white; border-radius: 50%; width: 28px; height: 28px; line-height: 28px; font-weight: bold; margin-bottom: 10px; font-size: 14px;}
-    .flow-step h3 { margin: 0 0 8px; font-size: 16px; font-weight: 600; color: var(--violet-900); }
-    .flow-step p { margin: 0; font-size: 14px; color: var(--ink-700); line-height: 1.6; }
-    .flow-step:nth-child(2) .step-num { background-color: var(--violet-800); }
-    .flow-step:nth-child(3) .step-num { background-color: var(--fuchsia-700); }
-    .flow-step:nth-child(4) .step-num { background-color: var(--fuchsia-600); }
-    
-    /* Style for new sub-headings */
-    .sub-heading {
-        font-size: 1.25rem; /* 20px */
-        font-weight: 600;
-        color: var(--violet-900);
-        margin-bottom: 1rem; /* 16px */
-        margin-top: 1.5rem; /* 24px */
-        border-bottom: 1px solid var(--cloud-200);
-        padding-bottom: 0.5rem; /* 8px */
-    }
-    .sub-heading:first-of-type {
-        margin-top: 0;
-    }
-
-    /* Proof points inline box */
-    .proof-point-box { background: var(--cloud-100); border-left: 4px solid var(--violet-800); padding: 16px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-top: 24px; }
-    .proof-point-box h4 { margin: 0 0 4px; font-size: 16px; font-weight: 600; color: var(--violet-900); }
-    .proof-point-box p { margin: 0; font-size: 15px; color: var(--ink-700); line-height: 1.6;}
-    .hidden { display: none; }
-
-    .footer { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; margin: 40px auto; padding: 0 clamp(12px, 3vw, 24px); max-width: 1180px; }
-    .footer small { color: var(--ink-500); font-size: 13px; }
-
-    /* Nav toggle styles */
-    body.nav-collapsed .nav {
-        display: none;
-    }
-    body.nav-collapsed .grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* Style for new inline collapse button */
-    .nav-collapse-btn {
-        background: none; 
-        border: none; 
-        font-size: 24px; 
-        color: var(--ink-500); 
-        cursor: pointer; 
-        padding: 0 4px; 
-        line-height: 1; 
-        transition: color 0.2s ease;
-    }
-    .nav-collapse-btn:hover {
-        color: var(--ink-900);
-    }
-
-    /* Presenter mode styles (REMOVED) */
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Guide: Head of Global Workplace GenAI</title>
+    <style>
+        :root {
+            --primary: #005A9C; /* Experian Blue */
+            --secondary: #E8F0F8;
+            --accent: #FF6A13;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-main: #F4F7F6;
+            --white: #FFFFFF;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 4px solid var(--accent);
+        }
+        header h1 { margin: 0; font-size: 2.5rem; }
+        header p { margin: 10px 0 0 0; font-size: 1.2rem; opacity: 0.9; }
+        
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            gap: 20px;
+        }
+        
+        /* Sidebar Navigation */
+        nav {
+            flex: 1;
+            background: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+        nav ul { list-style: none; padding: 0; margin: 0; }
+        nav li { margin-bottom: 10px; }
+        nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            display: block;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        nav a:hover { background: var(--secondary); }
+        
+        /* Main Content */
+        main { flex: 3; }
+        
+        .card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
+        }
+        .card h2 {
+            color: var(--primary);
+            margin-top: 0;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+        }
+        .card h3 { color: var(--text-dark); margin-top: 20px; }
+        
+        /* STAR Framework formatting */
+        .star-box {
+            background: var(--secondary);
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+        .star-letter {
+            font-weight: bold;
+            color: var(--accent);
+            margin-right: 10px;
+        }
+        .star-row { margin-bottom: 10px; }
+        
+        .highlight { font-weight: bold; color: var(--primary); }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        th { background-color: var(--secondary); color: var(--primary); }
+        
+        .alert {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-left: 5px solid #ffeeba;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
-  <!-- ===== Header ===== -->
-  <header class="hero">
-    <div class="hero-inner">
-      <div>
-        <div class="mark">experian.</div>
-        <h1 class="title">A Process-Driven GenAI Program: Adoption, Governance & Measurable ROI</h1> 
-        <p class="subtitle">Managing High Demand with Compliant Reliability | Ali R Chitsaz</p>
-      </div>
-      <div class="controls">
-        <!-- Presenter Mode Button Removed -->
-        <button class="pill ghost" id="btnToggleNav">Hide Outline</button>
-      </div>
-    </div>
-  </header>
 
-  <div class="wrap grid">
-    <!-- ===== Left Nav ===== -->
-    <nav class="nav" aria-label="Sections">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin: 4px 8px 12px;">
-          <h3 style="margin: 0; font-size: 15px; color: var(--ink-700); font-weight: 600;">Presentation Outline</h3>
-          <button id="navCollapseInline" class="nav-collapse-btn" title="Hide Outline">&times;</button>
-      </div>
-       <!-- Proof Points Toggle Checkbox -->
-       <div style="padding: 8px 12px; border-top: 1px solid var(--cloud-100); margin-top: 8px;">
-            <label for="experience-toggle-checkbox" class="flex items-center cursor-pointer" style="font-size: 14px; color: var(--ink-700); display: flex; align-items: center; gap: 8px;">
-                <input type="checkbox" id="experience-toggle-checkbox" class="form-checkbox h-4 w-4 text-violet-800 border-cloud-200 rounded focus:ring-violet-800" style="border-radius: 4px; cursor: pointer;">
-                <span>Show Inline Proof Points</span>
-            </label>
-        </div>
-      <div id="toc">
-          <!-- Navigation buttons generated by JS -->
-      </div>
+<header>
+    <h1>Experian Interview Strategy Guide</h1>
+    <p>Head of Global Workplace GenAI | Driving Safe, Scalable Enterprise Intelligence</p>
+</header>
+
+<div class="container">
+    <nav>
+        <ul>
+            <li><a href="#value-prop">1. Core Value Proposition</a></li>
+            <li><a href="#panel">2. The Panel Strategy</a></li>
+            <li><a href="#jd-mapping">3. JD Skill Mapping</a></li>
+            <li><a href="#star-stories">4. STAR Story Bank</a></li>
+            <li><a href="#questions">5. Strategic Questions</a></li>
+        </ul>
     </nav>
 
-    <!-- ===== Right content ===== -->
-    <div id="content">
-      <!-- Section cards are generated by JS -->
-    </div>
-  </div>
+    <main>
+        <div id="value-prop" class="card">
+            <h2>1. Core Value Proposition (The Elevator Pitch)</h2>
+            <p><strong>The Hook:</strong> "I sit at the intersection of complex technology and human behavior."</p>
+            <p><strong>The Pitch:</strong> Experian needs a leader who can take ChatGPT Enterprise and scale it globally without creating security nightmares or fragmented toolsets. My expertise lies in architecting governed, scalable platforms within Global ITSM and Digital Workplace environments, while serving as a key voice on AI Center of Excellence boards. I don't just deploy tech; I find the 'carrot' that drives user adoption, building custom workflows and agents that create immediate competitive advantages while strictly adhering to compliance, legal, and risk frameworks.</p>
+        </div>
 
-  <footer class="footer">
-    <small>Experian Public. Presentation for CIO, CTOs, CRO.</small>
-    <small>Style inspired by Experian visuals; not official assets.</small>
-  </footer>
+        <div id="panel" class="card">
+            <h2>2. The Panel Strategy</h2>
+            <table>
+                <tr>
+                    <th>Interviewer</th>
+                    <th>Focus Area</th>
+                    <th>Your Play</th>
+                </tr>
+                <tr>
+                    <td><strong>Kathy Tira</strong><br><small>SVP, Digital Workplace</small></td>
+                    <td>Business transformation, ITSM, end-user employee experience, enterprise scale.</td>
+                    <td>Speak her language. Highlight your extensive background directing Global ITSM and Digital Workplace initiatives. Emphasize seamless coordination with Identity, Security, and Service Management.</td>
+                </tr>
+                <tr>
+                    <td><strong>Scott Kattrein</strong><br><small>Mgr. Tech Recruiting</small></td>
+                    <td>Scaling engineering, finding "disruptors", technical acumen.</td>
+                    <td>Highlight the entrepreneurial mindset. Discuss hands-on experience architecting workflow automations and building out custom GPTs to solve specific business bottlenecks.</td>
+                </tr>
+                <tr>
+                    <td><strong>Von Jones</strong><br><small>Unknown / Internal</small></td>
+                    <td>Likely cross-functional alignment or specialized technical architecture.</td>
+                    <td>Focus on adaptability, cross-regional rollout strategies, and how you partner with diverse business units to define multi-persona use cases.</td>
+                </tr>
+            </table>
+        </div>
 
-  <!-- ===== FULL SCRIPT (STREAMLINED) ===== -->
-  <script>
-    // ===== Presentation Content (ALIGNED WITH SCRIPT) =====
-    const SECTIONS = [
-      {
-        id: "intro",
-        icon: "👋",
-        title: "Introduction: Mandate vs. Reality",
-        tag: "The Strategic Challenge",
-        content: `
-          <p class="text-lg text-gray-700 mb-6">The AI-First Mandate requires global transformation, accelerated adoption, and measurable productivity gains within 12 months, navigating significant operational realities.</p>
-          <div class="key-activities">
-            <div class="activity-item border-l-4 border-amber-500">
-              <h3>Acknowledging the Operational Context:</h3>
-              <ul class="list-disc list-inside text-gray-600 pl-1">
-                <li>High Volume Demand vs. Focused Program Resources</li>
-                <li>Complex Global Scale (40+ Countries), Stringent Regulations</li>
-                <li>Diverse Technology Landscape (Legacy & Modern)</li>
-                <li>High Executive Interest Requiring Demonstrable Control & ROI</li>
-              </ul>
-            </div>
-            <div class="activity-item border-l-4 border-green-500">
-              <h3>My Solution: A Disciplined, Process-Driven Program</h3>
-               <ul class="list-disc list-inside text-gray-600 pl-1">
-                <li><strong>Structured Process:</strong> Implementing Lean principles for intake, prioritization, and execution at scale.</li>
-                <li><strong>Proactive Governance:</strong> Building trust through clear checkpoints and compliant reliability.</li>
-                <li><strong>Data-Driven Prioritization:</strong> Focusing resources on initiatives with the highest strategic value.</li>
-                <li><strong>Measurable Adoption & Efficiency:</strong> Targeting tangible gains in both cultural adoption and development lifecycles.</li>
-              </ul>
-            </div>
-          </div>
-        `
-      },
-      {
-        id: "structure",
-        icon: "🏗️",
-        title: "1. Program Structure: Foundation First",
-        tag: "Phase 1: Discovery, Governance, Adoption, Measurement",
-        content: `
-          <p class="text-lg text-gray-700 mb-6">A successful program requires a strong foundation. We must rigorously <strong>Define</strong> needs and <strong>Measure</strong> the current state *before* scaling enablement or execution. Focus: First 90 Days.</p>
-          <div class="key-activities" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
-            <div class="activity-item">
-              <h3>1. Strategic Discovery & Alignment</h3>
-              <p>Conduct workshops with Business, Tech, Risk, and Legal leaders. Map key value streams to identify high-impact GenAI opportunities, ensuring alignment with Experian's strategic objectives.</p>
-            </div>
-            <div class="activity-item">
-              <h3>2. Establish Enterprise Governance Framework</h3>
-              <p>Define and deploy clear <strong>Responsible AI Principles</strong>. Implement formal <strong>"AI Checkpoints"</strong> (review gates for Risk, Legal, Architecture) integrated into the project lifecycle. Ensure compliant reliability by design.</p>
-            </div>
-             <div class="activity-item">
-              <h3>3. Baseline Key Performance Metrics</h3>
-              <p>Instrument and establish baselines for <strong>SDLC Efficiency</strong> (DORA metrics) and <strong>Adoption Rates</strong> (Active Users). Objectively quantify the starting point for both mandates.</p>
-            </div>
-             <div class="activity-item">
-              <h3>4. Launch Enablement & Adoption Program</h3>
-              <p>Charter a lightweight <strong>Center of Excellence (CoE)</strong>. Create role-based training (starting with "Responsible AI Use") and establish an "AI Champions" network to evangelize and support adoption.</p>
-            </div>
-          </div>
-        `
-      },
-      {
-        id: "balance",
-        icon: "⚖️",
-        title: "2. Balancing Innovation & Compliance",
-        tag: "Governance as an Enabler of Velocity",
-        content: `
-           <p class="text-lg text-gray-700 mb-6">Effective governance provides the necessary structure to accelerate innovation *safely* within Experian's complex regulatory environment. This is not a blocker; it is the enabler of velocity.</p>
-           <div class="governance-layers">
-              <div class="layer-item" style="--border-color: var(--violet-900);">
-                  <div class="num" style="background-color: var(--violet-900);">1</div>
-                  <div>
-                      <h3>Foundational Guardrails</h3>
-                      <p>Implement non-negotiable technical and policy controls: automated security checks, secure data handling protocols, PII detection, role-based access.</p>
-                  </div>
-              </div>
-               <div class="layer-item" style="--border-color: var(--violet-800);">
-                  <div class="num" style="background-color: var(--violet-800);">2</div>
-                  <div>
-                      <h3>"AI Checkpoints" (Risk-Based Process)</h3>
-                      <p>Formal review gates integrated into workflows with defined criteria, clear roles/responsibilities (Risk, Legal, Security, Arch.), and established SLAs. Employ risk-based assessments for efficient scrutiny.</p>
-                  </div>
-              </div>
-              <div class="layer-item" style="--border-color: var(--fuchsia-700);">
-                  <div class="num" style="background-color: var(--fuchsia-700);">3</div>
-                  <div>
-                      <h3>"Context-Aware Model Selection" (Operational Control)</h3>
-                      <p>Implement a documented process for selecting the optimal AI model (internal, external - OpenAI, Google, Anthropic, etc.) based on defined criteria: data sensitivity, risk profile, cost-effectiveness, and performance requirements.</p>
-                  </div>
-              </div>
-           </div>
-        `
-      },
-      {
-        id: "measure",
-        icon: "📈",
-        title: "3. Measuring Success: Adoption & Productivity",
-        tag: "KPIs: Adoption, Productivity & Compliance",
-         content: `
-            <p class="text-lg text-gray-700 mb-6">Focus on tangible metrics that reflect true gains in both cultural adoption (Mandate 1) and process efficiency (Mandate 2). We will report improvement trends against the established baselines.</p>
-            <div class="metrics-grid">
-                <div class="metric-group">
-                    <h3>Program Adoption & Engagement (Mandate 1)</h3>
-                    <ul>
-                        <li><span class="kpi-label">KPI:</span> Active User Rate (AUR) <span class="metric-detail">of GenAI Tools</span></li>
-                        <li><span class="kpi-label">KPI:</span> Training Completion Rate <span class="metric-detail">(All-Employee)</span></li>
-                        <li><span class="kpi-label">KPI:</span> BU & Regional Engagement <span class="metric-detail">(Intake Portal)</span></li>
-                        <li><span class="kpi-label">KPI:</span> AI Champions Network <span class="metric-detail">Growth & Activity</span></li>
-                    </ul>
-                </div>
-                 <div class="metric-group">
-                    <h3>Productivity & Efficiency Gains (Mandate 2)</h3>
-                    <ul>
-                         <li><span class="kpi-label">KPI:</span> % Reduction in <span class="metric-detail">SDLC Cycle Time</span></li>
-                         <li><span class="kpi-label">KPI:</span> Increase in <span class="metric-detail">Deployment Frequency (DORA)</span></li>
-                        <li><span class="kpi-label">KPI:</span> % Reduction in <span class="metric-detail">Model Validation Time</span></li>
-                        <li><em>Supporting:</em> <span class="metric-detail">Developer Satisfaction (SPACE)</span></li>
-                    </ul>
-                </div>
-                 <div class="metric-group">
-                    <h3>Governance & Compliance (For CRO)</h3>
-                    <ul>
-                         <li><span class="kpi-label">KPI:</span> 100% Adherence <span class="metric-detail">to "AI Checkpoints" for high-risk projects</span></li>
-                        <li><span class="kpi-label">KPI:</span> % Reduction in <span class="metric-detail">Audit Findings</span></li>
-                        <li><span class="kpi-label">KPI:</span> Time-to-Approve <span class="metric-detail">(Low-Risk Projects)</span></li>
-                    </ul>
-                </div>
-            </div>
-             <div class="mt-6 bg-cloud-050 p-4 rounded-lg border border-cloud-200">
-                <h3 class="text-lg font-semibold text-violet-900 mb-2">12-Month Milestones (Building Capability → Delivering Results)</h3>
-                <ol class="list-decimal list-inside text-gray-700 space-y-1">
-                    <li><strong>Q1:</strong> Governance Framework Deployed; Baselines Measured; Adoption Program Launched.</li>
-                    <li><strong>Q2:</strong> Lean Intake Operational; First Prioritized Pilots Launched (incl. Dev Productivity); Report first Adoption KPIs.</li>
-                    <li><strong>Q3:</strong> Scale Enablement; Implement Pilot-Validated Process Improvements; Report first Productivity KPIs.</li>
-                    <li><strong>Q4:</strong> Report Measured Gains vs. Baseline; Demonstrate Comprehensive ROI; Formalize Year 2 Roadmap.</li>
-                </ol>
-            </div>
-        `
-      },
-       {
-        id: "engage",
-        icon: "🗣️",
-        title: "4. Stakeholder Engagement: Driving Adoption & Managing Demand",
-        tag: "Change Management & Prioritization",
-        content: `
-            <p class="text-lg text-gray-700 mb-6">Stakeholder engagement has two functions: driving the cultural shift (Adoption) and providing a transparent system for new work (Demand).</p>
+        <div id="jd-mapping" class="card">
+            <h2>3. Mapping Your Skills to the JD</h2>
+            <ul>
+                <li><span class="highlight">JD Requirement:</span> Coordinate with Digital Workplace, Identity, Security, and Service Management.<br>
+                <strong>Your Advantage:</strong> Directing Global ITSM and Digital Workplace operations provides the exact blueprint for integrating a GenAI platform into existing service management and identity architectures.</li>
+                
+                <li><span class="highlight">JD Requirement:</span> Partner with Legal, Privacy, Risk, and InfoSec for responsible use.<br>
+                <strong>Your Advantage:</strong> Serving on an AI Center of Excellence board requires defining these exact governance standards and preventing "Shadow AI."</li>
+                
+                <li><span class="highlight">JD Requirement:</span> Hands-on experience delivering customer GPTs, Agents, or enterprise AI.<br>
+                <strong>Your Advantage:</strong> Co-founding and driving a workflow automation consultancy heavily involves building, testing, and deploying custom agents that solve real-world operational problems.</li>
+                
+                <li><span class="highlight">JD Requirement:</span> Define success metrics, track adoption, and value realization.<br>
+                <strong>Your Advantage:</strong> Merging tech with humans. You understand that a tool is useless without the "carrot." You specialize in change management and proving ROI to senior leadership.</li>
+            </ul>
+        </div>
+
+        <div id="star-stories" class="card">
+            <h2>4. STAR Story Bank (Fill in your specifics)</h2>
             
-            <h3 class="sub-heading">Driving the AI-First Mindset (Change Management)</h3>
-            <div class="key-activities" style="margin-top: 1rem;">
-                <div class="activity-item">
-                    <h3>1. AI Champions Network</h3>
-                    <p>Leverage embedded evangelists as a first line of support and to share local success stories, building grassroots excitement and competency.</p>
-                </div>
-                <div class="activity-item">
-                    <h3>2. Internal "Art of the Possible" Showcases</h3>
-                    <p>Run monthly showcases demonstrating real, internal success stories (e.g., "How we cut test-writing time by 30%") to build excitement and share best practices.</p>
-                </div>
-                <div class="activity-item">
-                    <h3>3. Role-Based Training</h3>
-                    <p>Deploy training from broad awareness (Level 1: Responsible AI Use for All) to deep, technical skills (Level 3: Secure Development for Tech teams).</p>
-                </div>
+            <div class="alert">
+                <strong>Pro Tip:</strong> When answering, keep the "Situation" and "Task" brief (20%). Spend 60% of your time on the "Action" (what YOU did), and 20% on the quantifiable "Result".
             </div>
 
-            <h3 class="sub-heading">Managing New Project Demand (Lean Intake Process)</h3>
-            <p class="text-md text-gray-600 mb-4">Proactively address high demand and limited resources using a transparent, data-driven prioritization process. This builds trust and ensures strategic focus.</p>
-            <div class="lean-intake-flow" style="margin-top: 1rem;">
-                <div class="flow-step"><span class="step-num">1</span><h3>Define (Intake Portal)</h3><p>Standardized request captures strategic value, estimated effort, and compliance needs.</p></div>
-                <div class="flow-step"><span class="step-num">2</span><h3>Measure (Scoring)</h3><p>Collaborative estimation. Calculate objective Priority Score (Value/Effort adjusted for Risk).</p></div>
-                <div class="flow-step"><span class="step-num">3</span><h3>Analyze (Prioritization)</h3><p>Monthly Steering Co. review of scored backlog. Make data-informed resource allocation choices.</p></div>
-                <div class="flow-step"><span class="step-num">4</span><h3>Improve/Control (Execution & Visibility)</h3><p>Execute prioritized work. Transparent Kanban provides status and manages expectations.</p></div>
+            <h3>Story 1: The Governance & CoE Play (Safe Operations)</h3>
+            <p><em>Use when asked about: Risk, Legal, Compliance, avoiding fragmented AI.</em></p>
+            <div class="star-box">
+                <div class="star-row"><span class="star-letter">S</span> <strong>Situation:</strong> The business was rapidly exploring GenAI, creating a risk of fragmented tools, "Shadow AI," and potential data vulnerabilities.</div>
+                <div class="star-row"><span class="star-letter">T</span> <strong>Task:</strong> Needed to establish a unified governance framework without suffocating innovation.</div>
+                <div class="star-row"><span class="star-letter">A</span> <strong>Action:</strong> Through involvement with the AI Center of Excellence, partnered with InfoSec, Legal, and Privacy. Defined access standards, regulated data controls, and created a structured intake/evaluation process for new AI capabilities.</div>
+                <div class="star-row"><span class="star-letter">R</span> <strong>Result:</strong> [Insert Metric] Achieved controlled scaling, mitigated compliance risks, and provided a single point of accountability for leadership.</div>
             </div>
-        `
-      },
-      {
-        id: "twist",
-        icon: "🔄",
-        title: "5. Scenario Twist: The Process Proves Value",
-        tag: "Strategic Response to Urgent Demands",
-        content: `
-          <p class="text-lg text-gray-700 mb-6">This scenario is not a disruption, but a validation of our program's process maturity. It demonstrates how we handle urgent, high-pressure demands effectively and strategically.</p>
-          <h3 class="text-xl font-semibold text-violet-900 mb-4">Applying the Lean Intake & Governance Process:</h3>
-          <div class="lean-intake-flow" style="grid-template-columns: repeat(3, 1fr);">
-                <div class="flow-step border-t-4 border-violet-900">
-                    <span class="step-num" style="background-color: var(--violet-900);">1</span>
-                    <h3>Define/Measure (Process, Not Panic)</h3>
-                    <p>Urgent request enters the <strong>Lean Intake Portal</strong>. Expedite Value/Effort/Risk assessment using the defined process. Gather objective data rapidly.</p>
-                </div>
-                <div class="flow-step border-t-4 border-violet-800">
-                     <span class="step-num" style="background-color: var(--violet-800);">2</span>
-                    <h3>Analyze (Data-Driven Decision)</h3>
-                    <p>Present clear analysis to <strong>Emergency Steering Co.</strong> Show Priority Score vs. current commitments (like the Developer Productivity pilot). Explicitly outline resource trade-offs.</p>
-                </div>
-                <div class="flow-step border-t-4 border-fuchsia-700">
-                    <span class="step-num" style="background-color: var(--fuchsia-700);">3</span>
-                    <h3>Improve/Control (Execute Strategically)</h3>
-                    <p>Based on committee's informed decision (e.g., pause pilot, add resources, or sequence), adjust Kanban transparently and communicate the 'why'.</p>
-                </div>
-          </div>
-          <div class="mt-8 p-6 bg-green-50 border border-green-200 rounded-lg text-center">
-             <h3 class="text-xl font-semibold text-green-700">Outcome: Enables Strategic Decision-Making</h3>
-             <p class="text-green-600 mt-2">The structured response provides leadership with the data to make an informed trade-off decision, reinforcing trust in the program's ability to manage complexity and communicate transparently.</p>
-          </div>
-        `
-      },
-      {
-          id:"appendix",
-          icon:"📎",
-          title:"Appendix: Supporting Frameworks",
-          tag:"Further Detail Available",
-          content:`
-              <div class="metrics-grid">
-                  <div class="metric-group">
-                      <h3>A. Multi-Vendor Platform View</h3>
-                      <p>Conceptual architecture showing the central program governing secure, policy-driven access to diverse AI models (OpenAI, Google, Anthropic, internal) via orchestrated interfaces.</p>
-                  </div>
-                   <div class="metric-group">
-                      <h3>B. Legacy & Cloud Integration Strategy</h3>
-                      <ul class="list-disc list-inside">
-                        <li><strong>Phase 1:</strong> API Wrappers (Secure interfaces for key legacy systems).</li>
-                        <li><strong>Phase 2:</strong> Data Virtualization/Replication (Controlled cloud access to legacy data).</li>
-                        <li><strong>Phase 3:</strong> Targeted Modernization (GenAI-assisted refactoring based on ROI).</li>
-                      </ul>
-                  </div>
-                  <div class="metric-group">
-                      <h3>C. Role-Based Enablement Framework</h3>
-                       <ul class="list-disc list-inside">
-                        <li><strong>Level 1 (All):</strong> Safe Usage, Data Privacy, Phishing Awareness.</li>
-                        <li><strong>Level 2 (BUs):</strong> Effective Prompting, M365 Copilot Use Cases.</li>
-                        <li><strong>Level 3 (Tech):</strong> Secure Development, Platform Tools, Model Validation.</li>
-                       </ul>
-                  </div>
-                  <div class="metric-group">
-                      <h3>D. High-Level 12-Month Roadmap Summary</h3>
-                      <p>Focuses on phased capability building: Q1 (Define/Measure: Governance, Baselines, Adoption Launch) → Q2 (Analyze/Improve: Intake Live, Pilots Launch) → Q3 (Improve: Scale Enablement, Report First KPIs) → Q4 (Control/Report: Measure Gains vs. Baselines, Plan Year 2).</p>
-                  </div>
-              </div>
-          `
-      }
-    ];
 
-    // ===== Proof points (Refined Language - Strategic Focus) =====
-    const PROOF_POINTS = [
-      { sectionId: "intro", point: "My 15+ years leading global, enterprise-scale technology programs provides the strategic perspective needed to navigate this complex mandate and deliver results." },
-      { sectionId: "structure", point: "My background in large-scale change management and Lean certification ensures a dual focus on both the cultural adoption (CoE, Champions) and the process framework (Governance, Intake)." },
-      { sectionId: "balance", point: "I have direct experience architecting and implementing the necessary data agreements, policy frameworks, and operational controls for secure, responsible, multi-vendor AI adoption at scale." },
-      { sectionId: "measure", point: "Leveraging my background in large-scale program management, I bring expertise in defining and tracking both cultural adoption KPIs (Active Users, Engagement) and hard productivity metrics (SDLC, ROI)." },
-      { sectionId: "engage", point: "I have deep experience in building both top-down stakeholder alignment (Steering Co., Lean Intake) and grassroots change management programs (Champions Networks, Roadshows)." },
-       { sectionId: "engage", point: "Building consensus and maintaining alignment across diverse global stakeholders (Technology, Risk, Business, Executive Leadership) through clear, consistent communication is a core strength." },
-      { sectionId: "twist", point: "I have successfully managed high-pressure resource conflicts by applying structured, data-driven processes, facilitating strategic decision-making, and ensuring clear communication throughout." },
-      { sectionId: "appendix", point: "My background in global program delivery, using methodologies like Agile and ITIL, provides the rigor needed to execute complex roadmaps and manage interdependencies effectively." }
-    ];
+            <h3>Story 2: The ITSM / Digital Workplace Rollout (Scale)</h3>
+            <p><em>Use when asked about: Global platforms, Service Management integration, operational support.</em></p>
+            <div class="star-box">
+                <div class="star-row"><span class="star-letter">S</span> <strong>Situation:</strong> Needed to deploy a major digital workplace platform across a global, multi-regional organization.</div>
+                <div class="star-row"><span class="star-letter">T</span> <strong>Task:</strong> Ensure seamless integration with existing Identity and Service Management structures while maintaining stable operations post-rollout.</div>
+                <div class="star-row"><span class="star-letter">A</span> <strong>Action:</strong> Leveraged Global ITSM frameworks. Coordinated the vendor/SI handoff, defined the long-term operating model, and managed the release cycle in a phased approach.</div>
+                <div class="star-row"><span class="star-letter">R</span> <strong>Result:</strong> [Insert Metric] Smooth enterprise-wide adoption with zero disruption to existing business lines.</div>
+            </div>
 
+            <h3>Story 3: Building Custom GPTs & "Finding the Carrot" (Adoption)</h3>
+            <p><em>Use when asked about: Hands-on agent building, multi-persona use cases, driving adoption.</em></p>
+            <div class="star-box">
+                <div class="star-row"><span class="star-letter">S</span> <strong>Situation:</strong> Teams had access to AI tools but adoption was low, or workflows were highly manual and inefficient.</div>
+                <div class="star-row"><span class="star-letter">T</span> <strong>Task:</strong> Deliver a targeted AI solution that users would actually want to adopt.</div>
+                <div class="star-row"><span class="star-letter">A</span> <strong>Action:</strong> Applied hands-on workflow automation expertise to build custom GPTs/Agents tailored to specific personas. Focused heavily on the human element—identifying the "carrot" that made their daily jobs easier rather than just pushing a mandate.</div>
+                <div class="star-row"><span class="star-letter">R</span> <strong>Result:</strong> [Insert Metric] High user adoption, measured productivity outcomes, and clear value realization reported to the C-suite.</div>
+            </div>
+        </div>
 
-    // ===== Render Application & Functionality (Streamlined) =====
-    const tocEl = document.getElementById('toc');
-    const contentEl = document.getElementById('content');
-    // presenterBtn Removed
-    const navToggleBtn = document.getElementById('btnToggleNav');
-    const navCollapseInlineBtn = document.getElementById('navCollapseInline');
-    const proofToggleCheckbox = document.getElementById('experience-toggle-checkbox');
-
-    let currentSectionId = SECTIONS[0].id; // Track active section
-    let observer; // Define observer outside
-
-    // Function to update visibility of inline proof points based on checkbox
-    function updateProofPointsVisibility() {
-         if (!proofToggleCheckbox) return;
-         const show = proofToggleCheckbox.checked;
-         document.querySelectorAll('.proof-point-box').forEach(box => {
-             const pElement = box.querySelector('.proof-point-text');
-             if (pElement && pElement.textContent && pElement.textContent.trim() !== '') {
-                box.classList.toggle('hidden', !show);
-             } else {
-                 box.classList.add('hidden'); // Ensure empty ones are always hidden
-             }
-         });
-     }
-
-
-    function renderApp() {
-        tocEl.innerHTML = ''; // Clear previous nav
-        contentEl.innerHTML = ''; // Clear previous content
-
-        SECTIONS.forEach((section) => {
-            // Render Nav Button
-            const navButton = document.createElement('button');
-            navButton.setAttribute('data-target', section.id);
-            navButton.innerHTML = `<span class="icon" aria-hidden="true">${section.icon}</span> <span>${section.title}</span>`;
-            if (section.id === currentSectionId) {
-                navButton.setAttribute('aria-current', 'page');
-            }
-            navButton.addEventListener('click', () => activateSection(section.id));
-            tocEl.appendChild(navButton);
-
-            // Render Section Card
-            const card = document.createElement('section');
-            card.id = section.id;
-             card.className = 'card'; // Simplified: Removed 'slide' and 'active' classes
-            card.innerHTML = `
-                <div class="card-header">
-                    <h2><span class="icon" aria-hidden="true">${section.icon}</span> ${section.title}</h2>
-                    <span class="tag">${section.tag}</span>
-                </div>
-                <div>${section.content}</div>
-                <!-- Proof point placeholder -->
-                <div class="proof-point-box hidden mt-6 p-5 bg-cloud-100 border-l-4 border-violet-800 rounded-r-md" data-section-id="${section.id}">
-                     <h4 class="text-md font-bold text-violet-900">My Experience Proof Point:</h4>
-                     <p class="proof-point-text text-ink-700 mt-2 text-base"><!-- Text injected by JS --></p>
-                 </div>
-            `;
-            contentEl.appendChild(card);
-        });
-
-         injectProofPoints(); // Inject proof points
-         updateProofPointsVisibility(); // Set initial visibility based on checkbox
-         startObserver(); // Start observer after content
-    }
-
-     // Inject proof points into their placeholders
-     function injectProofPoints() {
-         document.querySelectorAll('.proof-point-text').forEach(p => { p.textContent = ''; });
-         document.querySelectorAll('.proof-point-box').forEach(box => { box.style.display = 'none'; });
-
-         PROOF_POINTS.forEach(pp => {
-             const targetBox = document.querySelector(`.proof-point-box[data-section-id="${pp.sectionId}"]`);
-             if (targetBox) {
-                 const pElement = targetBox.querySelector('.proof-point-text');
-                 if (pElement) {
-                     pElement.textContent = pp.point;
-                     targetBox.style.display = '';
-                 }
-             }
-         });
-     }
-
-
-     function activateSection(id) {
-        currentSectionId = id; // Update tracked section
-
-        // Update nav buttons
-        document.querySelectorAll('#toc button').forEach(btn => {
-            btn.toggleAttribute('aria-current', btn.dataset.target === id);
-        });
-
-        // Simplified scrolling logic
-         const targetElement = document.getElementById(id);
-         if (targetElement) {
-             targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    }
-
-
-    // Presenter Mode Toggle (REMOVED)
-
-    // Nav Toggle
-    navToggleBtn.addEventListener('click', () => {
-        const isCollapsed = document.body.classList.toggle('nav-collapsed');
-        navToggleBtn.textContent = isCollapsed ? 'Show Outline' : 'Hide Outline';
-
-        // Re-trigger observer to recalculate layout
-        window.scrollBy(0, 1);
-        window.scrollBy(0, -1);
-    });
-
-    // Add listener for inline collapse button
-    if (navCollapseInlineBtn) {
-        navCollapseInlineBtn.addEventListener('click', () => {
-            navToggleBtn.click(); // Programmatically click the main header button
-        });
-    }
-
-    // Keyboard Navigation (REMOVED)
-
-    // Scroll Spy
-    function startObserver() {
-        if (observer) observer.disconnect(); // Clear previous observer
-
-        observer = new IntersectionObserver((entries) => {
-            let bestVisibleSectionId = null;
-            let maxRatio = 0;
-
-            entries.forEach(entry => {
-                if (entry.intersectionRatio > maxRatio) {
-                    maxRatio = entry.intersectionRatio;
-                    bestVisibleSectionId = entry.target.id;
-                }
-            });
-
-            if (window.scrollY > 50 && bestVisibleSectionId && bestVisibleSectionId !== currentSectionId && maxRatio > 0.1) {
-                currentSectionId = bestVisibleSectionId;
-                document.querySelectorAll('#toc button').forEach(btn => {
-                    btn.toggleAttribute('aria-current', btn.dataset.target === bestVisibleSectionId);
-                });
-            }
-             else if (window.scrollY < 50 && currentSectionId !== SECTIONS[0].id) {
-                 currentSectionId = SECTIONS[0].id;
-                 document.querySelectorAll('#toc button').forEach(btn => {
-                     btn.toggleAttribute('aria-current', btn.dataset.target === SECTIONS[0].id);
-                 });
-             }
-
-        }, {
-            root: null,
-            threshold: Array.from(Array(11).keys()).map(i => i * 0.1)
-        });
-
-        // Updated selector to find '.card' instead of '.slide'
-        document.querySelectorAll('#content .card').forEach(section => {
-             observer.observe(section);
-        });
-    }
-
-
-    // Add Proof Points toggle INLINE functionality
-    if (proofToggleCheckbox) {
-        proofToggleCheckbox.addEventListener('change', updateProofPointsVisibility);
-    }
-
-     // ===== Initial Render =====
-     renderApp();
-
-     setTimeout(() => {
-        if (window.scrollY < 50 && currentSectionId !== SECTIONS[0].id) {
-             activateSection(SECTIONS[0].id);
-         }
-         updateProofPointsVisibility();
-     }, 150);
-
-  </script>
+        <div id="questions" class="card">
+            <h2>5. Strategic Questions for the Panel</h2>
+            <ul>
+                <li><strong>For Kathy:</strong> "Given the goal of avoiding fragmented accountability, how is Experian currently balancing the aggressive push from individual business units wanting custom AI solutions against the need for central Digital Workplace governance?"</li>
+                <li><strong>For the Panel:</strong> "The JD mentions 'preventing fragmented accountability as workplace GenAI capabilities grow.' Beyond ChatGPT Enterprise, what specific tools or LLMs are currently causing the most friction or shadow-IT concerns within the organization?"</li>
+                <li><strong>For the Panel:</strong> "When you look at the rollout of this platform 12 months from now, what metric will tell you that the 'human adoption' piece of this strategy was a success?"</li>
+            </ul>
+        </div>
+    </main>
+</div>
 
 </body>
 </html>
-
