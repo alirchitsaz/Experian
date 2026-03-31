@@ -3,465 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Experian Workplace GenAI | Strategic Blueprint</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <title>Experian | Head of Global Workplace GenAI Strategic Vision</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables - Experian Corporate + Modern Web App */
         :root {
             --exp-blue: #1D4F91;
-            --exp-light-blue: #426DA9;
             --exp-magenta: #E80070;
-            --bg-dark: #0A1118;
-            --bg-light: #F4F6F9;
-            --surface: #FFFFFF;
-            --text-main: #111827;
-            --text-muted: #6B7280;
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --exp-dark: #050A0F;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #E2E8F0;
+            --transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-light);
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--exp-dark);
             color: var(--text-main);
-            overflow-x: hidden;
-            height: 100%;
-        }
-
-        /* Top Navigation Bar */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
-            box-sizing: border-box;
-        }
-
-        .brand {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--exp-blue);
-            letter-spacing: -0.5px;
-            text-transform: uppercase;
-        }
-
-        .brand span {
-            color: var(--exp-magenta);
-        }
-
-        /* Menu Toggle Button */
-        .menu-toggle {
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            z-index: 1000;
-        }
-        
-        .menu-toggle span {
-            display: block;
-            width: 30px;
-            height: 2px;
-            background-color: var(--exp-blue);
-            transition: var(--transition);
-        }
-
-        .menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); background-color: white;}
-        .menu-toggle.active span:nth-child(2) { opacity: 0; }
-        .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background-color: white;}
-
-        /* Full Screen Overlay Menu */
-        .overlay-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+            overflow: hidden; /* Lock scroll for slide effect */
             height: 100vh;
-            background-color: var(--bg-dark);
-            z-index: 99;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
         }
 
-        .overlay-menu.active {
-            opacity: 1;
-            visibility: visible;
+        /* Background Visuals */
+        .bg-blob {
+            position: fixed;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(232, 0, 112, 0.15) 0%, transparent 70%);
+            top: -200px; right: -200px;
+            z-index: -1; filter: blur(80px);
+            animation: pulse 10s infinite alternate;
+        }
+        @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.2); } }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 4px;
+            background: rgba(255,255,255,0.1); z-index: 1000;
+        }
+        #progress-bar {
+            height: 100%; width: 0%; background: var(--exp-magenta);
+            transition: width 0.3s ease;
         }
 
-        .menu-links {
-            list-style: none;
-            padding: 0;
-            text-align: center;
+        /* Navigation Controls */
+        .nav-controls {
+            position: fixed; bottom: 30px; right: 40px;
+            display: flex; gap: 20px; z-index: 1000;
         }
-
-        .menu-links li {
-            margin: 20px 0;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: var(--transition);
+        .nav-btn {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            color: white; padding: 12px 24px; border-radius: 30px;
+            cursor: pointer; backdrop-filter: blur(10px);
+            font-weight: 600; transition: var(--transition);
         }
+        .nav-btn:hover { background: var(--exp-magenta); border-color: var(--exp-magenta); }
 
-        .overlay-menu.active .menu-links li {
-            transform: translateY(0);
-            opacity: 1;
+        /* Slides Architecture */
+        .slide-container {
+            width: 100%; height: 100vh;
+            display: flex; transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
         }
-
-        .overlay-menu.active .menu-links li:nth-child(1) { transition-delay: 0.1s; }
-        .overlay-menu.active .menu-links li:nth-child(2) { transition-delay: 0.2s; }
-        .overlay-menu.active .menu-links li:nth-child(3) { transition-delay: 0.3s; }
-        .overlay-menu.active .menu-links li:nth-child(4) { transition-delay: 0.4s; }
-
-        .menu-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: -1px;
-            transition: color 0.3s;
+        .slide {
+            min-width: 100%; height: 100vh;
+            padding: 80px 10%;
+            display: flex; flex-direction: column; justify-content: center;
             position: relative;
         }
 
-        .menu-links a:hover, .menu-links a.current {
-            color: var(--exp-magenta);
-        }
-
-        /* SPA View Container */
-        main {
-            padding-top: 120px;
-            height: calc(100vh - 120px);
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            box-sizing: border-box;
-        }
-
-        .view {
-            position: absolute;
-            top: 120px;
-            left: 40px;
-            right: 40px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(15px);
-            transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
-        }
-
-        .view.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        /* Typography & Layouts */
+        /* Typography */
         .eyebrow {
-            color: var(--exp-magenta);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            display: block;
+            color: var(--exp-magenta); font-weight: 800; text-transform: uppercase;
+            letter-spacing: 4px; font-size: 0.85rem; margin-bottom: 20px;
         }
+        h1 { font-size: 4.5rem; line-height: 1; letter-spacing: -3px; margin-bottom: 20px; font-weight: 800; }
+        h1 span { color: var(--exp-magenta); }
+        .lead { font-size: 1.4rem; font-weight: 300; max-width: 750px; line-height: 1.6; color: #94A3B8; }
 
-        h1 {
-            font-size: 4rem;
-            color: var(--exp-blue);
-            margin: 0 0 20px 0;
-            letter-spacing: -2px;
-            line-height: 1.1;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            color: var(--text-main);
-            margin: 0 0 30px 0;
-            letter-spacing: -1px;
-        }
-
-        .lead {
-            font-size: 1.5rem;
-            color: var(--text-muted);
-            font-weight: 300;
-            max-width: 800px;
-            line-height: 1.5;
-            margin-bottom: 40px;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-            margin-top: 20px;
-        }
-
+        /* Components */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
         .card {
-            background: var(--surface);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            border: 1px solid rgba(0,0,0,0.05);
+            background: var(--glass); border: 1px solid var(--glass-border);
+            padding: 40px; border-radius: 24px; backdrop-filter: blur(10px);
+            transition: var(--transition);
         }
+        .card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.06); border-color: var(--exp-magenta); }
+        .card h3 { font-size: 1.5rem; margin-bottom: 15px; color: white; }
+        .card p { color: #94A3B8; font-size: 1rem; line-height: 1.6; }
 
-        .card h3 {
-            font-size: 1.4rem;
-            color: var(--exp-blue);
-            margin-top: 0;
-            border-bottom: 2px solid var(--bg-light);
-            padding-bottom: 15px;
+        /* Technical Matrix Slide */
+        .matrix-table {
+            width: 100%; border-collapse: collapse; margin-top: 40px;
+            background: var(--glass); border-radius: 16px; overflow: hidden;
         }
+        .matrix-table th, .matrix-table td { padding: 20px; text-align: left; border-bottom: 1px solid var(--glass-border); }
+        .matrix-table th { background: rgba(255,255,255,0.05); color: var(--exp-magenta); }
 
-        /* Matrix Table */
-        .matrix {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            background: var(--surface);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        /* Timeline View */
+        .timeline { border-left: 2px solid var(--exp-magenta); margin-top: 40px; padding-left: 30px; }
+        .timeline-item { position: relative; margin-bottom: 40px; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -41px; top: 0;
+            width: 20px; height: 20px; border-radius: 50%; background: var(--exp-magenta);
+            box-shadow: 0 0 15px var(--exp-magenta);
         }
+        .timeline-item h4 { font-size: 1.2rem; color: white; margin-bottom: 5px; }
 
-        .matrix th, .matrix td {
-            padding: 24px;
-            text-align: left;
-            border-bottom: 1px solid var(--bg-light);
-        }
-
-        .matrix th {
-            background-color: var(--bg-dark);
-            color: white;
-            font-weight: 500;
-            font-size: 1.1rem;
-        }
-
-        .matrix tr:last-child td { border-bottom: none; }
-
-        .tag {
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 700;
-        }
-        .tag.alert { background: #FEE2E2; color: #991B1B; }
-        .tag.safe { background: #D1FAE5; color: #065F46; }
-        .tag.watch { background: #FEF3C7; color: #B45309; }
-
-        ul.dash-list {
-            list-style: none;
-            padding: 0;
-        }
-        ul.dash-list li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 15px;
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-        ul.dash-list li::before {
-            content: "—";
-            position: absolute;
-            left: 0;
-            color: var(--exp-magenta);
-            font-weight: bold;
-        }
+        /* Animation */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: 0.8s ease forwards; }
+        .active .fade-in { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="brand">Experian <span>GenAI</span></div>
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </header>
+    <div class="progress-container"><div id="progress-bar"></div></div>
+    <div class="bg-blob"></div>
 
-    <div class="overlay-menu" id="overlayMenu">
-        <ul class="menu-links">
-            <li><a href="#" data-target="view-ethos" class="nav-link current">1. The Ethos</a></li>
-            <li><a href="#" data-target="view-human" class="nav-link">2. The Human Element</a></li>
-            <li><a href="#" data-target="view-matrix" class="nav-link">3. Platform Reality</a></li>
-            <li><a href="#" data-target="view-execution" class="nav-link">4. Operational Execution</a></li>
-        </ul>
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="prevSlide()">← PREV</button>
+        <button class="nav-btn" onclick="nextSlide()">NEXT →</button>
     </div>
 
-    <main>
+    <div class="slide-container" id="container">
 
-        <section id="view-ethos" class="view active">
-            <span class="eyebrow">Executive Summary</span>
-            <h1>The Practitioner's Edge.</h1>
-            <p class="lead">I do not rely on theoretical academic models. I am an architect of enterprise reality. Forged in the trenches of Global ITSM, Digital Workplace leadership, and hands-on AI CoE governance, I build systems that scale.</p>
-            
-            <div class="grid-2">
-                <div class="card" style="border-top: 4px solid var(--exp-magenta);">
-                    <h3>Experience Over Theory</h3>
-                    <p>The role of Head of Global Workplace GenAI requires navigating fragmented systems, stringent compliance, and shadow IT. This is not a role for an academic. It requires a practitioner who has successfully governed AI Centers of Excellence and embedded new tech into existing Service Management architectures.</p>
-                </div>
-                <div class="card">
-                    <h3>The Trusted Voice</h3>
-                    <p>When the stakes are high, leadership relies on proven execution. I operate as a trusted partner in rooms full of experts because I translate highly complex, anxiety-inducing technological shifts into clear, secure, and thoughtfully governed business capabilities.</p>
+        <section class="slide">
+            <div class="fade-in">
+                <span class="eyebrow">Experian | Global Workplace Intelligence</span>
+                <h1>The <span>Bridge</span> Between<br>Tech & Humans.</h1>
+                <p class="lead">Managing GenAI at an enterprise scale isn't an IT project. It is a behavioral revolution. I sit at the intersection of complex architecture and human potential.</p>
+                <div class="grid">
+                    <div class="card">
+                        <h3>The Practitioner</h3>
+                        <p>15+ years architecting global ITSM and Digital Workplace systems. I don't follow manuals; I build them.</p>
+                    </div>
+                    <div class="card">
+                        <h3>The Humanist</h3>
+                        <p>Specializing in removing the "Fear Factor" and finding the "Carrot" that drives 90%+ organic adoption.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="view-human" class="view">
-            <span class="eyebrow">Change Management</span>
-            <h2>Demystifying AI: From Anxiety to Adoption</h2>
-            <p class="lead">The biggest threat to a ChatGPT Enterprise rollout isn't API limits—it's human behavior. Tools fail when they feel like mandates. My superpower is finding the "carrot."</p>
-            
-            <div class="grid-3">
-                <div class="card">
-                    <h3>1. Validate the Fear</h3>
-                    <p>AI threatens routines. I address data privacy and job security concerns head-on, explaining complex guardrails in layman's terms to show the thoughtfulness of leadership's decisions.</p>
-                </div>
-                <div class="card">
-                    <h3>2. Never One-Size-Fits-All</h3>
-                    <p>A global rollout requires proven governance standards, but the user experience demands constant improvement. Engineering needs code assistance; HR needs document synthesis. The platform must flex to the persona.</p>
-                </div>
-                <div class="card" style="border-top: 4px solid var(--exp-blue);">
-                    <h3>3. Build the Carrot</h3>
-                    <p>Adoption is driven by friction relief. By actively building and demonstrating custom GPT workflows that save a user 45 minutes a day, the anxiety evaporates and organic adoption scales.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="view-matrix" class="view">
-            <span class="eyebrow">Technical Acumen</span>
-            <h2>ChatGPT Enterprise: State of the Union</h2>
-            <p class="lead">Owning this platform requires an unvarnished understanding of OpenAI's current enterprise offerings—exploiting the strengths while actively mitigating the vulnerabilities.</p>
-            
-            <table class="matrix">
-                <thead>
-                    <tr>
-                        <th>Capability Vector</th>
-                        <th>Current Market Reality & Strategy</th>
-                        <th>Risk Profile</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Data Privacy (SOC 2)</strong></td>
-                        <td>ChatGPT Enterprise features at-rest/in-transit encryption and zero model training on Experian data. This is our non-negotiable anchor for Legal/Risk approval.</td>
-                        <td><span class="tag safe">Secured</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Custom GPTs & Workspaces</strong></td>
-                        <td>Highly effective for persona-based adoption, but poses a massive "Shadow AI" risk. Requires strict CoE governance to prevent unmaintained bot sprawl.</td>
-                        <td><span class="tag watch">Requires Governance</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Model "Laziness" & Hallucination</strong></td>
-                        <td>Recent GPT-4 iterations have exhibited task truncation. Mitigation requires continuous internal training on advanced prompt architecture and system prompts.</td>
-                        <td><span class="tag alert">Active Mitigation</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>The Shift to Agentic AI</strong></td>
-                        <td>OpenAI is moving from conversational outputs to autonomous, multi-step execution. Our governance frameworks must be pre-built to handle AI that *acts*, not just answers.</td>
-                        <td><span class="tag watch">Upcoming Shift</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section id="view-execution" class="view">
-            <span class="eyebrow">Operational Strategy</span>
-            <h2>The 90-Day Mandate</h2>
-            <p class="lead">Transitioning Experian from experimental pilots to a unified, measurable, and globally scaled generative AI ecosystem.</p>
-
-            <div class="grid-2">
-                <div class="card">
-                    <h3>Phase 1: Governance & Alignment</h3>
-                    <ul class="dash-list">
-                        <li>Establish single-point ownership; audit and halt fragmented AI procurement.</li>
-                        <li>Partner with Legal, InfoSec, and Privacy to lock in regulated data controls.</li>
-                        <li>Define the sustainable vendor/SI handoff and ITSM operating model.</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>Phase 2: Scale & Value Realization</h3>
-                    <ul class="dash-list">
-                        <li>Coordinate with Identity/Security for seamless enterprise SSO provisioning.</li>
-                        <li>Deploy high-impact Custom GPTs to targeted business lines to prove immediate ROI.</li>
-                        <li>Establish the intake/evaluation cycle for rapid deployment of new OpenAI features.</li>
-                    </ul>
+        <section class="slide">
+            <div class="fade-in">
+                <span class="eyebrow">The Challenge</span>
+                <h1>Demystifying <span>Fear.</span></h1>
+                <p class="lead">AI causes anxiety. When leadership introduces ChatGPT Enterprise, the first question isn't "How do I use it?" but "Will I be replaced?"</p>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Translating Complexity</h3>
+                        <p>I explain reasoning models (o3/o4) and RAG architectures in layman's terms, framing them as a "Mind Exoskeleton" that protects the employee.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Governance as a Shield</h3>
+                        <p>I position governance (Legal, Privacy, SOC2) not as a roadblock, but as a defensive weapon that allows employees to innovate safely.</p>
+                    </div>
+                    <div class="card">
+                        <h3>The Value Gap</h3>
+                        <p>I close the gap between "having a tool" and "using a tool" by identifying the persona-specific bottlenecks that keep users up at night.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-    </main>
+        <section class="slide">
+            <div class="fade-in">
+                <span class="eyebrow">Technical Mastery</span>
+                <h1>The <span>2026</span> Landscape.</h1>
+                <p class="lead">Owning the ChatGPT Enterprise platform requires staying ahead of the OpenAI roadmap. This is the current state of play for Experian.</p>
+                
+                <table class="matrix-table">
+                    <thead>
+                        <tr>
+                            <th>Capability</th>
+                            <th>Strategic Application at Experian</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Agentic Operators</strong></td>
+                            <td>Moving from "Chat" to "Action." AI that interfaces directly with ServiceNow and Jira to execute tasks.</td>
+                            <td><span style="color:var(--exp-magenta)">● Critical Path</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reasoning Models (o3)</strong></td>
+                            <td>Using Chain-of-Thought for complex legal auditing and data lineage tracking within the privacy wall.</td>
+                            <td><span style="color:var(--exp-magenta)">● Active Build</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Canvas Workspaces</strong></td>
+                            <td>Multi-user collaborative editing for global teams to build project plans and code in real-time with AI.</td>
+                            <td><span style="color:var(--exp-magenta)">● Rollout Ready</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Privacy-Preserving RAG</strong></td>
+                            <td>Connecting internal Experian knowledge bases without exposing sensitive PII to external training.</td>
+                            <td><span style="color:var(--exp-magenta)">● Governance Goal</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="fade-in">
+                <span class="eyebrow">Proven Execution</span>
+                <h1>Built on <span>Experience.</span></h1>
+                <p class="lead">Academic degrees discuss what *should* be done. My 15-year career is a record of what *has* been done at a global, million-user scale.</p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Global ITSM Architecture</h4>
+                        <p>Led the implementation of service frameworks that support 20k+ employees, integrating complex identity and security stacks.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>AI Center of Excellence (CoE)</h4>
+                        <p>A founding voice in establishing the guardrails, ethics, and intake processes for enterprise AI deployment.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Workflow Automation Consultancy</h4>
+                        <p>Hands-on building of custom agents and LLM-powered tools that solve specific operational bottlenecks in real-time.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="fade-in">
+                <span class="eyebrow">The Roadmap</span>
+                <h1>The <span>Mission</span> Plan.</h1>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Day 1-30: Consolidate</h3>
+                        <p>Audit fragmented AI toolsets. Establish single-point accountability. Partner with Legal/InfoSec to lock down "Safe Operation" boundaries.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Day 31-60: The Carrot</h3>
+                        <p>Launch persona-based Custom GPTs for high-impact teams (Sales/IT Support). Prove adoption via measurable friction reduction.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Day 61-90: Scale</h3>
+                        <p>Establish a global, sustainable operating model. Integrate GenAI with core Digital Workplace tools for seamless, SSO-backed access.</p>
+                    </div>
+                </div>
+                <div style="margin-top:40px; text-align:center;">
+                    <p style="font-size:1.5rem; font-weight:800; color:white;">"I don't just launch tools. I launch competitive advantages."</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuToggle = document.getElementById('menuToggle');
-            const overlayMenu = document.getElementById('overlayMenu');
-            const navLinks = document.querySelectorAll('.nav-link');
-            const views = document.querySelectorAll('.view');
+        let currentSlide = 0;
+        const totalSlides = 5;
+        const container = document.getElementById('container');
+        const progressBar = document.getElementById('progress-bar');
+        const slides = document.querySelectorAll('.slide');
 
-            // Toggle Menu
-            menuToggle.addEventListener('click', () => {
-                menuToggle.classList.toggle('active');
-                overlayMenu.classList.toggle('active');
+        function updateSlide() {
+            container.style.transform = `translateX(-${currentSlide * 100}%)`;
+            progressBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+            
+            slides.forEach((slide, index) => {
+                if(index === currentSlide) slide.classList.add('active');
+                else slide.classList.remove('active');
             });
+        }
 
-            // Handle Navigation
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
-                    // Update active link styling
-                    navLinks.forEach(l => l.classList.remove('current'));
-                    link.classList.add('current');
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
 
-                    // Close menu
-                    menuToggle.classList.remove('active');
-                    overlayMenu.classList.remove('active');
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
 
-                    // Get target view id
-                    const targetId = link.getAttribute('data-target');
-
-                    // Switch views
-                    setTimeout(() => {
-                        views.forEach(view => {
-                            if (view.id === targetId) {
-                                view.classList.add('active');
-                            } else {
-                                view.classList.remove('active');
-                            }
-                        });
-                    }, 300); // Slight delay for menu close animation
-                });
-            });
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
         });
+
+        // Initialize
+        updateSlide();
     </script>
 </body>
 </html>
