@@ -3,299 +3,700 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Experian | Head of Global Workplace GenAI Strategic Vision</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Ali Chitsaz | Head of Global Workplace GenAI — Experian</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --exp-blue: #1D4F91;
+            /* ── Experian Primary Palette (from official brand guidelines) ── */
+            --exp-dark-blue: #1D4F91;
+            --exp-light-blue: #426DA9;
+            --exp-purple: #77127B;
+            --exp-raspberry: #C1188B;
             --exp-magenta: #E80070;
-            --exp-dark: #050A0F;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-main: #E2E8F0;
-            --transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            --exp-navy: #1A2B4B;
+
+            /* ── Secondary Tints ── */
+            --blue-50: #8795C0;
+            --blue-30: #C6CBE1;
+            --blue-20: #E1E4EF;
+            --blue-10: #F7F8FB;
+            --magenta-50: #FE5B90;
+            --magenta-30: #FFBACB;
+            --magenta-20: #FFDDE5;
+            --purple-50: #B985B7;
+            --raspberry-50: #DB73AF;
+            --grey: #495765;
+            --grey-50: #8F97A0;
+            --grey-20: #E2E4E7;
+            --grey-10: #F8F8F9;
+
+            /* ── Functional ── */
+            --surface: #FFFFFF;
+            --text-primary: var(--exp-navy);
+            --text-body: var(--grey);
+            --text-light: var(--grey-50);
+
+            /* ── Roboto = Experian online typeface ── */
+            --font: 'Roboto', Arial, sans-serif;
+
+            /* ── Squircle radii (Experian brand: side/4) ── */
+            --squircle-sm: 12px;
+            --squircle-md: 20px;
+            --squircle-lg: 28px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--exp-dark);
-            color: var(--text-main);
-            overflow: hidden; /* Lock scroll for slide effect */
+            font-family: var(--font);
+            background: var(--surface);
+            color: var(--text-primary);
+            overflow: hidden;
             height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Background Visuals */
-        .bg-blob {
-            position: fixed;
-            width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(232, 0, 112, 0.15) 0%, transparent 70%);
-            top: -200px; right: -200px;
-            z-index: -1; filter: blur(80px);
-            animation: pulse 10s infinite alternate;
+        /* ── Experian Scattered Squares Background ── */
+        .brand-squares {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            overflow: hidden;
         }
-        @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.2); } }
+        .brand-squares .sq {
+            position: absolute;
+            border-radius: 3px;
+            opacity: 0.06;
+        }
 
-        /* Progress Bar */
-        .progress-container {
+        /* ── Progress Bar ── */
+        .progress-track {
             position: fixed; top: 0; left: 0; width: 100%; height: 4px;
-            background: rgba(255,255,255,0.1); z-index: 1000;
+            background: var(--grey-20); z-index: 1000;
         }
-        #progress-bar {
-            height: 100%; width: 0%; background: var(--exp-magenta);
-            transition: width 0.3s ease;
+        .progress-fill {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, var(--exp-dark-blue), var(--exp-magenta));
+            transition: width 0.5s cubic-bezier(0.33, 1, 0.68, 1);
         }
 
-        /* Navigation Controls */
+        /* ── Header Bar ── */
+        .header {
+            position: fixed; top: 0; left: 0; right: 0;
+            height: 60px; z-index: 999;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 40px;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--grey-20);
+        }
+        .header-left {
+            display: flex; align-items: center; gap: 16px;
+        }
+        /* Experian logo mark — grid of colored squircle dots */
+        .exp-mark {
+            display: grid; grid-template-columns: repeat(3, 8px); gap: 2px;
+        }
+        .exp-mark .d {
+            width: 8px; height: 8px; border-radius: 2px;
+        }
+        .header-name {
+            font-size: 0.75rem; font-weight: 500;
+            color: var(--text-light); letter-spacing: 2px; text-transform: uppercase;
+        }
+        .slide-counter {
+            font-size: 0.8rem; font-weight: 500;
+            color: var(--text-light); letter-spacing: 1px;
+        }
+        .slide-counter .curr { color: var(--exp-dark-blue); font-weight: 700; }
+
+        /* ── Navigation ── */
         .nav-controls {
             position: fixed; bottom: 30px; right: 40px;
-            display: flex; gap: 20px; z-index: 1000;
+            display: flex; gap: 10px; z-index: 1000;
         }
         .nav-btn {
-            background: var(--glass); border: 1px solid var(--glass-border);
-            color: white; padding: 12px 24px; border-radius: 30px;
-            cursor: pointer; backdrop-filter: blur(10px);
-            font-weight: 600; transition: var(--transition);
+            width: 46px; height: 46px;
+            border-radius: var(--squircle-sm);
+            background: var(--surface);
+            border: 1.5px solid var(--grey-20);
+            color: var(--exp-dark-blue);
+            font-size: 1rem; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.35s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-        .nav-btn:hover { background: var(--exp-magenta); border-color: var(--exp-magenta); }
+        .nav-btn:hover {
+            background: var(--exp-dark-blue);
+            border-color: var(--exp-dark-blue);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(29,79,145,0.2);
+        }
+        .nav-hint {
+            position: fixed; bottom: 38px; left: 40px; z-index: 1000;
+            font-size: 0.68rem; color: var(--text-light);
+        }
 
-        /* Slides Architecture */
-        .slide-container {
-            width: 100%; height: 100vh;
-            display: flex; transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+        /* ── Slides ── */
+        .slide-track {
+            display: flex; width: 100%; height: 100vh;
+            transition: transform 0.85s cubic-bezier(0.65, 0, 0.35, 1);
         }
         .slide {
             min-width: 100%; height: 100vh;
-            padding: 80px 10%;
+            padding: 96px 8% 80px;
             display: flex; flex-direction: column; justify-content: center;
+            position: relative; z-index: 1;
+        }
+
+        /* ── Typography ── */
+        .label {
+            font-size: 0.68rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 4px;
+            color: var(--exp-magenta);
+            margin-bottom: 18px;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .label::before {
+            content: '';
+            width: 18px; height: 3px;
+            background: var(--exp-magenta);
+            border-radius: 2px;
+        }
+
+        h1 {
+            font-size: clamp(2.4rem, 4.8vw, 4rem);
+            line-height: 1.1;
+            font-weight: 900;
+            color: var(--exp-navy);
+            margin-bottom: 18px;
+            max-width: 820px;
+            letter-spacing: -0.5px;
+        }
+        h1 .accent { color: var(--exp-dark-blue); }
+        h1 .pop { color: var(--exp-magenta); }
+
+        .subtitle {
+            font-size: 1.05rem;
+            font-weight: 300;
+            line-height: 1.75;
+            color: var(--text-body);
+            max-width: 640px;
+        }
+
+        /* ── Experian Color Bar ── */
+        .color-bar {
+            display: flex; gap: 4px; margin: 14px 0;
+        }
+        .color-bar span {
+            height: 4px; border-radius: 2px; flex: 1;
+        }
+
+        /* ── Squircle Cards ── */
+        .card-grid {
+            display: grid; gap: 16px; margin-top: 36px;
+        }
+        .card-grid.three { grid-template-columns: repeat(3, 1fr); }
+        .card-grid.two { grid-template-columns: repeat(2, 1fr); }
+        .card-grid.four { grid-template-columns: repeat(2, 1fr); }
+
+        .card {
+            background: var(--surface);
+            border: 1.5px solid var(--grey-20);
+            padding: 28px 24px;
+            border-radius: var(--squircle-md);
+            transition: all 0.4s ease;
+        }
+        .card:hover {
+            border-color: var(--exp-dark-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(29,79,145,0.08);
+        }
+        .card .icon-sq {
+            width: 36px; height: 36px;
+            border-radius: 9px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 0.85rem;
+            margin-bottom: 14px; color: white;
+        }
+        .card h3 {
+            font-size: 0.95rem; font-weight: 700;
+            margin-bottom: 6px; color: var(--exp-navy);
+        }
+        .card p {
+            font-size: 0.84rem; line-height: 1.6; color: var(--text-body);
+        }
+        .card .org-label {
+            font-size: 0.65rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        /* ── Metrics ── */
+        .metric-row {
+            display: flex; gap: 36px; margin-top: 36px; flex-wrap: wrap;
+        }
+        .metric { padding-left: 18px; position: relative; }
+        .metric::before {
+            content: ''; position: absolute; left: 0; top: 4px;
+            width: 4px; height: 32px; border-radius: 2px;
+            background: linear-gradient(180deg, var(--exp-dark-blue), var(--exp-magenta));
+        }
+        .metric .value {
+            font-size: 2.4rem; font-weight: 900;
+            color: var(--exp-dark-blue); line-height: 1;
+        }
+        .metric .desc {
+            font-size: 0.76rem; color: var(--text-body);
+            margin-top: 3px; max-width: 150px; line-height: 1.4;
+        }
+
+        /* ── Alignment Table ── */
+        .align-table {
+            width: 100%; margin-top: 28px;
+            border-collapse: separate; border-spacing: 0;
+            border: 1.5px solid var(--grey-20);
+            border-radius: var(--squircle-md); overflow: hidden;
+        }
+        .align-table th {
+            font-size: 0.62rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 3px;
+            color: var(--exp-dark-blue);
+            padding: 12px 18px; text-align: left;
+            background: var(--blue-10);
+            border-bottom: 1.5px solid var(--grey-20);
+        }
+        .align-table td {
+            font-size: 0.82rem; padding: 14px 18px;
+            border-bottom: 1px solid var(--grey-20);
+            color: var(--text-body); vertical-align: top; line-height: 1.5;
+        }
+        .align-table td:first-child {
+            color: var(--exp-navy); font-weight: 500; width: 30%;
+        }
+        .align-table tr:last-child td { border-bottom: none; }
+        .align-table tbody tr { transition: background 0.3s; }
+        .align-table tbody tr:hover { background: var(--blue-10); }
+        .match-tag {
+            display: inline-block; font-size: 0.58rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.5px;
+            padding: 3px 9px; border-radius: 20px; white-space: nowrap;
+            background: rgba(29,79,145,0.1); color: var(--exp-dark-blue);
+        }
+
+        /* ── Phase Grid ── */
+        .phase-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 0; margin-top: 36px;
+            border: 1.5px solid var(--grey-20);
+            border-radius: var(--squircle-lg); overflow: hidden;
+        }
+        .phase {
+            padding: 28px 24px;
+            border-right: 1.5px solid var(--grey-20);
+            transition: background 0.3s;
+        }
+        .phase:last-child { border-right: none; }
+        .phase:hover { background: var(--blue-10); }
+        .phase .phase-num {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 32px; height: 32px; border-radius: 8px;
+            background: var(--exp-dark-blue); color: white;
+            font-weight: 900; font-size: 0.75rem; margin-bottom: 14px;
+        }
+        .phase .phase-label {
+            font-size: 0.58rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 3px;
+            color: var(--exp-magenta); margin-bottom: 6px;
+        }
+        .phase h3 {
+            font-size: 1.1rem; font-weight: 700;
+            margin-bottom: 12px; color: var(--exp-navy);
+        }
+        .phase ul { list-style: none; padding: 0; }
+        .phase li {
+            font-size: 0.8rem; line-height: 1.5;
+            color: var(--text-body); padding: 4px 0 4px 14px;
             position: relative;
         }
-
-        /* Typography */
-        .eyebrow {
-            color: var(--exp-magenta); font-weight: 800; text-transform: uppercase;
-            letter-spacing: 4px; font-size: 0.85rem; margin-bottom: 20px;
+        .phase li::before {
+            content: ''; position: absolute; left: 0; top: 11px;
+            width: 5px; height: 5px; border-radius: 2px;
+            background: var(--exp-dark-blue); opacity: 0.35;
         }
-        h1 { font-size: 4.5rem; line-height: 1; letter-spacing: -3px; margin-bottom: 20px; font-weight: 800; }
-        h1 span { color: var(--exp-magenta); }
-        .lead { font-size: 1.4rem; font-weight: 300; max-width: 750px; line-height: 1.6; color: #94A3B8; }
 
-        /* Components */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-        .card {
-            background: var(--glass); border: 1px solid var(--glass-border);
-            padding: 40px; border-radius: 24px; backdrop-filter: blur(10px);
-            transition: var(--transition);
+        /* ── Closing ── */
+        .closing-grid {
+            display: flex; gap: 28px; margin-top: 28px; flex-wrap: wrap;
         }
-        .card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.06); border-color: var(--exp-magenta); }
-        .card h3 { font-size: 1.5rem; margin-bottom: 15px; color: white; }
-        .card p { color: #94A3B8; font-size: 1rem; line-height: 1.6; }
-
-        /* Technical Matrix Slide */
-        .matrix-table {
-            width: 100%; border-collapse: collapse; margin-top: 40px;
-            background: var(--glass); border-radius: 16px; overflow: hidden;
+        .closing-item {
+            font-size: 0.88rem; color: var(--text-body);
         }
-        .matrix-table th, .matrix-table td { padding: 20px; text-align: left; border-bottom: 1px solid var(--glass-border); }
-        .matrix-table th { background: rgba(255,255,255,0.05); color: var(--exp-magenta); }
-
-        /* Timeline View */
-        .timeline { border-left: 2px solid var(--exp-magenta); margin-top: 40px; padding-left: 30px; }
-        .timeline-item { position: relative; margin-bottom: 40px; }
-        .timeline-item::before {
-            content: ''; position: absolute; left: -41px; top: 0;
-            width: 20px; height: 20px; border-radius: 50%; background: var(--exp-magenta);
-            box-shadow: 0 0 15px var(--exp-magenta);
+        .closing-item strong {
+            color: var(--exp-navy); font-weight: 700;
+            display: block; font-size: 0.62rem;
+            text-transform: uppercase; letter-spacing: 2px;
+            margin-bottom: 2px; color: var(--text-light);
         }
-        .timeline-item h4 { font-size: 1.2rem; color: white; margin-bottom: 5px; }
 
-        /* Animation */
-        .fade-in { opacity: 0; transform: translateY(30px); transition: 0.8s ease forwards; }
-        .active .fade-in { opacity: 1; transform: translateY(0); }
-        .delay-1 { transition-delay: 0.2s; }
-        .delay-2 { transition-delay: 0.4s; }
+        /* ── Decorative squircles on title slide ── */
+        .deco-squircle {
+            position: absolute; z-index: 0;
+        }
+        .deco-sq-1 {
+            right: 5%; top: 50%; transform: translateY(-50%);
+            width: 320px; height: 320px; border-radius: 80px;
+            background: linear-gradient(135deg, var(--exp-dark-blue), var(--exp-light-blue));
+            opacity: 0.05;
+        }
+        .deco-sq-2 {
+            right: 12%; top: 38%; transform: translateY(-50%);
+            width: 180px; height: 180px; border-radius: 45px;
+            background: linear-gradient(135deg, var(--exp-magenta), var(--exp-raspberry));
+            opacity: 0.04;
+        }
+        .deco-sq-3 {
+            right: 3%; top: 30%;
+            width: 60px; height: 60px; border-radius: 15px;
+            background: var(--exp-purple); opacity: 0.06;
+        }
+
+        /* ── Animations ── */
+        .reveal {
+            opacity: 0; transform: translateY(22px);
+            transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.d1 { transition-delay: 0.1s; }
+        .reveal.d2 { transition-delay: 0.22s; }
+        .reveal.d3 { transition-delay: 0.36s; }
+        .reveal.d4 { transition-delay: 0.5s; }
+        .active .reveal { opacity: 1; transform: translateY(0); }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .slide { padding: 86px 5% 70px; }
+            .card-grid.three, .card-grid.four, .phase-grid { grid-template-columns: 1fr; }
+            .phase { border-right: none; border-bottom: 1.5px solid var(--grey-20); }
+            .phase:last-child { border-bottom: none; }
+            h1 { font-size: 2rem; }
+            .deco-squircle { display: none; }
+            .header { padding: 0 16px; }
+            .nav-hint { display: none; }
+            .metric .value { font-size: 1.8rem; }
+            .metric-row { gap: 24px; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="progress-container"><div id="progress-bar"></div></div>
-    <div class="bg-blob"></div>
+<!-- Scattered Squares (Experian logo motif) -->
+<div class="brand-squares" id="bsq"></div>
 
-    <div class="nav-controls">
-        <button class="nav-btn" onclick="prevSlide()">← PREV</button>
-        <button class="nav-btn" onclick="nextSlide()">NEXT →</button>
+<!-- Progress -->
+<div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+
+<!-- Header -->
+<div class="header">
+    <div class="header-left">
+        <div class="exp-mark">
+            <div class="d" style="background:var(--exp-dark-blue);"></div>
+            <div class="d" style="background:var(--exp-dark-blue);"></div>
+            <div class="d" style="background:var(--exp-light-blue);"></div>
+            <div class="d" style="background:var(--exp-raspberry);"></div>
+            <div class="d" style="background:var(--exp-dark-blue);"></div>
+            <div class="d" style="background:var(--exp-magenta);"></div>
+            <div class="d" style="background:var(--exp-purple);"></div>
+            <div class="d" style="background:var(--exp-dark-blue);"></div>
+            <div class="d" style="background:var(--exp-dark-blue);"></div>
+        </div>
+        <span class="header-name">Ali Chitsaz — Interview Presentation</span>
     </div>
+    <div class="slide-counter"><span class="curr" id="cc">01</span> / <span id="ct">08</span></div>
+</div>
 
-    <div class="slide-container" id="container">
+<!-- Nav -->
+<div class="nav-controls">
+    <button class="nav-btn" onclick="go(-1)" aria-label="Previous">&#8592;</button>
+    <button class="nav-btn" onclick="go(1)" aria-label="Next">&#8594;</button>
+</div>
+<div class="nav-hint">Use arrow keys or scroll to navigate</div>
 
-        <section class="slide">
-            <div class="fade-in">
-                <span class="eyebrow">Experian | Global Workplace Intelligence</span>
-                <h1>The <span>Bridge</span> Between<br>Tech & Humans.</h1>
-                <p class="lead">Managing GenAI at an enterprise scale isn't an IT project. It is a behavioral revolution. I sit at the intersection of complex architecture and human potential.</p>
-                <div class="grid">
-                    <div class="card">
-                        <h3>The Practitioner</h3>
-                        <p>15+ years architecting global ITSM and Digital Workplace systems. I don't follow manuals; I build them.</p>
-                    </div>
-                    <div class="card">
-                        <h3>The Humanist</h3>
-                        <p>Specializing in removing the "Fear Factor" and finding the "Carrot" that drives 90%+ organic adoption.</p>
-                    </div>
-                </div>
+<div class="slide-track" id="track">
+
+    <!-- ══ SLIDE 1: TITLE ══ -->
+    <section class="slide active">
+        <div class="deco-squircle deco-sq-1"></div>
+        <div class="deco-squircle deco-sq-2"></div>
+        <div class="deco-squircle deco-sq-3"></div>
+        <div class="reveal"><div class="label">Head of Global Workplace GenAI</div></div>
+        <h1 class="reveal d1">I Don't Deploy Tools.<br>I Build <span class="pop">Competitive<br>Advantages.</span></h1>
+        <div class="color-bar reveal d2" style="max-width:260px;">
+            <span style="background:var(--exp-dark-blue);"></span>
+            <span style="background:var(--exp-light-blue);"></span>
+            <span style="background:var(--exp-purple);"></span>
+            <span style="background:var(--exp-raspberry);"></span>
+            <span style="background:var(--exp-magenta);"></span>
+        </div>
+        <p class="subtitle reveal d2">Ali Chitsaz &#8212; 15+ years of enterprise platform ownership, GenAI program leadership, and digital workplace transformation at global scale.</p>
+        <div class="metric-row reveal d3">
+            <div class="metric"><div class="value">300%</div><div class="desc">Increase in GenAI &amp; collaboration adoption</div></div>
+            <div class="metric"><div class="value">95%</div><div class="desc">IT service satisfaction score</div></div>
+            <div class="metric"><div class="value">3</div><div class="desc">GenAI ecosystems operationalized end-to-end</div></div>
+        </div>
+    </section>
+
+    <!-- ══ SLIDE 2: THE PROBLEM ══ -->
+    <section class="slide">
+        <div class="reveal"><div class="label">The Problem I Solve</div></div>
+        <h1 class="reveal d1">The Gap Between<br><span class="accent">Having</span> AI &amp;<br><span class="pop">Using</span> AI.</h1>
+        <p class="subtitle reveal d2">Every enterprise buys the platform. Almost none unlock the value. The failure mode is always the same: fragmented ownership, ungoverned rollouts, and employees who are anxious instead of empowered.</p>
+        <div class="card-grid three reveal d3">
+            <div class="card">
+                <div class="icon-sq" style="background:var(--exp-dark-blue);">01</div>
+                <h3>Fragmented Accountability</h3>
+                <p>Multiple teams deploy AI tools with no single owner. Security gaps form. Duplication wastes budget. No one reports to leadership on real value.</p>
             </div>
-        </section>
-
-        <section class="slide">
-            <div class="fade-in">
-                <span class="eyebrow">The Challenge</span>
-                <h1>Demystifying <span>Fear.</span></h1>
-                <p class="lead">AI causes anxiety. When leadership introduces ChatGPT Enterprise, the first question isn't "How do I use it?" but "Will I be replaced?"</p>
-                <div class="grid">
-                    <div class="card">
-                        <h3>Translating Complexity</h3>
-                        <p>I explain reasoning models (o3/o4) and RAG architectures in layman's terms, framing them as a "Mind Exoskeleton" that protects the employee.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Governance as a Shield</h3>
-                        <p>I position governance (Legal, Privacy, SOC2) not as a roadblock, but as a defensive weapon that allows employees to innovate safely.</p>
-                    </div>
-                    <div class="card">
-                        <h3>The Value Gap</h3>
-                        <p>I close the gap between "having a tool" and "using a tool" by identifying the persona-specific bottlenecks that keep users up at night.</p>
-                    </div>
-                </div>
+            <div class="card">
+                <div class="icon-sq" style="background:var(--exp-purple);">02</div>
+                <h3>The Fear Factor</h3>
+                <p>When leadership introduces ChatGPT Enterprise, the first question isn't "How do I use it?" &#8212; it's "Will I be replaced?" Anxiety kills adoption.</p>
             </div>
-        </section>
-
-        <section class="slide">
-            <div class="fade-in">
-                <span class="eyebrow">Technical Mastery</span>
-                <h1>The <span>2026</span> Landscape.</h1>
-                <p class="lead">Owning the ChatGPT Enterprise platform requires staying ahead of the OpenAI roadmap. This is the current state of play for Experian.</p>
-                
-                <table class="matrix-table">
-                    <thead>
-                        <tr>
-                            <th>Capability</th>
-                            <th>Strategic Application at Experian</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Agentic Operators</strong></td>
-                            <td>Moving from "Chat" to "Action." AI that interfaces directly with ServiceNow and Jira to execute tasks.</td>
-                            <td><span style="color:var(--exp-magenta)">● Critical Path</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Reasoning Models (o3)</strong></td>
-                            <td>Using Chain-of-Thought for complex legal auditing and data lineage tracking within the privacy wall.</td>
-                            <td><span style="color:var(--exp-magenta)">● Active Build</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Canvas Workspaces</strong></td>
-                            <td>Multi-user collaborative editing for global teams to build project plans and code in real-time with AI.</td>
-                            <td><span style="color:var(--exp-magenta)">● Rollout Ready</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Privacy-Preserving RAG</strong></td>
-                            <td>Connecting internal Experian knowledge bases without exposing sensitive PII to external training.</td>
-                            <td><span style="color:var(--exp-magenta)">● Governance Goal</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="card">
+                <div class="icon-sq" style="background:var(--exp-magenta);">03</div>
+                <h3>Governance Debt</h3>
+                <p>Legal, Privacy, and InfoSec aren't at the table early enough. Regulated-data controls are bolted on after the fact instead of built in from day one.</p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="slide">
-            <div class="fade-in">
-                <span class="eyebrow">Proven Execution</span>
-                <h1>Built on <span>Experience.</span></h1>
-                <p class="lead">Academic degrees discuss what *should* be done. My 15-year career is a record of what *has* been done at a global, million-user scale.</p>
-                
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h4>Global ITSM Architecture</h4>
-                        <p>Led the implementation of service frameworks that support 20k+ employees, integrating complex identity and security stacks.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>AI Center of Excellence (CoE)</h4>
-                        <p>A founding voice in establishing the guardrails, ethics, and intake processes for enterprise AI deployment.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>Workflow Automation Consultancy</h4>
-                        <p>Hands-on building of custom agents and LLM-powered tools that solve specific operational bottlenecks in real-time.</p>
-                    </div>
-                </div>
+    <!-- ══ SLIDE 3: PHILOSOPHY ══ -->
+    <section class="slide">
+        <div class="reveal"><div class="label">My Approach</div></div>
+        <h1 class="reveal d1">Platform Ownership<br>Is a <span class="pop">Leadership</span><br>Problem.</h1>
+        <p class="subtitle reveal d2">Technology is 30% of the work. The other 70% is governance, change management, and translating complexity into confidence for every persona in the organization.</p>
+        <div class="card-grid three reveal d3">
+            <div class="card">
+                <div class="icon-sq" style="background:var(--exp-dark-blue);">&#8594;</div>
+                <h3>Single-Point Ownership</h3>
+                <p>One accountable leader who owns platform operations, vendor handoffs, release cycles, and reporting to senior leadership. I've operated exactly this model across three GenAI platforms.</p>
             </div>
-        </section>
-
-        <section class="slide">
-            <div class="fade-in">
-                <span class="eyebrow">The Roadmap</span>
-                <h1>The <span>Mission</span> Plan.</h1>
-                <div class="grid">
-                    <div class="card">
-                        <h3>Day 1-30: Consolidate</h3>
-                        <p>Audit fragmented AI toolsets. Establish single-point accountability. Partner with Legal/InfoSec to lock down "Safe Operation" boundaries.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Day 31-60: The Carrot</h3>
-                        <p>Launch persona-based Custom GPTs for high-impact teams (Sales/IT Support). Prove adoption via measurable friction reduction.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Day 61-90: Scale</h3>
-                        <p>Establish a global, sustainable operating model. Integrate GenAI with core Digital Workplace tools for seamless, SSO-backed access.</p>
-                    </div>
-                </div>
-                <div style="margin-top:40px; text-align:center;">
-                    <p style="font-size:1.5rem; font-weight:800; color:white;">"I don't just launch tools. I launch competitive advantages."</p>
-                </div>
+            <div class="card">
+                <div class="icon-sq" style="background:var(--exp-raspberry);">&#8594;</div>
+                <h3>Governance as an Enabler</h3>
+                <p>I partner with Legal, Privacy, Risk, and InfoSec from Day 1 &#8212; not as a gate, but as a shield that allows teams to innovate within safe, compliant boundaries.</p>
             </div>
-        </section>
+            <div class="card">
+                <div class="icon-sq" style="background:var(--exp-purple);">&#8594;</div>
+                <h3>Adoption Through Empathy</h3>
+                <p>I find persona-specific pain points and build "carrots" &#8212; Custom GPTs, agents, and workflows that solve real bottlenecks. Not generic demos.</p>
+            </div>
+        </div>
+    </section>
 
-    </div>
+    <!-- ══ SLIDE 4: JD ALIGNMENT ══ -->
+    <section class="slide">
+        <div class="reveal"><div class="label">Direct Alignment</div></div>
+        <h1 class="reveal d1">What You Need.<br>What I've <span class="pop">Done.</span></h1>
+        <div class="reveal d2" style="overflow-x:auto;">
+            <table class="align-table">
+                <thead><tr><th>Experian Requirement</th><th>My Proven Experience</th><th></th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td>Global platform owner for ChatGPT Enterprise</td>
+                        <td>Global Platform Owner for Workplace GenAI at TaylorMade &#8212; managed evaluation, release cycles, and enterprise rollout of OpenAI, Anthropic &amp; Google platforms</td>
+                        <td><span class="match-tag">Exact Match</span></td>
+                    </tr>
+                    <tr>
+                        <td>Partner with Legal, Privacy, Risk, InfoSec</td>
+                        <td>Partnered directly with Legal, Privacy, and InfoSec to establish responsible AI training, regulated-data controls for Copilot, Claude, and Gemini</td>
+                        <td><span class="match-tag">Exact Match</span></td>
+                    </tr>
+                    <tr>
+                        <td>Define success metrics &amp; report to leadership</td>
+                        <td>Delivered 300% adoption increase through targeted enablement; tracked usage and reported productivity outcomes to senior leadership</td>
+                        <td><span class="match-tag">Exact Match</span></td>
+                    </tr>
+                    <tr>
+                        <td>Coordinate with Digital Workplace, Identity, Security teams</td>
+                        <td>Principal Architect of Global Employee Experience Stack &#8212; coordinated Digital Workplace, Entra ID, Security, and Service Management</td>
+                        <td><span class="match-tag">Exact Match</span></td>
+                    </tr>
+                    <tr>
+                        <td>Vendor &amp; SI handoff accountability</td>
+                        <td>Managed $200M+ tech procurement at Hulu/Disney Streaming; single-point vendor accountability for GenAI platforms at TaylorMade</td>
+                        <td><span class="match-tag">Exact Match</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
-    <script>
-        let currentSlide = 0;
-        const totalSlides = 5;
-        const container = document.getElementById('container');
-        const progressBar = document.getElementById('progress-bar');
-        const slides = document.querySelectorAll('.slide');
+    <!-- ══ SLIDE 5: TECHNICAL LANDSCAPE ══ -->
+    <section class="slide">
+        <div class="reveal"><div class="label">Technical Fluency</div></div>
+        <h1 class="reveal d1">The <span class="pop">2026</span><br>Landscape.</h1>
+        <p class="subtitle reveal d2">Owning ChatGPT Enterprise at Experian means staying ahead of OpenAI's roadmap while governing for security and compliance.</p>
+        <div class="card-grid four reveal d3">
+            <div class="card">
+                <div class="icon-sq" style="background:var(--exp-dark-blue);">A</div>
+                <h3>Agentic Operators &amp; Custom GPTs</h3>
+                <p>Moving from "chat" to "action." AI agents that interface with ServiceNow and Jira to execute tasks &#8212; the highest-impact opportunity for Experian's service teams.</p>
+            </div>
+            <div class="card">
+                <div class="icon-sq" style="background:var(--exp-purple);">R</div>
+                <h3>Reasoning Models (o3 / o4-mini)</h3>
+                <p>Chain-of-thought for complex use cases: legal auditing, data lineage tracking, compliance review. These models need governance guardrails.</p>
+            </div>
+            <div class="card">
+                <div class="icon-sq" style="background:var(--exp-raspberry);">P</div>
+                <h3>Privacy-Preserving RAG</h3>
+                <p>Connecting internal knowledge bases without exposing PII. Strategic data agreements and zero-retention architectures are non-negotiable at Experian's scale.</p>
+            </div>
+            <div class="card">
+                <div class="icon-sq" style="background:var(--exp-magenta);">M</div>
+                <h3>Multi-Platform Strategy</h3>
+                <p>ChatGPT Enterprise is the starting point &#8212; not the ceiling. I've already operationalized OpenAI, Anthropic, and Google side by side with unified governance.</p>
+            </div>
+        </div>
+    </section>
 
-        function updateSlide() {
-            container.style.transform = `translateX(-${currentSlide * 100}%)`;
-            progressBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
-            
-            slides.forEach((slide, index) => {
-                if(index === currentSlide) slide.classList.add('active');
-                else slide.classList.remove('active');
-            });
-        }
+    <!-- ══ SLIDE 6: TRACK RECORD ══ -->
+    <section class="slide">
+        <div class="reveal"><div class="label">Track Record</div></div>
+        <h1 class="reveal d1">Built at <span class="accent">Scale.</span><br>Proven in <span class="pop">Production.</span></h1>
+        <div class="card-grid two reveal d2">
+            <div class="card" style="border-left: 4px solid var(--exp-dark-blue);">
+                <div class="org-label" style="color:var(--exp-dark-blue);">TaylorMade Golf &#8212; 2019&#8211;Present</div>
+                <h3>Assoc. Director, Global ITSM &amp; Digital Workplace</h3>
+                <p>Board member of AI Center of Excellence. Global Platform Owner for GenAI. Principal Architect of the employee experience stack. 300% adoption increase. 95%+ CSAT. Zero-downtime global Intune migration.</p>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--exp-magenta);">
+                <div class="org-label" style="color:var(--exp-magenta);">Hulu / Disney Streaming &#8212; 2015&#8211;2018</div>
+                <h3>Manager, Global IT Services</h3>
+                <p>Directed global IT across 8 locations, 2,400 users, 16 direct reports. Deployed ServiceNow ITSM &#8212; 40% faster incident resolution. Managed $200M+ procurement strategy.</p>
+            </div>
+        </div>
+        <div class="metric-row reveal d3" style="margin-top:28px;">
+            <div class="metric"><div class="value">15+</div><div class="desc">Years platform ownership</div></div>
+            <div class="metric"><div class="value">8+</div><div class="desc">Years leading global teams</div></div>
+            <div class="metric"><div class="value">3</div><div class="desc">GenAI ecosystems governed</div></div>
+            <div class="metric"><div class="value">$200M+</div><div class="desc">Procurement managed</div></div>
+        </div>
+    </section>
 
-        function nextSlide() {
-            if (currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateSlide();
-            }
-        }
+    <!-- ══ SLIDE 7: 90-DAY PLAN ══ -->
+    <section class="slide">
+        <div class="reveal"><div class="label">The Plan</div></div>
+        <h1 class="reveal d1">90-Day <span class="pop">Mission</span><br>for Experian.</h1>
+        <div class="phase-grid reveal d2">
+            <div class="phase">
+                <div class="phase-num">01</div>
+                <div class="phase-label">Days 1&#8211;30</div>
+                <h3>Consolidate</h3>
+                <ul>
+                    <li>Audit all fragmented GenAI toolsets across regions</li>
+                    <li>Establish single-point accountability for ChatGPT Enterprise</li>
+                    <li>Partner with Legal, Privacy, InfoSec on "Safe Operation" boundaries</li>
+                    <li>Map stakeholders &amp; build governance intake process</li>
+                </ul>
+            </div>
+            <div class="phase">
+                <div class="phase-num" style="background:var(--exp-purple);">02</div>
+                <div class="phase-label">Days 31&#8211;60</div>
+                <h3>Prove Value</h3>
+                <ul>
+                    <li>Deploy persona-based Custom GPTs for Sales, IT Support, Legal</li>
+                    <li>Measure and report friction reduction with real metrics</li>
+                    <li>Establish release cycle management for OpenAI capabilities</li>
+                    <li>Launch enterprise-wide AI training program</li>
+                </ul>
+            </div>
+            <div class="phase">
+                <div class="phase-num" style="background:var(--exp-magenta);">03</div>
+                <div class="phase-label">Days 61&#8211;90</div>
+                <h3>Scale</h3>
+                <ul>
+                    <li>Build global, sustainable operating model for GenAI</li>
+                    <li>Integrate with Digital Workplace, Identity (SSO), and ITSM</li>
+                    <li>Define success dashboard for leadership reporting</li>
+                    <li>Roadmap multi-platform GenAI strategy beyond ChatGPT</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-        function prevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateSlide();
-            }
-        }
+    <!-- ══ SLIDE 8: CLOSING ══ -->
+    <section class="slide">
+        <div class="reveal"><div class="label">Powering Opportunities</div></div>
+        <h1 class="reveal d1">The Bridge Between<br><span class="accent">Technology</span> &amp;<br><span class="pop">Human Potential.</span></h1>
+        <p class="subtitle reveal d2">I bring single-point platform ownership, governance-first thinking, and the ability to translate complex AI capabilities into measurable value for every team at Experian.</p>
+        <div class="color-bar reveal d3" style="max-width:260px;">
+            <span style="background:var(--exp-dark-blue);"></span>
+            <span style="background:var(--exp-light-blue);"></span>
+            <span style="background:var(--exp-purple);"></span>
+            <span style="background:var(--exp-raspberry);"></span>
+            <span style="background:var(--exp-magenta);"></span>
+        </div>
+        <div class="closing-grid reveal d3">
+            <div class="closing-item"><strong>Name</strong>Ali Chitsaz</div>
+            <div class="closing-item"><strong>Phone</strong>858.349.5566</div>
+            <div class="closing-item"><strong>Email</strong>alirchitsaz@gmail.com</div>
+            <div class="closing-item"><strong>LinkedIn</strong>linkedin.com/in/alirchitsaz</div>
+            <div class="closing-item"><strong>Location</strong>Carlsbad, CA</div>
+        </div>
+        <div class="metric-row reveal d4" style="margin-top:28px;">
+            <div class="metric"><div class="value">300%</div><div class="desc">Adoption increase delivered</div></div>
+            <div class="metric"><div class="value">95%</div><div class="desc">Service satisfaction</div></div>
+            <div class="metric"><div class="value">15+</div><div class="desc">Years platform ownership</div></div>
+        </div>
+    </section>
 
-        // Keyboard Navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
-            if (e.key === 'ArrowLeft') prevSlide();
-        });
+</div>
 
-        // Initialize
-        updateSlide();
-    </script>
+<script>
+// ── Scattered Squares (Experian logo motif) ──
+!function(){
+    var c=document.getElementById('bsq'),
+        colors=['#1D4F91','#426DA9','#77127B','#C1188B','#E80070','#8795C0','#B985B7','#C6CBE1'];
+    for(var i=0;i<40;i++){
+        var s=document.createElement('div');
+        s.className='sq';
+        var sz=6+Math.random()*18;
+        s.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;background:'+colors[Math.floor(Math.random()*colors.length)]+';transform:rotate('+(Math.random()*12-6)+'deg)';
+        c.appendChild(s);
+    }
+}();
+
+// ── Slide Engine ──
+var cur=0,slides=document.querySelectorAll('.slide'),
+    total=slides.length,track=document.getElementById('track'),
+    prog=document.getElementById('progress'),
+    cc=document.getElementById('cc'),ct=document.getElementById('ct');
+ct.textContent=('0'+total).slice(-2);
+
+function upd(){
+    track.style.transform='translateX(-'+cur*100+'%)';
+    prog.style.width=(cur+1)/total*100+'%';
+    cc.textContent=('0'+(cur+1)).slice(-2);
+    slides.forEach(function(s,i){i===cur?s.classList.add('active'):s.classList.remove('active')});
+}
+function go(d){var n=cur+d;if(n>=0&&n<total){cur=n;upd();}}
+
+document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(1);}
+    if(e.key==='ArrowLeft'){e.preventDefault();go(-1);}
+});
+
+var wl=false;
+document.addEventListener('wheel',function(e){
+    if(wl)return;
+    if(Math.abs(e.deltaY)>30){go(e.deltaY>0?1:-1);wl=true;setTimeout(function(){wl=false},900);}
+},{passive:true});
+
+var ts=0;
+document.addEventListener('touchstart',function(e){ts=e.touches[0].clientX;});
+document.addEventListener('touchend',function(e){var d=ts-e.changedTouches[0].clientX;if(Math.abs(d)>60)go(d>0?1:-1);});
+
+upd();
+</script>
 </body>
 </html>
